@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, resolveForwardRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { HttpService } from '../services/http.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ export class AuthPage implements OnInit {
   public password: string = '';
   public password2: string = '';
 
-  constructor(private auth: AuthService, private modalCtrl: ModalController) {}
+  constructor(private auth: AuthService, private api: HttpService, private modalCtrl: ModalController) {}
   
   ngOnInit() {}
 
@@ -34,22 +35,28 @@ export class AuthPage implements OnInit {
 
   private handleLogin() {
     if(!this.eingabeCheck()) { return; }
-    // backend methode fehlt 
-    const dummyToken = 'demo-token-123'
-    this.auth.login(dummyToken);
-    this.modalCtrl.dismiss();
+
+    this.api.login(this.username, this.password).subscribe(response => {
+      console.log(response.message);
+      if (response.success) {
+        const dummyToken = 'demo-token-123'
+        this.auth.login(dummyToken);
+        this.modalCtrl.dismiss();      
+      }
+    });
   }
 
   private handleRegister() {
-    if (this.password !== this.password2) {
-      alert('Passwörter stimmen nicht überein!');
-      return;
-    }
     if(!this.eingabeCheck()) { return; }
-    // backend methode fehlt 
-    const dummyToken = 'demo-token-123'
-    this.auth.login(dummyToken);
-    this.modalCtrl.dismiss();
+
+    this.api.register(this.username, this.email, this.password).subscribe(response => {
+      console.log(response.message);
+      if(response.success){
+        const dummyToken = 'demo-token-123'
+        this.auth.login(dummyToken);
+        this.modalCtrl.dismiss();
+      }
+    });
   }
 
   private eingabeCheck(): boolean{
@@ -67,8 +74,8 @@ export class AuthPage implements OnInit {
         alert('email eingeben!');
         return false;
       }
-      if (!this.password2?.trim()){
-        alert('Passwort eingeben!');
+      if (this.password !== this.password2) {
+        alert('Passwörter stimmen nicht überein!');
         return false;
       }
     }
