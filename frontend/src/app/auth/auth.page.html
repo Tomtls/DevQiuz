@@ -1,0 +1,46 @@
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">
+        {{ authMode === 'login' ? 'Login' : 'Registrierung' }}
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <!-- Benutzername -->
+      <ion-item>
+        <ion-label position="stacked">Benutzername</ion-label>
+        <ion-input [(ngModel)]="username" required />
+      </ion-item>
+
+      <!-- E-Mail nur bei Registrierung -->
+      <ion-item *ngIf="authMode === 'register'">
+        <ion-label position="stacked">E-Mail</ion-label>
+        <ion-input type="email" [(ngModel)]="email" required />
+      </ion-item>
+
+      <!-- Passwort -->
+      <ion-item>
+        <ion-label position="stacked">Passwort</ion-label>
+        <ion-input type="password" [(ngModel)]="password" required />
+      </ion-item>
+
+      <!-- Passwort-Wiederholung -->
+      <ion-item *ngIf="authMode === 'register'">
+        <ion-label position="stacked">Passwort wiederholen</ion-label>
+        <ion-input type="password" [(ngModel)]="password2" required />
+      </ion-item>
+
+      <ion-button expand="block" class="ion-margin-top" (click)="submit()">
+        {{ authMode === 'login' ? 'Einloggen' : 'Registrieren' }}
+      </ion-button>
+
+      <!-- Umschalt-Link -->
+      <ion-button fill="clear" size="small" (click)="toggleAuthMode()">
+        {{ authMode === 'login' ? 'Noch keinen Account? Jetzt registrieren' : 'Zurück zum Login' }}
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
