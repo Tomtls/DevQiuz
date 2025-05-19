@@ -29,4 +29,16 @@ export const routes: Routes = [
     path: 'highscore',
     loadComponent: () => import('./highscore/highscore.page').then( m => m.HighscorePage)
   },
+  {
+    path: 'quiz-view/:id',
+    loadComponent: () => import('./quiz-view/quiz-view.page').then( m => m.QuizViewPage)
+  },
+  {
+    path: 'quiz-hello-world',
+    loadComponent: () => import('./quiz-hello-world/quiz-hello-world.page').then( m => m.QuizHelloWorldPage)
+  },
+  {
+    path: 'quiz-js',
+    loadComponent: () => import('./quiz-js/quiz-js.page').then( m => m.QuizJsPage)
+  },
 ];

@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "title": "Beispielfragen zu HTML",
+    "demo": true,
+    "questions": [
+      {
+        "text": "Wofür steht HTML?",
+        "options": ["HyperText Markup Language", "Home Tool Markup Language", "Hyperlink Text Machine Language"],
+        "answer": "HyperText Markup Language"
+      },
+      {
+        "text": "frage 2",
+        "options": ["HyperText Markup Language", "Home Tool Markup Language", "Hyperlink Text Machine Language"],
+        "answer": "HyperText Markup Language"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "JavaScript Grundlagen",
+    "questions": [
+      {
+        "text": "Welches Symbol verwendet man für Arrow Functions?",
+        "options": ["=>", "->", "<=", "==>"],
+        "answer": "=>"
+      }
+    ]
+  }
+] 

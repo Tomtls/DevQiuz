@@ -15,10 +15,35 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
+  //#region auth
   public register(username: string, email: string, password: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.baseUrl}/auth/register`, { username, email, password });
   }
   public login(username: string, password: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.baseUrl}/auth/login`, { username, password });
   }
+  //#endregion
+
+  //#region quiz
+  public getQuizzes(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/quizzes`);
+  }
+  //#endregion
+
+  //#region js quiz
+  public getJsQuiz(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/jsquiz`);
+  }
+  //#endregion
+
+  //#region highscore
+  /*public getHighscore(quizId: number, username: string): Observable<any>{
+    return this.http.get(`${this.baseUrl}/highscore`, { });
+  }*/
+  public saveHighscore(quizId: number, username: string, score: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/highscore`, { quizId, username, score });
+  }
+  
+  //#endregion
+
 }

@@ -1,5 +1,19 @@
 <ion-content [fullscreen]="true">
   <ion-item class="platzhalter"></ion-item>
-  <ion-title size="large">quiz</ion-title>
-  <ion-item> in process Commin soon</ion-item>
+
+  <div class="quiz-grid">
+    <ion-card *ngFor="let quiz of quizzes" class="quiz-card">
+      <ion-card-header>
+        <ion-card-title>{{ quiz.title }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ quiz.questions.length }} Fragen</p>
+        <p *ngIf="quiz.demo">🔓 Demo</p>
+        <ion-button expand="block" (click)="openQuiz(quiz.id)">
+          Starten
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
 </ion-content>

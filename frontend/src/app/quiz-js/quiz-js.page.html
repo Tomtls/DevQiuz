@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>quiz-js</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- Quizfragen -->
+  <div *ngIf="!showResults && questions.length">
+    <h2>Frage {{ current + 1 }} von {{ questions.length }}</h2>
+    <pre><code>{{ questions[current].question }}</code></pre>
+
+    <ion-button
+      *ngFor="let option of questions[current].options; let i = index"
+      expand="block"
+      (click)="selectOption(i)">
+      {{ option }}
+    </ion-button>
+  </div>
+
+  <!-- Ergebnisse -->
+  <div *ngIf="showResults">
+    <h2>Du hast {{ score }} von {{ questions.length }} richtig!</h2>
+
+    <div *ngFor="let q of questions; let i = index">
+      <h3>{{ i + 1 }}. {{ q.question }}</h3>
+      <p>Output: {{ q.options[q.answerIndex] }}</p>
+      <p>Du hast geantwortet: {{ q.options[selectedAnswers[i]] }}</p>
+      <p [ngClass]="isCorrect(i) ? 'correct' : 'incorrect'">
+        {{ isCorrect(i) ? 'Richtig!' : 'Falsch!' }}
+      </p>
+
+      <p *ngIf="q.explanation">{{ q.explanation }}</p>
+      <pre *ngIf="q.code"><code>{{ q.code }}</code></pre>
+      <hr />
+    </div>
+
+    <ion-button routerLink="/home">Zurück</ion-button>
+  </div>
+
+</ion-content>
+

@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>quiz-helloWorld</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Hello World Quiz</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <div class="status-bar">
+      <span>Lives: {{ lives }}</span>
+      <span>Score: {{ score }}</span>
+    </div>
+
+    <pre><code [innerText]="currentQuestion.code"></code></pre>
+
+    <ion-button
+      *ngFor="let option of currentQuestion.options"
+      expand="block"
+      (click)="checkAnswer(option)"
+    >
+      {{ option }}
+    </ion-button>
+  </ion-card-content>
+</ion-card>
+</ion-content>

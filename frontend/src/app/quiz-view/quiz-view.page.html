@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ quiz?.title || 'Quiz' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form *ngIf="quiz">
+    <div class="quiz-container">
+      <ion-card *ngFor="let q of quiz.questions; let i = index">
+        <ion-card-header>
+          <ion-card-subtitle>Frage {{ i + 1 }}</ion-card-subtitle>
+          <ion-card-title>{{ q.text }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="answer-grid">
+            <ion-button
+              *ngFor="let opt of q.options"
+              [color]="isSelected(i, opt) ? 'primary' : 'medium'"
+              (click)="selectAnswer(i, opt)"
+              expand="block"
+              fill="outline"
+            >{{ opt }}
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <ion-button expand="block" class="ion-margin-top" (click)="submitQuiz()">
+      Abschließen
+    </ion-button>
+  </form>
+
+  <ng-container *ngIf="finished">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Ergebnis</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Du hast {{ correctAnswers }} von {{ quiz.questions.length }} Fragen richtig.</p>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+</ion-content>

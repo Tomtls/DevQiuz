@@ -1,0 +1,5 @@
+[
+  { "quizId": 1, "username": "Tom", "score": 7 },
+  { "quizId": 1, "username": "Anna", "score": 9 },
+  { "quizId": 2, "username": "Tom", "score": 5 }
+]
