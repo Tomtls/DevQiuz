@@ -1,0 +1,266 @@
+[
+  {
+    "user_id": 1,
+    "score": 25,
+    "timestamp": "2025-05-20T15:20:00.000Z",
+    "answers": [
+      {
+        "question_index": 1,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 2,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 3,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 4,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 5,
+        "selected": 2,
+        "correctAnswer": 2
+      },
+      {
+        "question_index": 6,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 7,
+        "selected": 3,
+        "correctAnswer": 3
+      },
+      {
+        "question_index": 8,
+        "selected": 2,
+        "correctAnswer": 2
+      },
+      {
+        "question_index": 9,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 10,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 11,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 12,
+        "selected": 0,
+        "correctAnswer": 0
+      },
+      {
+        "question_index": 13,
+        "selected": 2,
+        "correctAnswer": 2
+      },
+      {
+        "question_index": 14,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 15,
+        "selected": 3,
+        "correctAnswer": 3
+      },
+      {
+        "question_index": 16,
+        "selected": 2,
+        "correctAnswer": 2
+      },
+      {
+        "question_index": 17,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 18,
+        "selected": 2,
+        "correctAnswer": 2
+      },
+      {
+        "question_index": 19,
+        "selected": 0,
+        "correctAnswer": 0
+      },
+      {
+        "question_index": 20,
+        "selected": 2,
+        "correctAnswer": 2
+      },
+      {
+        "question_index": 21,
+        "selected": 2,
+        "correctAnswer": 2
+      },
+      {
+        "question_index": 22,
+        "selected": 0,
+        "correctAnswer": 0
+      },
+      {
+        "question_index": 23,
+        "selected": 2,
+        "correctAnswer": 2
+      },
+      {
+        "question_index": 24,
+        "selected": 2,
+        "correctAnswer": 2
+      },
+      {
+        "question_index": 25,
+        "selected": 0,
+        "correctAnswer": 0
+      }
+    ]
+  },
+  {
+    "user_id": 1,
+    "score": 10,
+    "timestamp": "2025-05-20T14:07:46.540Z",
+    "answers": [
+      {
+        "question_index": 1,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 2,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 3,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 4,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 5,
+        "selected": 1,
+        "correctAnswer": 2
+      },
+      {
+        "question_index": 6,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 7,
+        "selected": 1,
+        "correctAnswer": 3
+      },
+      {
+        "question_index": 8,
+        "selected": 1,
+        "correctAnswer": 2
+      },
+      {
+        "question_index": 9,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 10,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 11,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 12,
+        "selected": 1,
+        "correctAnswer": 0
+      },
+      {
+        "question_index": 13,
+        "selected": 1,
+        "correctAnswer": 2
+      },
+      {
+        "question_index": 14,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 15,
+        "selected": 1,
+        "correctAnswer": 3
+      },
+      {
+        "question_index": 16,
+        "selected": 1,
+        "correctAnswer": 2
+      },
+      {
+        "question_index": 17,
+        "selected": 1,
+        "correctAnswer": 1
+      },
+      {
+        "question_index": 18,
+        "selected": 1,
+        "correctAnswer": 2
+      },
+      {
+        "question_index": 19,
+        "selected": 1,
+        "correctAnswer": 0
+      },
+      {
+        "question_index": 20,
+        "selected": 1,
+        "correctAnswer": 2
+      },
+      {
+        "question_index": 21,
+        "selected": 1,
+        "correctAnswer": 2
+      },
+      {
+        "question_index": 22,
+        "selected": 1,
+        "correctAnswer": 0
+      },
+      {
+        "question_index": 23,
+        "selected": 1,
+        "correctAnswer": 2
+      },
+      {
+        "question_index": 24,
+        "selected": 1,
+        "correctAnswer": 2
+      },
+      {
+        "question_index": 25,
+        "selected": 1,
+        "correctAnswer": 0
+      }
+    ]
+  }
+]

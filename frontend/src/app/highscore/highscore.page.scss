@@ -1,3 +1,24 @@
-.platzhalter{
-    height: 100px;
-  }
+.highscore-section {
+  margin-bottom: 2rem;
+}
+
+.highscore-table {
+  border: 1px solid var(--ion-color-medium);
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 0.95rem;
+}
+
+.table-header {
+  background: var(--ion-color-light-shade);
+  font-weight: bold;
+}
+
+.table-row:nth-child(even) {
+  background: var(--ion-color-light-tint);
+}
+
+.placeholder {
+  color: var(--ion-color-medium);
+  font-style: italic;
+}

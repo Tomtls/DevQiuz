@@ -21,7 +21,8 @@ exports.registerUser = async (username, email, password) => {
 
   const hash = await bcrypt.hash(password, 10);
 
-  const newUser = { username, email, password: hash };
+  const maxId = users.reduce((max,user) => Math.max(max, user.user_id || 0), 0)
+  const newUser = { user_id: maxId + 1, username, email, password: hash };
   users.push(newUser);
   writeUsers(users);
 

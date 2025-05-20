@@ -36,7 +36,15 @@ export class HttpService {
   }
 
   public getJsQuizAnswers(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/jsquiz/answers`)
+    return this.http.get<any[]>(`${this.baseUrl}/jsquiz/answers`);
+  }
+
+  public getJsQuizHighscores(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/jsquiz/highscores`);
+  }
+
+  public postJsQuizResults(payload: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/jsquiz/results`, payload);
   }
   //#endregion
 

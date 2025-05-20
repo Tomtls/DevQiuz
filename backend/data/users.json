@@ -1,5 +1,6 @@
 [
   {
+    "user_id": 1,
     "username": "tom",
     "email": "tom@1",
     "password": "$2b$10$GYRy4oYcPJw0peTxx9xp0ekQOthH0.CFtA7RNk/LNgGkqKr6To6ja"

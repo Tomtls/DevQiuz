@@ -1,5 +1,32 @@
-<ion-content [fullscreen]="true">
-  <ion-item class="platzhalter"></ion-item>
-  <ion-title size="large">highscore</ion-title>
-  <ion-item> in process Commin soon</ion-item>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Highscores</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="highscore-section">
+    <h2>JS is Weird – Highscore</h2>
+    <ion-grid class="highscore-table">
+      <ion-row class="table-header">
+        <ion-col size="1">#</ion-col>
+        <ion-col size="5" size-sm="4">Name</ion-col>
+        <ion-col size="3">Punkte</ion-col>
+        <ion-col size="3" size-sm="4">Datum</ion-col>
+      </ion-row>
+
+      <ion-row *ngFor="let entry of jsHighscore; let i = index" class="table-row">
+        <ion-col size="1">{{ i + 1 }}</ion-col>
+        <ion-col size="5" size-sm="4">{{ entry.username }}</ion-col>
+        <ion-col size="3">{{ entry.score }}</ion-col>
+        <ion-col size="3" size-sm="4">{{ entry.timestamp | date:'short' }}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!-- Platzhalter für weitere Quizzes -->
+  <div class="highscore-section">
+    <h2>HTML Basics – Highscore</h2>
+    <p class="placeholder">Noch keine Ergebnisse.</p>
+  </div>
 </ion-content>

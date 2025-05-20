@@ -52,7 +52,27 @@ export class QuizJsPage implements OnInit {
       this.questions = data;
       this.showResults = true;
       this.explanationVisible = Array(data.length).fill(false);
+      this.saveResults();
     });
+  }
+
+  private saveResults() {
+    const answers = this.questions.map((q, i) => ({
+      question_index: q.question_index,
+      selected: this.selectedAnswers[i],
+      correctAnswer: q.correctAnswer
+    }));
+    
+    const payload = {
+      user_id: 1,//this.getUserId(),
+      score: answers.filter(a => a.selected === a.correctAnswer).length,
+      timestamp: new Date().toISOString(),
+      answers
+    };
+    this.http.postJsQuizResults(payload).subscribe({
+      next: () => console.log('Ergebnisse gespeichert'),
+      error: (err) => console.error('Fehler beim Speichern:', err)
+    });  
   }
 
   private reset() {
