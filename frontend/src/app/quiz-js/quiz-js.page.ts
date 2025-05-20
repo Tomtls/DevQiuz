@@ -12,36 +12,53 @@ import { IonicModule } from '@ionic/angular';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class QuizJsPage implements OnInit {
-  questions: any[] = [];
-  current = 0;
-  selectedAnswers: number[] = [];
-  showResults = false;
+  public questions: any[] = [];
+  public current = 0;
+  public selectedAnswers: number[] = [];
+  public showResults = false;
+  public explanationVisible: boolean[] = [];
 
   constructor(private http: HttpService) { }
 
   ngOnInit() {
     this.http.getJsQuiz().subscribe(data => this.questions = data);
   }
-  ionViewWillEnter(){
+
+  ionViewWillEnter() {
     this.http.getJsQuiz().subscribe(data => this.questions = data);
-    console.log(this.questions);
+    this.reset();
   }
-  selectOption(index: number) {
+
+  public get score(): number {
+    return this.questions.filter((q, i) => q.correctAnswer === this.selectedAnswers[i]).length;
+  }
+
+  public isCorrect(index: number): boolean {
+    return this.questions[index].correctAnswer === this.selectedAnswers[index];
+  }
+
+  public toggleExplanation(index: number): void {
+    this.explanationVisible[index] = !this.explanationVisible[index];
+  }
+
+  public selectOption(index: number) {
     this.selectedAnswers[this.current] = index;
-    if (this.current + 1 < this.questions.length) {
-      this.current++;
-    } else { this.showResults = true; }
-  }
-    
-  getCorrectAnswer(index: number) {
-    return this.questions[index].options[this.questions[index].answerIndex];
+    if (this.current + 1 < this.questions.length) { this.current++; } 
+    else { this.loadResults(); }
   }
 
-  isCorrect(index: number): boolean {
-    return this.questions[index].answerIndex === this.selectedAnswers[index];
+  private loadResults() {
+    this.http.getJsQuizAnswers().subscribe((data: any[]) => {
+      this.questions = data;
+      this.showResults = true;
+      this.explanationVisible = Array(data.length).fill(false);
+    });
   }
 
-  get score(): number {
-    return this.questions.filter((q, i) => q.answerIndex === this.selectedAnswers[i]).length;
+  private reset() {
+    this.showResults = false;
+    this.current = 0;
+    this.selectedAnswers = [];
   }
+
 }

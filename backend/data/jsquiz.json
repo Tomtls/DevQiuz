@@ -2,126 +2,861 @@
   {
     "question":"true + false",
     "options":["\"truefalse\"","1","NaN","SyntaxError"],
-    "correctAnswer":1
+    "correctAnswer":1,
+    "explanation": [
+      {
+        "type":"inline",
+        "content":[
+          {
+            "type": "text",
+            "content": "According to the "
+          },      
+          {
+            "type": "link",
+            "content": "ECMAScript Language Specification",
+            "url":"https://262.ecma-international.org/5.1/#sec-11.6"
+          },
+          {
+            "type": "text",
+            "content": ", the two boolean values are type coerced into their numeric counterparts."
+          }
+        ]
+      },
+      {
+        "type": "code",
+        "content": "Number(true); // -> 1 \n1 + 0; // -> 1"
+      }
+    ]
   },
   {
     "question":"[,,,].length",
     "options":["0","3","4","SyntaxError"],
-    "correctAnswer":1
+    "correctAnswer":1,
+    "explanation": [
+      {
+        "type":"inline",
+        "content":[
+          {
+            "type": "text",
+            "content": "[,,,] outputs an array with three empty slots. The last comma is a "
+          },
+          {
+            "type": "link",
+            "content": "trailing comma",
+            "url":"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Trailing_commas"
+          },
+          {
+            "type": "text",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "content": "If you don't think this is weird enough yet, then take a look at this:"
+      },
+      {
+        "type": "code",
+        "content": "[,] + [,]; // -> \"\"\n[] + [] === [,] + [,]; // -> true\n[,,,] + [,,,]; // -> \",,,,\"\n([,,,] + [,,,]).length === [,,,,].length; // -> true"
+      },
+      {
+        "type": "text",
+        "content": "To find resources that explain the addition operator with arrays, take a look at the explanation for question 3, directly below this."
+      }
+    ]
   },
   {
     "question":"[1, 2, 3] + [4, 5, 6]",
     "options":["\"123456\"","\"1,2,34,5,6\"","\"1,2,3,4,5,6\"","NaN"],
-    "correctAnswer":1
+    "correctAnswer":1,
+    "explanation": [
+      {
+        "type":"inline",
+        "content":[
+          {
+            "type": "text",
+            "content": "The extremely simplified answer is that the arrays are converted to strings and are then concatenated. See "
+          },
+          {
+            "type": "link",
+            "content": "Denys Dovhan's explanation",
+            "url":"https://github.com/denysdovhan/wtfjs#adding-arrays"
+          },
+          {
+            "type": "text",
+            "content": " for how this happens. To learn more about this behavior, visit "
+          },
+          {
+            "type": "link",
+            "content": "this StackOverflow answer",
+            "url":"https://stackoverflow.com/questions/9032856/what-is-the-explanation-for-these-bizarre-javascript-behaviours-mentioned-in-the"
+          },
+          {
+            "type": "text",
+            "content": " for a mid-level explanation or "
+          },
+          {
+            "type": "link",
+            "content": "this blog post",
+            "url":"https://2ality.com/2012/01/object-plus-object.html"
+          },
+          {
+            "type": "text",
+            "content": " for a more detailed one."
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "content": "Adding a trailing comma doesn't change anything, by the way:"
+      },
+      {
+        "type": "code",
+        "content": "[1, 2, 3,] + [4, 5, 6]; // -> \"1,2,34,5,6\""
+      },
+      {
+        "type": "text",
+        "content": "But, I suppose, if you really want to convert your arrays to comma-separated strings and combine them, you could write something stupid like this:"
+      },
+      {
+        "type": "code",
+        "content": "[1, 2, 3] + [, 4, 5, 6]; // -> \"1,2,3,4,5,6\""
+      },
+      {
+        "type": "text",
+        "content": "Or, even dumber, this:"
+      },
+      {
+        "type": "code",
+        "content": "[1, 2, 3, \"\"] + [4, 5, 6]; // -> \"1,2,3,4,5,6\""
+      },
+      {
+        "type": "text",
+        "content": "Probably best not to use the addition operator together with arrays, though. If you do want to combine two arrays for real, this is a better approach:"
+      },
+      {
+        "type": "code",
+        "content": "[...[1, 2, 3], ...[4, 5, 6]];"
+      }
+    ]
   },
   {
     "question":"0.2 + 0.1 === 0.3",
     "options":["true","false","NaN","SyntaxError"],
-    "correctAnswer":1
+    "correctAnswer":1,
+    "explanation": [
+      {
+        "type":"inline",
+        "content":[
+          {
+            "type": "text",
+            "content": "This is a standard dilemma of comparing floating-point values. Instead of comparing two floating points directly, one should compare the floating points with some level of tolerance. "
+          },
+          {
+            "type": "link",
+            "content": "This StackOverflow answer",
+            "url":"https://stackoverflow.com/questions/588004/is-floating-point-math-broken"
+          },
+          {
+            "type": "text",
+            "content": " explains the problem in greater detail."
+          }
+        ]
+      },
+      {
+        "type": "code",
+        "content": "0.2 + 0.1; // -> 0.30000000000000004;\n0.2 + 0.1 > 0.3; // -> true"
+      }
+    ]
   },
   {
     "question":"10,2",
     "options":["10.2","10","2","20"],
-    "correctAnswer":2
+    "correctAnswer":2,
+    "explanation": [
+      {
+        "type":"inline",
+        "content":[
+          {
+            "type": "text",
+            "content": "The "
+          },
+          {
+            "type": "link",
+            "content": "comma operator",
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comma_Operator"
+          },
+          {
+            "type": "text",
+            "content": " simply returns the value of the last operand."
+          }
+        ]
+      },
+      {
+        "type": "code",
+        "content": "10, 2; // -> 2\n1, 2, 3, 4; // -> 4\n42, \"pineapple\", true; // -> true"
+      }
+    ]
   },
   {
     "question":"!!\"\"",
     "options":["true","false","undefined","SyntaxError"],
-    "correctAnswer":1
+    "correctAnswer":1,
+    "explanation":[
+      {
+        "type":"inline",
+        "content":[
+          {
+            "type":"text",
+            "content": "You can add two exclamation marks before any value to get its corresponding boolean primitive. The technical term for this is "
+          },
+          {
+            "type":"link",
+            "content":"double NOT",
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_NOT#double_not_!!"
+          },
+          {
+            "type":"text",
+            "content": " (yes, really, Borat would love it). The conversion is based on the "
+          },
+          {
+            "type":"link",
+            "content": "truthyness",
+            "url":"https://developer.mozilla.org/en-US/docs/Glossary/Truthy"
+          },
+          {
+            "type":"text",
+            "content":" or "
+          },
+          {
+            "type":"link",
+            "content":"falsyness",
+            "url":"https://developer.mozilla.org/en-US/docs/Glossary/Falsy"
+          },
+          {
+            "type":"text",
+            "content": " of the value."
+          }
+        ]
+      },
+      {
+        "type":"code",
+        "content": "!!\"\"; // -> false\n!!0; // -> false\n!!\"Pineapple\"; // -> true\n!!42; // -> true"
+      },
+      {
+        "type":"text",
+        "content":"This same conversion can be done by using the Boolean function"
+      },
+      {
+        "type":"code",
+        "content":"Boolean(\"\"); // -> false"
+      }
+    ]
   },
   {
     "question":"+!![]",
     "options":["true","false","0","1"],
-    "correctAnswer":3
+    "correctAnswer":3,
+    "explanation":[
+      {
+        "type":"inline",
+        "content":[
+          {
+            "type":"text",
+            "content":"Arrays are "
+          },
+          {
+            "type":"link",
+            "content":"truthy",
+            "url":"https://developer.mozilla.org/en-US/docs/Glossary/Truthy"
+          },
+          {
+            "type": "text",
+            "content":", hence the double NOT operator will output true. The plus character then converts true to its numeric representation: 1."
+          }
+        ]
+      },
+      {
+        "type":"code",
+        "content":"!![]; // -> true\n+true; // -> 1"
+      },
+      {
+        "type":"text",
+        "content":"This expression might become clearer if written explicitly."
+      },
+      {
+        "type":"code",
+        "content":"Number(Boolean([])); // -> 1"
+      }
+    ]
   },
   {
     "question":"parseInt(0.0000005)",
     "options":["0","1","5","NaN"],
-    "correctAnswer":2
+    "correctAnswer":2,
+    "explanation":[
+      {
+        "type":"text",
+        "content":"Yeah, this is genuinely wild."
+      },
+      {
+        "type":"code",
+        "content":"parseInt(0.5); // -> 0\nparseInt(0.05); // -> 0\nparseInt(0.005); // -> 0\nparseInt(0.0005); // -> 0\nparseInt(0.00005); // -> 0\nparseInt(0.000005); // -> 0\nparseInt(0.0000005); // -> 5"
+      },
+      {
+        "type":"text",
+        "content":"The parseInt  function converts its first argument into a string (if it isn't one already) and then to a number. When 0.0000005 is converted into a string, this happens:"
+      },
+      {
+        "type":"code",
+        "content":"String(0.0000005); // -> \"5e-7\""
+      },
+      {
+        "type":"inline",
+        "content":[
+          {
+            "type":"text",
+            "content":"The parseInt function then simply takes the first character from that string, namely 5, and parses only that character into a number. Full credit to "
+          },
+          {
+            "type":"link",
+            "content":"Dmitri Pavlutin",
+            "url":"https://dmitripavlutin.com/parseint-mystery-javascript/"
+          },
+          {
+            "type":"text",
+            "content":" for explaining this behavior. Please check out his website for a more detailed explanation (as well as an alternative function that you could use instead)."
+          }
+        ]
+      }
+    ]
   },
   {
     "question":"true == \"true\"",
     "options":["true","false","undefined","SyntaxError"],
-    "correctAnswer":1
+    "correctAnswer":1,
+    "explanation":[
+      {
+        "type":"inline",
+        "content":[
+          {
+            "type":"text",
+            "content":"According to the rules of "
+          },
+          {
+            "type":"link",
+            "content":"abstract equality comparison",
+            "url":"https://262.ecma-international.org/11.0/#sec-abstract-equality-comparison"
+          },
+          {
+            "type":"text",
+            "content":", both of these values are converted to numbers when compared."
+          }
+        ]
+      }, 
+      {
+        "type":"code",
+        "content": "Number(true); // -> 1\nNumber(\"true\"); // -> NaN\n1 == NaN; // -> false"
+      }
+    ]
   },
   {
     "question":"010 - 03",
     "options":["7","5","3","NaN"],
-    "correctAnswer":1
+    "correctAnswer":1,
+    "explanation":[
+      {
+        "type":"inline",
+        "content":[
+          {
+            "type":"text",
+            "content":"010 is treated as an octal number by JavaScript. Thus, its value is in base 8. "
+          },
+          {
+            "type":"link",
+            "content":"The MDN Web Docs provides a brief explanation of octal numbers",
+            "url":"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Numbers_and_dates#octal_numbers"
+          },
+          {
+            "type":"text",
+            "content":"."
+          }
+        ]
+      },
+      {
+        "type":"code",
+        "content":"010; // -> 8\n03; // -> 3\n8 - 3; // -> 5"
+      },
+      {
+        "type":"text",
+        "content":"You can go all out with octal numbers, if you'd like:"
+      },
+      {
+        "type":"code",
+        "content":"01111111111111111; // -> 40210710958665"
+      },
+      {
+        "type":"text",
+        "content":"By the way, the number of leading zeroes doesn't matter:"
+      },
+      {
+        "type":"code",
+        "content":"010 === 0000000010; // -> true"
+      }
+    ]
   },
   {
     "question":"\"\" - - \"\"",
     "options":["\"\"","0","NaN","SyntaxError"],
-    "correctAnswer":1
+    "correctAnswer":1,
+    "explanation":[
+      {
+        "type":"text",
+        "content":"These two empty strings are both converted to 0."
+      },
+      {
+        "type":"code",
+        "content":"Number(\"\"); // -> 0\n0 - - 0; // -> 0"
+      },
+      {
+        "type":"text",
+        "content":"The expression might become a bit clearer if I write it like this:"
+      },
+      {
+        "type":"code",
+        "content":"+\"\" - -\"\";\n+0 - -0;"
+      },
+      {
+        "type":"text",
+        "content":"Please note that, while I put the space between the minus sign and the empty string simply to attempt to confuse you, the space between the minus signs themselves is important:"
+      },
+      {
+        "type":"code",
+        "content":"- -\"\"; // -> 0\n--\"\"; // -> SyntaxError"
+      }
+    ]
   },
   {
     "question":"null + 0",
     "options":["0","\"null0\"","NaN","TypeError"],
-    "correctAnswer":0
+    "correctAnswer":0,
+    "explanation":[
+      {
+        "type":"text",
+        "content":"Null converts to its numeric representation: 0."
+      },
+      {
+        "type":"code",
+        "content":"Number(null); // -> 0\n0 + 0; // -> 0"
+      },
+      {
+        "type":"text",
+        "content":"This also means that while..."
+      },
+      {
+        "type":"code",
+        "content":"null === false; // -> false"
+      },
+      {
+        "type":"text",
+        "content":"... this is true:"
+      },
+      {
+        "type":"code",
+        "content":"+null === +false; // -> true"
+      }
+    ]
   },
   {
     "question":"0/0",
     "options":["0","Infinity","NaN","SyntaxError"],
-    "correctAnswer":2
+    "correctAnswer":2,
+    "explanation":[
+      {
+        "type":"text",
+        "content": "As there is no meaningful numerical answer to the equation 0/0, the output is simply NaN."
+      },
+      {
+        "type":"code",
+        "content":"isNaN(0/0); // -> true"
+      }
+    ]
   },
   {
     "question":"1/0 > 10 ** 1000",
     "options":["true","false","NaN","SyntaxError"],
-    "correctAnswer":1
+    "correctAnswer":1,
+    "explanation":[
+      {
+        "type":"inline",
+        "content":[
+          {
+            "type":"text",
+            "content":"JavaScript treats both of these values as infinite, and infinity is equal to infinity. "
+          },
+          {
+            "type":"link",
+            "content":"Learn more about infinities",
+            "url":"https://en.wikipedia.org/wiki/Floating-point_arithmetic#Infinities"
+          },
+          {
+            "type":"text",
+            "content":"."
+          }
+        ]
+      },
+      {
+        "type":"code",
+        "content":"1/0; // -> Infinity\n10 ** 1000; // -> Infinity\nInfinity > Infinity; // -> false"
+      },
+      {
+        "type":"inline",
+        "content":[
+          {
+            "type":"text",
+            "content":"The exponentiation operator ** is "
+          },
+          {
+            "type":"link",
+            "content":"basically",
+            "url":"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Exponentiation"
+          },
+          {
+            "type":"text",
+            "content":" the same thing as the Math.pow function"
+          }
+        ]
+      },
+      {
+        "type":"code",
+        "content":"10 ** 1000; // -> Infinity\nMath.pow(10, 1000); // -> Infinity"
+      }
+    ]
   },
   {
     "question":"true++",
     "options":["1","2","NaN","SyntaxError"],
-    "correctAnswer":3
+    "correctAnswer":3,
+    "explanation":[
+      {
+        "type":"text",
+        "content":"Our first and only syntax error. I put SyntaxError as an option on a lot of the questions, hoping that some users would find some syntax so bizarre that it could not possibly be allowed. So, I felt that I had to add at least one expression that actually does result in a SyntaxError."
+      },
+      {
+        "type":"text",
+        "content":"Some global variables and functions won't throw syntax errors, by the way:"
+      },
+      {
+        "type":"code",
+        "content":"true++; // -> SyntaxError\n1++; // -> SyntaxError\n\"x\"++; // -> SyntaxError\nnull++; // -> SyntaxError\nundefined++; // -> NaN\n$++; // -> NaN\nconsole.log++; // -> NaN\nNaN++; // -> NaN"
+      },
+      {
+        "type":"text",
+        "content":"And, of course, just to be completely clear, this is valid syntax:"
+      },
+      {
+        "type":"code",
+        "content":"let _true = true;\n_true++;\n_true; // -> 2"
+      }
+    ]
   },
   {
     "question":"\"\" - 1",
     "options":["\"1\"","\"-1\"","-1","NaN"],
-    "correctAnswer":2
+    "correctAnswer":2,
+    "explanation":[
+      {
+        "type":"text",
+        "content":"While the addition operator (+) is used both for numbers and strings, the subtraction operator (-) has no use for strings, so JavaScript interprets this as an operation between numbers. An empty string is type coerced into 0."
+      },
+      {
+        "type":"code",
+        "content":"Number(\"\"); // -> 0\n0 - 1; // -> -1;"
+      },
+      {
+        "type":"text",
+        "content":"This would still be true even if the string had a space (or more) inside of it:"
+      },
+      {
+        "type":"code",
+        "content":"\" \" - 1; // -> -1;"
+      },
+      {
+        "type":"text",
+        "content":"However, if we use the addition operator, then string concatenation takes priority:"
+      },
+      {
+        "type":"code",
+        "content":"\"\" + 1; // -> \"1\""
+      }
+    ]
   },
   {
     "question":"(null - 0) + \"0\"",
     "options":["\"null0\"","\"00\"","0","NaN"],
-    "correctAnswer":1
+    "correctAnswer":1,
+    "explanation":[
+      {
+        "type":"text",
+        "content":"null is coerced into 0."
+      },
+      {
+        "type":"code",
+        "content":"Number(null); // -> 0\n0 - 0; // -> 0\n0 + \"0\"; // -> \"00\""
+      },
+      {
+        "type":"text",
+        "content":"If the question had used only the subtraction operator, the result would have been different:"
+      },
+      {
+        "type":"code",
+        "content":"(null - 0) - \"0\"; // -> 0"
+      }
+    ]
   },
   {
     "question":"true + (\"true\" - 0)",
     "options":["1","2","NaN","SyntaxError"],
-    "correctAnswer":2
+    "correctAnswer":2,
+    "explanation":[
+      {
+        "type":"text",
+        "content":"You might suspect that JS is so bananas that it would convert the string literal \"true\" into the numeric representation of the boolean true. It's not quite that bananas, however. What actually happens is that it tries to convert the string to a number and fails."
+      },
+      {
+        "type":"code",
+        "content":"Number(\"true\"); // -> NaN"
+      }
+    ]
   },
   {
     "question":"!5 + !5",
     "options":["0","10","25","NaN"],
-    "correctAnswer":0
+    "correctAnswer":0,
+    "explanation":[
+      {
+        "type":"text",
+        "content":"Putting a solemn exclamation mark, also known as the logical NOT operator, before a non-Boolean value will convert it to a boolean value opposite of what the Boolean function would convert it into."
+      },
+      {
+        "type":"text",
+        "content":"5 is truthy:"
+      },
+      {
+        "type":"code",
+        "content":"Boolean(5); // -> true\n!!5; // -> true"
+      },
+      {
+        "type":"text",
+        "content":"The opposite of true is, of course, false, which in turn is coerced into 0:"
+      },
+      {
+        "type":"code",
+        "content":"!5; // -> false\n+false; // -> 0\n0 + 0; // -> 0"
+      }
+    ]
   },
   {
     "question":"[] + []",
     "options":["[]","[,]","\"\"","NaN"],
-    "correctAnswer":2
+    "correctAnswer":2,
+    "explanation":[
+      {
+        "type":"text",
+        "content":"This question is closely tied to question 3. Again, the extremely simplified answer is that JavaScript converts the arrays to strings. Scroll up to question 3 to find resources that explain this behavior."
+      },
+      {
+        "type":"code",
+        "content":"[].toString(); // -> \"\"\n\"\" + \"\"; // -> \"\""
+      },
+      {
+        "type":"text",
+        "content":"Also, like I mentioned in the explanation for question 2, these expressions are equal, due to trailing commas:"
+      },
+      {
+        "type":"code",
+        "content":"[] + [] === [,] + [,]; // -> true"
+      },
+      {
+        "type":"text",
+        "content":"Even though these arrays are different, they are both converted to empty strings:"
+      },
+      {
+        "type":"code",
+        "content":"[].length; // -> 0\n[,].length; // -> 1\n[].toString() === [,].toString(); // -> true"
+      },
+      {
+        "type":"text",
+        "content":"Of course, this is also true:"
+      },
+      {
+        "type":"code",
+        "content":"Number([]) === Number([,]); // -> true"
+      }
+    ]
   },
   {
     "question":"1 + 2 + \"3\"",
     "options":["6","\"123\"","\"33\"","NaN"],
-    "correctAnswer":2
+    "correctAnswer":2,
+    "explanation":[
+      {
+        "type":"text",
+        "content":"JavaScript will execute these operations from left to right. String concatenation will take priority when the number three is added with the string three."
+      },
+      {
+        "type":"code",
+        "content":"1 + 2; // -> 3\n3 + \"3\";  // -> \"33\""
+      },
+      {
+        "type":"text",
+        "content":"Since the operations are executed from left to right, the expressions will give a signficantly different output if it was the first or second operation that had contained a string:"
+      },
+      {
+        "type":"code",
+        "content":"\"1\" + 2 + 3;  // -> \"123\"\n1 + \"2\" + 3;  // -> \"123\""
+      }
+    ]
   },
   {
     "question":"typeof NaN",
     "options":["\"number\"","\"nan\"","\"undefined\"","\"object\""],
-    "correctAnswer":0
+    "correctAnswer":0,
+    "explanation":[
+      {
+        "type":"inline",
+        "content":[
+          {
+            "type":"text",
+            "content":"The "
+          },
+          {
+            "type":"link",
+            "content":"ECMAScript Language Specification",
+            "url":"https://262.ecma-international.org/5.1/#sec-4.3.23"
+          },
+          {
+            "type":"text",
+            "content":" explains NaN as a number value that is a IEEE 754 \"Not-a-Number\" value. It might seem strange, but this is a common computer science principle."
+          }
+        ]
+      },
+      {
+        "type":"text",
+        "content":"There are some odd issues surrounding NaN in JavaScript, however. For instance, this is one of the two only instances where the Object.is function disagrees with triple equals."
+      },
+      {
+        "type":"code",
+        "content":"NaN === NaN; // -> false\nObject.is(NaN, NaN); // -> true"
+      },
+      {
+        "type":"text",
+        "content":"If you want to see if a value is NaN, then you should always use the isNaN function."
+      },
+      {
+        "type":"code",
+        "content":"isNaN(NaN); // -> true"
+      },
+      {
+        "type":"text",
+        "content":"Unrelated, but in case you are curious about the other case where the Object.is function disagrees with triple equals, it's 0 and -0."
+      },
+      {
+        "type":"code",
+        "content":"0 === -0; // -> true\nObject.is(0, -0); // -> false"
+      }
+    ]
   },
   {
     "question":"undefined + false",
     "options":["\"undefinedfalse\"","0","NaN","SyntaxError"],
-    "correctAnswer":2
+    "correctAnswer":2,
+    "explanation":[
+      {
+        "type":"text",
+        "content":"While false can be converted to a number, undefined cannot."
+      },
+      {
+        "type":"code",
+        "content":"Number(undefined); // -> NaN\nNumber(false); // -> 0\nNaN + 0; // -> NaN"
+      },
+      {
+        "type":"text",
+        "content":"However, undefined is represented by false:"
+      },
+      {
+        "type":"code",
+        "content":"!!undefined === false; // -> true"
+      },
+      {
+        "type":"text",
+        "content":"Which means that we can add undefined and false like so:"
+      },
+      {
+        "type":"code",
+        "content":"!!undefined + false; // -> 0"
+      }
+    ]
   },
   {
     "question":"\"\" && -0",
     "options":["true","false","\"\"","-0"],
-    "correctAnswer":2
+    "correctAnswer":2,
+    "explanation":[
+      {
+        "type":"inline",
+        "content":[
+          {
+            "type":"text",
+            "content":"Chances are that you've only ever used the "
+          },
+          {
+            "type":"link",
+            "content":"logical AND operator",
+            "url":"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND"
+          },
+          {
+            "type":"text",
+            "content":" in if-statements, but when used by itself it actually returns the value of one of the operands. If the first expression is truthy, then it returns the second. Otherwise, it returns the first. An empty string is "
+          },
+          {
+            "type":"link",
+            "content":"falsy",
+            "url":"https://developer.mozilla.org/en-US/docs/Glossary/Falsy"
+          },
+          {
+            "type":"text",
+            "content":", hence it returns the first operand."
+          }
+        ]
+      },
+      {
+        "type":"code",
+        "content":"\"\" && -0; // -> \"\"\n-0 && \"\"; // -> -0\n5 && 3; // -> 3\n0 && 3; // -> 0"
+      }
+    ]
   },
   {
     "question":"+!!NaN * \"\" - - [,]",
     "options":["0","\"0\"","NaN","I give up"],
-    "correctAnswer":0
+    "correctAnswer":0,
+    "explanation":[
+      {
+        "type":"text",
+        "content":"The finale combines some of the bizarre syntax that I've covered in this quiz. I've explained all of this behavior already in the explanations above, except for the multiplication operator (*), which will coerce the empty string into its numeric equivalent: 0."
+      },
+      {
+        "type":"code",
+        "content":"+!!NaN; // -> 0\n+\"\"; // -> 0\n-[,]; // -> -0"
+      },
+      {
+        "type":"text",
+        "content":"Add it all together:"
+      },
+      {
+        "type":"code",
+        "content":"0 * 0 - -0; // -> 0"
+      }
+    ]
   }
 ]

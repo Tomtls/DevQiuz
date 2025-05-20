@@ -1,3 +1,40 @@
+.quiz-container {
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto; // zentriert auf großen Bildschirmen
+}
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.results-container {
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.result-card {
+  background: var(--ion-item-background, var(--ion-background-color));
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-left: 5px solid var(--ion-color-medium);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(var(--ion-color-dark-rgb), 0.08);
+  color: var(--ion-text-color);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.correct-card {
+  border-left-color: var(--ion-color-success);
+  background: rgba(var(--ion-color-success-rgb), 0.05);
+}
+.incorrect-card {
+  border-left-color: var(--ion-color-danger);
+  background: rgba(var(--ion-color-danger-rgb), 0.05);
+}
+.answer-label {
+  margin: 0.25rem 0;
+}
 .correct {
   color: green;
   font-weight: bold;
@@ -6,8 +43,17 @@
   color: red;
   font-weight: bold;
 }
+.explanation {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  background: transparent;
+  border-left: 3px solid var(--ion-color-primary);
+  padding-left: 0.75rem;
+  color: var(--ion-text-color);
+  transition: all 0.3s ease;
+  padding-top: 0.5rem;
+}
 pre {
-  background: #000000;
   padding: 1em;
   border-radius: 8px;
   white-space: pre-wrap;

@@ -7,32 +7,57 @@
 <ion-content>
 
   <!-- Quizfragen -->
-  <div *ngIf="!showResults && questions.length">
+  <div *ngIf="!showResults && questions.length" class="quiz-container">
     <h2>Frage {{ current + 1 }} von {{ questions.length }}</h2>
     <pre><code>{{ questions[current].question }}</code></pre>
 
-    <ion-button
+    <div class="options-grid">
+      <ion-button
       *ngFor="let option of questions[current].options; let i = index"
-      expand="block"
-      (click)="selectOption(i)">
+      (click)="selectOption(i)"
+      style="text-transform: none;">
       {{ option }}
     </ion-button>
   </div>
+  </div>
 
   <!-- Ergebnisse -->
-  <div *ngIf="showResults">
+  <div *ngIf="showResults" class="results-container">
     <h2>Du hast {{ score }} von {{ questions.length }} richtig!</h2>
 
-    <div *ngFor="let q of questions; let i = index">
+    <div *ngFor="let q of questions; let i = index" class="result-card" [ngClass]="isCorrect(i) ? 'correct-card' : 'incorrect-card'">
       <h3>{{ i + 1 }}. {{ q.question }}</h3>
-      <p>Output: {{ q.options[q.answerIndex] }}</p>
-      <p>Du hast geantwortet: {{ q.options[selectedAnswers[i]] }}</p>
+      <p class="answer-label"><strong>Output:</strong> {{ q.options[q.correctAnswer] }}</p>
+      <p class="answer-label"><strong>Du hast geantwortet:</strong>  {{ q.options[selectedAnswers[i]] }}</p>
       <p [ngClass]="isCorrect(i) ? 'correct' : 'incorrect'">
         {{ isCorrect(i) ? 'Richtig!' : 'Falsch!' }}
       </p>
 
-      <p *ngIf="q.explanation">{{ q.explanation }}</p>
-      <pre *ngIf="q.code"><code>{{ q.code }}</code></pre>
+      <!-- Toggle Button -->
+      <ion-button fill="clear" size="small" (click)="toggleExplanation(i)" style="text-transform: none;">
+        {{ explanationVisible[i] ? 'Erklärung verbergen' : 'Warum?' }}
+      </ion-button>    
+
+      <div *ngIf="explanationVisible[i]" class="explanation">
+        <h4>Erklärung:</h4>
+        <div *ngFor="let part of q.explanation">
+          <!-- Textabschnitt -->
+          <p *ngIf="part.type === 'inline'">
+            <ng-container *ngFor="let inline of part.content" [ngSwitch]="inline.type">
+              <span *ngSwitchCase="'text'">{{ inline.content }}</span>
+              <a *ngSwitchCase="'link'" [href]="inline.url" target="_blank">{{ inline.content }}</a>
+            </ng-container>
+          </p>
+          <p *ngIf="part.type === 'text'">{{ part.content }}</p>
+          <!-- Linkabschnitt --> 
+          <p *ngIf="part.type === 'link'">
+            <a [href]="part.url" target="_blank" rel="noopener noreferrer">{{ part.content }}</a>
+          </p>
+          
+          <!-- Codeabschnitt -->
+          <pre *ngIf="part.type === 'code'"><code>{{ part.content }}</code></pre>
+        </div>
+      </div>
       <hr />
     </div>
 
