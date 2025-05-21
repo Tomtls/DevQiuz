@@ -39,9 +39,10 @@ export class AuthPage implements OnInit {
     this.api.login(this.username, this.password).subscribe(response => {
       console.log(response.message);
       if (response.success) {
-        const dummyToken = 'demo-token-123'
-        this.auth.login(dummyToken);
-        this.modalCtrl.dismiss();      
+        const dummyToken = 'demo-token-123';
+        const userId = response.user_id.toString();
+        this.auth.login(dummyToken, userId);
+        this.modalCtrl.dismiss({ success: true });    
       }
     });
   }
@@ -52,9 +53,10 @@ export class AuthPage implements OnInit {
     this.api.register(this.username, this.email, this.password).subscribe(response => {
       console.log(response.message);
       if(response.success){
-        const dummyToken = 'demo-token-123'
-        this.auth.login(dummyToken);
-        this.modalCtrl.dismiss();
+        const dummyToken = 'demo-token-123';
+        const userId = response.user_id.toString();
+        this.auth.login(dummyToken, userId);
+        this.modalCtrl.dismiss({ success: true });
       }
     });
   }

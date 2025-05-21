@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpService } from '../services/http.service';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service';
+import { AppComponent } from '../app.component';
+import { AuthPage } from '../auth/auth.page';
 
 @Component({
   selector: 'app-quiz-js',
@@ -18,7 +21,9 @@ export class QuizJsPage implements OnInit {
   public showResults = false;
   public explanationVisible: boolean[] = [];
 
-  constructor(private http: HttpService) { }
+  highscoreNotSaved = true;
+
+  constructor(private http: HttpService, private auth: AuthService, private app: AppComponent, private modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.http.getJsQuiz().subscribe(data => this.questions = data);
@@ -29,22 +34,33 @@ export class QuizJsPage implements OnInit {
     this.reset();
   }
 
-  public get score(): number {
-    return this.questions.filter((q, i) => q.correctAnswer === this.selectedAnswers[i]).length;
-  }
+  public get score(): number { return this.questions.filter((q, i) => q.correctAnswer === this.selectedAnswers[i]).length; }
+  public get isLoggedIn(): boolean { return this.auth.isLoggedIn() }
+  private get currentUserId(): number | null { return this.auth.getUserID(); }
 
-  public isCorrect(index: number): boolean {
-    return this.questions[index].correctAnswer === this.selectedAnswers[index];
-  }
-
-  public toggleExplanation(index: number): void {
-    this.explanationVisible[index] = !this.explanationVisible[index];
-  }
+  public isCorrect(index: number): boolean { return this.questions[index].correctAnswer === this.selectedAnswers[index]; }
+  public toggleExplanation(index: number): void { this.explanationVisible[index] = !this.explanationVisible[index]; }
 
   public selectOption(index: number) {
     this.selectedAnswers[this.current] = index;
     if (this.current + 1 < this.questions.length) { this.current++; } 
     else { this.loadResults(); }
+  }
+
+  public async anmelden() {
+    const modal = await this.modalCtrl.create({
+      component: AuthPage,
+      componentProps: { authMode: 'login' }
+    });
+
+    modal.onDidDismiss().then(result => {
+      const success = result.data?.success;
+      if (success && this.auth.isLoggedIn()) {
+        this.saveResults();
+        this.highscoreNotSaved = false;
+      }
+    });
+    await modal.present();
   }
 
   private loadResults() {
@@ -57,6 +73,8 @@ export class QuizJsPage implements OnInit {
   }
 
   private saveResults() {
+    if(!this.isLoggedIn){ return; }
+    this.highscoreNotSaved = false;
     const answers = this.questions.map((q, i) => ({
       question_index: q.question_index,
       selected: this.selectedAnswers[i],
@@ -64,7 +82,7 @@ export class QuizJsPage implements OnInit {
     }));
     
     const payload = {
-      user_id: 1,//this.getUserId(),
+      user_id: this.currentUserId,
       score: answers.filter(a => a.selected === a.correctAnswer).length,
       timestamp: new Date().toISOString(),
       answers

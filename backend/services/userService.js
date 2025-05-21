@@ -26,7 +26,7 @@ exports.registerUser = async (username, email, password) => {
   users.push(newUser);
   writeUsers(users);
 
-  return { success: true, message: 'Registrierung erfolgreich' };
+  return { success: true, message: 'Registrierung erfolgreich', user_id: newUser.user_id };
 };
 
 exports.loginUser = async (username, password) => {
@@ -37,5 +37,5 @@ exports.loginUser = async (username, password) => {
   const match = await bcrypt.compare(password, user.password);
   if (!match) return { success: false, message: 'Falsches Passwort' };
 
-  return { success: true, message: 'Login erfolgreich' };
+  return { success: true, message: 'Login erfolgreich', user_id: user.user_id };
 };

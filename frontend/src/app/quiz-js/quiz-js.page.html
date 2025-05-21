@@ -14,8 +14,7 @@
     <div class="options-grid">
       <ion-button
       *ngFor="let option of questions[current].options; let i = index"
-      (click)="selectOption(i)"
-      style="text-transform: none;">
+      (click)="selectOption(i)" >
       {{ option }}
     </ion-button>
   </div>
@@ -61,7 +60,18 @@
       <hr />
     </div>
 
-    <ion-button routerLink="/home">Zurück</ion-button>
+    
+    <ion-item *ngIf="highscoreNotSaved" color="warning" lines="none">
+      <ion-label>
+        <strong>Highscore wurde nicht gespeichert.</strong><br>
+        Bitte anmelden oder registrieren, um Ergebnisse zu speichern.
+      </ion-label>
+    </ion-item>
+    <ion-buttons>
+      <ion-button routerLink="/home">Zurück</ion-button>
+      <ion-button *ngIf="!isLoggedIn" (click)="anmelden()">Anmelden</ion-button>
+    </ion-buttons>
+
   </div>
 
 </ion-content>
