@@ -4,11 +4,33 @@
   margin: 0 auto; // zentriert auf großen Bildschirmen
 }
 .options-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 0.75rem;
-  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  //padding: 0 1em;
+  //display: grid;
+  //grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  //gap: 0.75rem;
+  //margin-top: 1rem;
 }
+@media (min-width: 600px) {
+  .options-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .options-grid ion-button {
+    flex: 1 1 45%; // zwei Buttons pro Zeile
+  }
+}
+
+@media (min-width: 1024px) {
+  .options-grid ion-button {
+    flex: 1 1 0; // eine Zeile, alle nebeneinander
+  }
+}
+
 .results-container {
   padding: 1rem;
   max-width: 800px;
