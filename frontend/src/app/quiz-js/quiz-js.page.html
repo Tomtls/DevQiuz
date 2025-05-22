@@ -14,7 +14,8 @@
     <div class="options-grid">
       <ion-button
       *ngFor="let option of questions[current].options; let i = index"
-      (click)="selectOption(i)" >
+      (click)="selectOption(i)"
+      style="text-transform: none;">
       {{ option }}
     </ion-button>
   </div>
