@@ -1,30 +1,492 @@
 [
   {
-    "id": 1,
-    "title": "Beispielfragen zu HTML",
-    "demo": true,
-    "questions": [
-      {
-        "text": "Wofür steht HTML?",
-        "options": ["HyperText Markup Language", "Home Tool Markup Language", "Hyperlink Text Machine Language"],
-        "answer": "HyperText Markup Language"
-      },
-      {
-        "text": "frage 2",
-        "options": ["HyperText Markup Language", "Home Tool Markup Language", "Hyperlink Text Machine Language"],
-        "answer": "HyperText Markup Language"
-      }
-    ]
-  },
-  {
-    "id": 2,
-    "title": "JavaScript Grundlagen",
-    "questions": [
-      {
-        "text": "Welches Symbol verwendet man für Arrow Functions?",
-        "options": ["=>", "->", "<=", "==>"],
-        "answer": "=>"
-      }
-    ]
-  }
+  "id": 1,
+  "title": "Beispielfragen zu HTML",
+  "demo": true,
+  "questions": [
+    {
+      "text": "Wofür steht HTML?",
+      "options": ["HyperText Markup Language", "Home Tool Markup Language", "Hyperlink Text Machine Language"],
+      "answer": "HyperText Markup Language"
+    },
+    {
+      "text": "Welches HTML-Element nutzt man für Absätze?",
+      "options": ["<div>", "<span>", "<p>"],
+      "answer": "<p>"
+    },
+    {
+      "text": "Wie bindet man ein Bild in HTML ein?",
+      "options": ["<img>", "<image>", "<src>"],
+      "answer": "<img>"
+    },
+    {
+      "text": "Welches Attribut braucht <img>, um ein Bild anzuzeigen?",
+      "options": ["alt", "href", "src"],
+      "answer": "src"
+    },
+    {
+      "text": "Welches Tag erzeugt eine ungeordnete Liste?",
+      "options": ["<ol>", "<ul>", "<list>"],
+      "answer": "<ul>"
+    },
+    {
+      "text": "Was macht das <a>-Tag?",
+      "options": ["Erstellt eine Liste", "Fügt einen Absatz hinzu", "Erstellt einen Link"],
+      "answer": "Erstellt einen Link"
+    },
+    {
+      "text": "Welches Attribut im <a>-Tag definiert die Ziel-URL?",
+      "options": ["src", "href", "link"],
+      "answer": "href"
+    },
+    {
+      "text": "Was macht das <br>-Tag?",
+      "options": ["Fettet den Text", "Erzeugt einen Zeilenumbruch", "Verlinkt eine Seite"],
+      "answer": "Erzeugt einen Zeilenumbruch"
+    },
+    {
+      "text": "Was ist ein valides HTML5-Doctype?",
+      "options": ["<!DOCTYPE html>", "<!DOCTYPE HTML5>", "<doctype>html</doctype>"],
+      "answer": "<!DOCTYPE html>"
+    },
+    {
+      "text": "Wofür steht das Attribut 'alt' bei Bildern?",
+      "options": ["Alternative Bildquelle", "Alternativer Text, wenn das Bild nicht lädt", "Automatischer Text"],
+      "answer": "Alternativer Text, wenn das Bild nicht lädt"
+    },
+    {
+      "text": "Welches Tag ist korrekt verschachtelt?",
+      "options": ["<b><i>Text</b></i>", "<p><strong>Text</strong></p>", "<i><p>Text</i></p>"],
+      "answer": "<p><strong>Text</strong></p>"
+    },
+    {
+      "text": "Welche Datei-Endung ist Standard für HTML-Dateien?",
+      "options": [".html", ".htm", ".php"],
+      "answer": ".html"
+    },
+    {
+      "text": "Wie viele Heading-Tags (Überschriften) gibt es in HTML?",
+      "options": ["3", "6", "10"],
+      "answer": "6"
+    },
+    {
+      "text": "Was ist das Root-Element in jeder HTML-Datei?",
+      "options": ["<html>", "<head>", "<body>"],
+      "answer": "<html>"
+    },
+    {
+      "text": "Was steht im <head>-Tag?",
+      "options": ["Der sichtbare Inhalt", "Meta-Infos, Titel, Verlinkungen", "Navigation"],
+      "answer": "Meta-Infos, Titel, Verlinkungen"
+    },
+    {
+      "text": "Welches Tag nutzt man für Tabellen?",
+      "options": ["<table>", "<tab>", "<data-table>"],
+      "answer": "<table>"
+    }
+  ]
+},
+ {
+  "id": 2,
+  "title": "JavaScript Grundlagen",
+  "questions": [
+    {
+      "text": "Welches Symbol verwendet man für Arrow Functions?",
+      "options": ["=>", "->", "<=", "==>"],
+      "answer": "=>"
+    },
+    {
+      "text": "Wie definiert man eine Variable mit Block-Scope?",
+      "options": ["var", "let", "const", "static"],
+      "answer": "let"
+    },
+    {
+      "text": "Was gibt 'typeof null' zurück?",
+      "options": ["null", "object", "undefined", "boolean"],
+      "answer": "object"
+    },
+    {
+      "text": "Welche Ausgabe hat: console.log(2 + '2')?",
+      "options": ["4", "'22'", "NaN", "undefined"],
+      "answer": "'22'"
+    },
+    {
+      "text": "Welche Schleife gibt es in JavaScript?",
+      "options": ["for", "while", "do...while", "alle drei"],
+      "answer": "alle drei"
+    },
+    {
+      "text": "Wie ruft man eine Funktion namens greet auf?",
+      "options": ["call.greet()", "greet()", "greet;", "new greet()"],
+      "answer": "greet()"
+    },
+    {
+      "text": "Was macht '===' im Vergleich zu '=='?",
+      "options": [
+        "Vergleicht nur Werte",
+        "Vergleicht Werte und Typen",
+        "Ist langsamer",
+        "Ist eine Zuweisung"
+      ],
+      "answer": "Vergleicht Werte und Typen"
+    },
+    {
+      "text": "Welche der folgenden ist KEINE primitive Datenart in JS?",
+      "options": ["string", "boolean", "object", "number"],
+      "answer": "object"
+    },
+    {
+      "text": "Was passiert bei 'let x = [1,2,3]; x[5] = 10;'?",
+      "options": [
+        "Fehler",
+        "Array bleibt bei 3 Elementen",
+        "Array hat 6 Elemente, mit Lücken",
+        "10 wird am Anfang eingefügt"
+      ],
+      "answer": "Array hat 6 Elemente, mit Lücken"
+    },
+    {
+      "text": "Wie erstellt man ein leeres Objekt?",
+      "options": ["let obj = []", "let obj = {}", "let obj = new Array()", "let obj = ''"],
+      "answer": "let obj = {}"
+    },
+    {
+      "text": "Was macht 'Array.push()'?",
+      "options": [
+        "Entfernt das letzte Element",
+        "Fügt ein Element am Ende hinzu",
+        "Sortiert das Array",
+        "Löscht das erste Element"
+      ],
+      "answer": "Fügt ein Element am Ende hinzu"
+    },
+    {
+      "text": "Wie kann man mit JavaScript Inhalte im HTML ändern?",
+      "options": [
+        "document.write()",
+        "document.innerHTML",
+        "document.getElementById().innerHTML",
+        "HTML.change()"
+      ],
+      "answer": "document.getElementById().innerHTML"
+    },
+    {
+      "text": "Wie nennt man Funktionen in Variablen?",
+      "options": ["Objektfunktionen", "Callback-Funktionen", "anonyme Funktionen", "Funktionen als Werte"],
+      "answer": "anonyme Funktionen"
+    },
+    {
+      "text": "Was passiert bei 'const name = \"Max\"; name = \"Tom\";'?",
+      "options": [
+        "Max wird durch Tom ersetzt",
+        "Fehler, weil const nicht neu zugewiesen werden darf",
+        "Wird ignoriert",
+        "Funktioniert nur im strict mode nicht"
+      ],
+      "answer": "Fehler, weil const nicht neu zugewiesen werden darf"
+    },
+    {
+      "text": "Was ist ein Callback in JavaScript?",
+      "options": [
+        "Ein Rückgabewert",
+        "Eine Funktion, die später ausgeführt wird",
+        "Ein Event-Listener",
+        "Eine Methode, um Daten zu speichern"
+      ],
+      "answer": "Eine Funktion, die später ausgeführt wird"
+    }
+  ]
+},
+{
+  "id": 3,
+  "title": "TypeScript Grundlagen",
+  "questions": [
+    {
+      "text": "Was ist TypeScript?",
+      "options": ["Ein CSS-Framework", "Ein Superset von JavaScript mit Typen", "Ein SQL-Dialekt", "Nur für Backend"],
+      "answer": "Ein Superset von JavaScript mit Typen"
+    },
+    {
+      "text": "Wie definiert man eine Variable mit Typ in TypeScript?",
+      "options": ["let age: number = 25;", "let age = number 25;", "let age = 25:number;", "number age = 25;"],
+      "answer": "let age: number = 25;"
+    },
+    {
+      "text": "Welcher Typ ist korrekt für Text?",
+      "options": ["String", "Text", "string", "str"],
+      "answer": "string"
+    },
+    {
+      "text": "Was passiert, wenn du 'let x: number = \"Hallo\";' schreibst?",
+      "options": ["Es wird zu string konvertiert", "Fehler ", "x wird undefined", "Funktioniert normal"],
+      "answer": "Fehler"
+    },
+    {
+      "text": "Was bedeutet das ? bei einem Parameter?",
+      "options": [
+        "Ist ein Pflichtwert",
+        "Ist ein optionaler Parameter",
+        "Ist ein Kommentar",
+        "Zeigt ein Interface an"
+      ],
+      "answer": "Ist ein optionaler Parameter"
+    },
+    {
+      "text": "Wie sieht eine Funktion mit Rückgabetyp aus?",
+      "options": [
+        "function greet(): string {}",
+        "function greet() => string {}",
+        "function string greet() {}",
+        "function greet(string): {}"
+      ],
+      "answer": "function greet(): string {}"
+    },
+    {
+      "text": "Was ist der Unterschied zu JavaScript?",
+      "options": [
+        "TS ist langsamer",
+        "TS braucht keinen Compiler",
+        "TS kennt Typen und JS nicht",
+        "JS braucht mehr Code"
+      ],
+      "answer": "TS kennt Typen und JS nicht"
+    },
+    {
+      "text": "Wie deklariert man ein Array aus Zahlen?",
+      "options": [
+        "let arr: number[] = [1, 2, 3];",
+        "let arr: numbers = [1, 2, 3];",
+        "let arr = [number];",
+        "let arr = number[];"
+      ],
+      "answer": "let arr: number[] = [1, 2, 3];"
+    },
+    {
+      "text": "Was macht 'any' für einen Typ?",
+      "options": [
+        "Verhindert Fehler, alles erlaubt",
+        "Nur Zahlen möglich",
+        "Nur Strings erlaubt",
+        "Es deaktiviert die Variable"
+      ],
+      "answer": "Verhindert Fehler, alles erlaubt"
+    },
+    {
+      "text": "Wie nennt man eigene Strukturen mit Typdefinition?",
+      "options": ["Class", "Interface", "Schema", "Element"],
+      "answer": "Interface"
+    },
+    {
+      "text": "Was bedeutet das 'as' in TypeScript?",
+      "options": [
+        "Funktion aufrufen",
+        "Typumwandlung (Type Assertion)",
+        "Funktion abbrechen",
+        "Schleife starten"
+      ],
+      "answer": "Typumwandlung (Type Assertion)"
+    },
+    {
+      "text": "Wie schreibt man ein Union-Type?",
+      "options": [
+        "let id: string | number;",
+        "let id: string || number;",
+        "let id = string, number;",
+        "let id: (string number);"
+      ],
+      "answer": "let id: string | number;"
+    },
+    {
+      "text": "Was ist der Unterschied zwischen 'interface' und 'type'?",
+      "options": [
+        "Gibt keinen",
+        "interface ist für Klassen, type für alles",
+        "type ist langsamer",
+        "interface ist nur für Arrays"
+      ],
+      "answer": "interface ist für Klassen, type für alles"
+    },
+    {
+      "text": "Welche Datei-Endung nutzt man für TypeScript-Dateien?",
+      "options": [".js", ".ts", ".tsx", ".typ"],
+      "answer": ".ts"
+    },
+    {
+      "text": "Wie nennt man den Prozess, bei dem TS in JS umgewandelt wird?",
+      "options": ["Rendering", "Compiling", "Styling", "Bundling"],
+      "answer": "Compiling"
+    }
+  ]
+},
+{
+  "id": 4,
+  "title": "SQL Grundlagen",
+  "questions": [
+    {
+      "text": "Was bedeutet SQL?",
+      "options": ["Structured Query Language", "Simple Question Logic", "Sequential Query List", "Standard Query Layout"],
+      "answer": "Structured Query Language"
+    },
+    {
+      "text": "Welcher Befehl wird genutzt, um Daten aus einer Tabelle abzurufen?",
+      "options": ["SELECT", "GET", "FETCH", "READ"],
+      "answer": "SELECT"
+    },
+    {
+      "text": "Welcher Befehl wird verwendet, um neue Daten hinzuzufügen?",
+      "options": ["INSERT INTO", "ADD DATA", "CREATE ROW", "APPEND"],
+      "answer": "INSERT INTO"
+    },
+    {
+      "text": "Wie filtert man Datensätze in einer SELECT-Abfrage?",
+      "options": ["FILTER BY", "IF", "WHERE", "LIMIT"],
+      "answer": "WHERE"
+    },
+    {
+      "text": "Wie sortiert man Ergebnisse absteigend nach einer Spalte?",
+      "options": ["ORDER BY column ASC", "SORT BY column", "ORDER BY column DESC", "RANK BY column"],
+      "answer": "ORDER BY column DESC"
+    },
+    {
+      "text": "Welcher SQL-Befehl löscht eine komplette Tabelle?",
+      "options": ["DELETE TABLE", "DROP TABLE", "REMOVE TABLE", "DESTROY TABLE"],
+      "answer": "DROP TABLE"
+    },
+    {
+      "text": "Wie benennt man eine Spalte in einer Abfrage um?",
+      "options": ["AS", "RENAME", "CHANGE", "LABEL"],
+      "answer": "AS"
+    },
+    {
+      "text": "Wie wählt man alle Spalten aus einer Tabelle?",
+      "options": ["SELECT all", "SELECT *", "GET ALL", "SELECT ALL *"],
+      "answer": "SELECT *"
+    },
+    {
+      "text": "Was ist ein PRIMARY KEY?",
+      "options": ["Ein eindeutiger Wert für jede Zeile", "Ein geheimer Schlüssel", "Ein Fremdschlüssel", "Eine Index-Spalte"],
+      "answer": "Ein eindeutiger Wert für jede Zeile"
+    },
+    {
+      "text": "Was macht ein FOREIGN KEY?",
+      "options": ["Verweist auf einen Primärschlüssel in einer anderen Tabelle", "Speichert verschlüsselte Daten", "Erzeugt ein neues Feld", "Legt Standardwerte fest"],
+      "answer": "Verweist auf einen Primärschlüssel in einer anderen Tabelle"
+    },
+    {
+      "text": "Welche Anweisung aktualisiert vorhandene Daten?",
+      "options": ["MODIFY", "CHANGE", "UPDATE", "EDIT"],
+      "answer": "UPDATE"
+    },
+    {
+      "text": "Wie kombiniert man zwei Tabellen basierend auf einem gemeinsamen Feld?",
+      "options": ["CONNECT", "MERGE", "JOIN", "LINK"],
+      "answer": "JOIN"
+    },
+    {
+      "text": "Welche Funktion zählt die Zeilen in einem Ergebnis?",
+      "options": ["SUM()", "TOTAL()", "COUNT()", "CALC()"],
+      "answer": "COUNT()"
+    },
+    {
+      "text": "Wie nennt man das Entfernen doppelter Ergebnisse in einer SELECT-Abfrage?",
+      "options": ["REMOVE DUPLICATES", "DISTINCT", "UNIQUE", "FILTER DOUBLE"],
+      "answer": "DISTINCT"
+    },
+    {
+      "text": "Welcher Datentyp wird für Zeichenketten verwendet?",
+      "options": ["VARCHAR", "INT", "DECIMAL", "DATE"],
+      "answer": "VARCHAR"
+    }
+  ]
+},
+{
+  "id": 5,
+  "title": "Ionic Grundlagen",
+  "questions": [
+    {
+      "text": "Was ist Ionic?",
+      "options": [
+        "Ein Framework zur Erstellung von mobilen Apps mit Webtechnologien",
+        "Ein Backend-System für Datenbanken",
+        "Ein JavaScript-Compiler",
+        "Ein Android-Betriebssystem"
+      ],
+      "answer": "Ein Framework zur Erstellung von mobilen Apps mit Webtechnologien"
+    },
+    {
+      "text": "Welche Programmiersprachen nutzt man typischerweise mit Ionic?",
+      "options": ["HTML, CSS, TypeScript", "Python, Java, SQL", "C#, XAML, XML", "PHP, MySQL, JavaScript"],
+      "answer": "HTML, CSS, TypeScript"
+    },
+    {
+      "text": "Wie startet man ein neues Ionic-Projekt?",
+      "options": [
+        "ionic start",
+        "ionic new project",
+        "ionic create app",
+        "ionic init"
+      ],
+      "answer": "ionic start"
+    },
+    {
+      "text": "Was ist die Standard-UI-Bibliothek, die Ionic verwendet?",
+      "options": ["Material UI", "Tailwind", "Ionic Components", "Bootstrap"],
+      "answer": "Ionic Components"
+    },
+    {
+      "text": "Wie startet man die App im Browser zur Vorschau?",
+      "options": ["ionic run", "ionic preview", "ionic serve", "ionic dev"],
+      "answer": "ionic serve"
+    },
+    {
+      "text": "Welche Plattformen unterstützt Ionic hauptsächlich?",
+      "options": ["iOS und Android", "Nur Web", "Nur iOS", "Nur Android"],
+      "answer": "iOS und Android"
+    },
+    {
+      "text": "Was ist ion-content?",
+      "options": [
+        "Ein Container für den sichtbaren Seiteninhalt",
+        "Ein Datenbankmodul",
+        "Ein Plugin für API-Zugriffe",
+        "Eine Footer-Komponente"
+      ],
+      "answer": "Ein Container für den sichtbaren Seiteninhalt"
+    },
+    {
+      "text": "Wie fügt man eine neue Seite zu einem Ionic-Projekt hinzu?",
+      "options": [
+        "ionic generate page name",
+        "ionic add screen",
+        "ionic create view",
+        "ionic page new name"
+      ],
+      "answer": "ionic generate page name"
+    },
+    {
+      "text": "Was ist Capacitor in einem Ionic-Projekt?",
+      "options": [
+        "Ein Tool zur nativen Funktionserweiterung",
+        "Ein CSS-Framework",
+        "Ein Testtool",
+        "Ein Datenbankinterface"
+      ],
+      "answer": "Ein Tool zur nativen Funktionserweiterung"
+    },
+    {
+      "text": "Was ist der Zweck von ion-button?",
+      "options": [
+        "Erstellt einen klickbaren Button",
+        "Stellt das Layout dar",
+        "Erzeugt eine Navigationsleiste",
+        "Verbindet mit Bluetooth"
+      ],
+      "answer": "Erstellt einen klickbaren Button"
+    }
+  ]
+}
+
+
+
+
 ] 
