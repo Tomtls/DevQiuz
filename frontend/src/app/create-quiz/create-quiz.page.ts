@@ -48,37 +48,66 @@ export class CreateQuizPage {
   }
 
 
-  async submitQuiz() {
-    // Optional: Validierung
-    if (!this.quiz.title || this.quiz.questions.length === 0) {
+ async submitQuiz() {
+  if (!this.quiz.title || this.quiz.questions.length === 0) {
+    const toast = await this.toastCtrl.create({
+      message: 'Bitte Titel und mindestens eine Frage angeben.',
+      duration: 2000,
+      color: 'danger'
+    });
+    toast.present();
+    return;
+  }
+
+  // Validierung: Jede Frage braucht mindestens zwei nicht-leere Optionen
+  const invalidQuestion = this.quiz.questions.find(q => {
+    const validOptions = q.options.filter(opt => opt && opt.trim() !== '');
+    return validOptions.length < 2;
+  });
+
+  if (invalidQuestion) {
+    const toast = await this.toastCtrl.create({
+      message: 'Jede Frage muss mindestens zwei Antwortoptionen haben.',
+      duration: 2500,
+      color: 'danger'
+    });
+    toast.present();
+    return;
+  }
+
+  // Neue Validierung: Jede Frage muss eine richtige Antwort haben
+  const missingAnswer = this.quiz.questions.find(q => !q.answer || q.answer.trim() === '');
+
+  if (missingAnswer) {
+    const toast = await this.toastCtrl.create({
+      message: 'Bitte wähle für jede Frage eine richtige Antwort aus.',
+      duration: 2500,
+      color: 'danger'
+    });
+    toast.present();
+    return;
+  }
+
+  // ✅ Alles valid — Speichern
+  this.api.createQuiz(this.quiz).subscribe({
+    next: async () => {
       const toast = await this.toastCtrl.create({
-        message: 'Bitte Titel und mindestens eine Frage angeben.',
+        message: 'Quiz erfolgreich erstellt!',
+        duration: 2000,
+        color: 'success'
+      });
+      toast.present();
+      this.router.navigate(['/']);
+    },
+    error: async () => {
+      const toast = await this.toastCtrl.create({
+        message: 'Fehler beim Speichern!',
         duration: 2000,
         color: 'danger'
       });
       toast.present();
-      return;
     }
+  });
+}
 
-    // 🚀 Speichern via API
-    this.api.createQuiz(this.quiz).subscribe({
-      next: async () => {
-        const toast = await this.toastCtrl.create({
-          message: 'Quiz erfolgreich erstellt!',
-          duration: 2000,
-          color: 'success'
-        });
-        toast.present();
-        this.router.navigate(['/']); // oder zur Quiz-Übersicht
-      },
-      error: async () => {
-        const toast = await this.toastCtrl.create({
-          message: 'Fehler beim Speichern!',
-          duration: 2000,
-          color: 'danger'
-        });
-        toast.present();
-      }
-    });
-  }
 }
