@@ -29,6 +29,10 @@ export class HttpService {
   public getQuizzes(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/quizzes`);
   }
+  public createQuiz(quiz: any) {
+   return this.http.post(`${this.baseUrl}/quizzes`, quiz);
+  }
+
   //#endregion
 
   //#region js quiz

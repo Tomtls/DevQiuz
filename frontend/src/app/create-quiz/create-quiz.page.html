@@ -1,5 +1,54 @@
-<ion-content [fullscreen]="true">
-  <ion-item class="platzhalter"></ion-item>
-  <ion-title size="large">create-quiz</ion-title>
-  <ion-item> in process Commin soon</ion-item>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Quiz erstellen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="floating">Quiz-Titel</ion-label>
+    <ion-input [(ngModel)]="quiz.title" type="text"></ion-input>
+  </ion-item>
+
+  <div *ngFor="let q of quiz.questions; let i = index">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Frage {{ i + 1 }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">Fragetext</ion-label>
+          <ion-input [(ngModel)]="q.text" type="text"></ion-input>
+        </ion-item>
+
+        <ion-list>
+          <ion-item *ngFor="let opt of q.options; let j = index; trackBy: trackByIndex">
+            <ion-label position="floating">Option {{ j + 1 }}</ion-label>
+            <ion-input [(ngModel)]="q.options[j]" type="text"></ion-input>
+          </ion-item>
+        </ion-list>
+
+        <ion-item>
+          <ion-label>Richtige Antwort</ion-label>
+          <ion-select
+            interface="popover"
+            [(ngModel)]="q.answer"
+            placeholder="Antwort wählen">
+            <ion-select-option
+              *ngFor="let opt of q.options"
+              [value]="opt">
+              {{ opt }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-button color="danger" expand="block" (click)="removeQuestion(i)">
+          Frage löschen
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-button expand="block" (click)="addQuestion()">+ Neue Frage</ion-button>
+  <ion-button expand="block" color="success" (click)="submitQuiz()">✅ Quiz speichern</ion-button>
 </ion-content>
