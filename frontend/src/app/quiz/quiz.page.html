@@ -1,11 +1,20 @@
 <ion-content [fullscreen]="true">
   <ion-item class="platzhalter"></ion-item>
 
+<ion-item *ngIf="isAdmin" lines="none">
+  <ion-label>Admin Modus</ion-label>
+  <ion-toggle [(ngModel)]="adminModeActive"></ion-toggle>
+</ion-item>
+
+
   <div class="quiz-grid">
-    <ion-card *ngFor="let quiz of quizzes" class="quiz-card">
-      <ion-card-header>
-        <ion-card-title>{{ quiz.title }}</ion-card-title>
-      </ion-card-header>
+    <ion-card *ngFor="let quiz of quizzes">
+        <ion-card-header>
+          <ion-card-title>{{ quiz.title }}</ion-card-title>
+          <ion-button *ngIf="adminModeActive" color="danger" size="small" (click)="deleteQuiz(quiz.id)">
+            Löschen
+          </ion-button>
+        </ion-card-header>
       <ion-card-content>
         <p>{{ quiz.questions.length }} Fragen</p>
         <p *ngIf="quiz.demo">🔓 Demo</p>

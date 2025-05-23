@@ -5,8 +5,11 @@ const dataFile = './data/users.json';
 function readUsers() {
   if (!fs.existsSync(dataFile)) return [];
   const raw = fs.readFileSync(dataFile);
-  try { return JSON.parse(raw || '[]'); } 
-  catch (err) { return []; }
+  try { 
+    return JSON.parse(raw || '[]'); 
+  } catch (err) { 
+    return []; 
+  }
 }
 
 function writeUsers(users) {
@@ -21,8 +24,14 @@ exports.registerUser = async (username, email, password) => {
 
   const hash = await bcrypt.hash(password, 10);
 
-  const maxId = users.reduce((max,user) => Math.max(max, user.user_id || 0), 0)
-  const newUser = { user_id: maxId + 1, username, email, password: hash };
+  const maxId = users.reduce((max, user) => Math.max(max, user.user_id || 0), 0);
+  const newUser = { 
+    user_id: maxId + 1, 
+    username, 
+    email, 
+    password: hash,
+    is_admin: false  // Neu: Default kein Admin
+  };
   users.push(newUser);
   writeUsers(users);
 
@@ -37,5 +46,11 @@ exports.loginUser = async (username, password) => {
   const match = await bcrypt.compare(password, user.password);
   if (!match) return { success: false, message: 'Falsches Passwort' };
 
-  return { success: true, message: 'Login erfolgreich', user_id: user.user_id };
+  // Admin-Status mitliefern
+  return { 
+    success: true, 
+    message: 'Login erfolgreich', 
+    user_id: user.user_id,
+    is_admin: user.is_admin || false
+  };
 };

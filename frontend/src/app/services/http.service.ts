@@ -32,6 +32,9 @@ export class HttpService {
   public createQuiz(quiz: any) {
    return this.http.post(`${this.baseUrl}/quizzes`, quiz);
   }
+  deleteQuiz(quizId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/quizzes/${quizId}`);
+  }
 
   //#endregion
 

@@ -36,7 +36,11 @@ export class QuizJsPage implements OnInit {
 
   public get score(): number { return this.questions.filter((q, i) => q.correctAnswer === this.selectedAnswers[i]).length; }
   public get isLoggedIn(): boolean { return this.auth.isLoggedIn() }
-  private get currentUserId(): number | null { return this.auth.getUserID(); }
+  private get currentUserId(): number | null {
+    const id = this.auth.getUserId();
+    return id ? +id : null;
+  }
+
 
   public isCorrect(index: number): boolean { return this.questions[index].correctAnswer === this.selectedAnswers[index]; }
   public toggleExplanation(index: number): void { this.explanationVisible[index] = !this.explanationVisible[index]; }

@@ -4,5 +4,12 @@
     "username": "tom",
     "email": "tom@1",
     "password": "$2b$10$GYRy4oYcPJw0peTxx9xp0ekQOthH0.CFtA7RNk/LNgGkqKr6To6ja"
+  },
+  {
+    "user_id": 2,
+    "username": "Rene",
+    "email": "Test",
+    "password": "$2b$10$7vy64aY9HBWTsFoNETqM/eKdOqRjzJBVAVAtgA1sAH4YzufQaR1ZC",
+    "is_admin": true
   }
 ]

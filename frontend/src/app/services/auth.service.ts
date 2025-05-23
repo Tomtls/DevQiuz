@@ -1,33 +1,36 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  private token: string | null = null;
+  private userId: String | null = null; // User ID als number
+  private adminStatus: boolean = false;
 
-  private TOKEN_KEY = 'auth_token';
-  private USER_ID = 'user_id';
-
-  login(token: string, userID: string) {
-    localStorage.setItem(this.TOKEN_KEY, token);
-    localStorage.setItem(this.USER_ID, userID)
+  login(token: string, userId: String, isAdmin: boolean = false) {
+    this.token = token;
+    this.userId = userId;
+    this.adminStatus = isAdmin;
+    // Optional: localStorage/sessionStorage speichern
   }
 
   logout() {
-    localStorage.removeItem(this.TOKEN_KEY);
-    localStorage.removeItem(this.USER_ID);
+    this.token = null;
+    this.userId = null;
+    this.adminStatus = false;
+    // Optional: localStorage/sessionStorage löschen
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem(this.TOKEN_KEY);
+    return !!this.token;
   }
 
-  getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
+  getUserId(): String | null {
+    return this.userId;
   }
 
-  getUserID(): number | null {
-    const id = localStorage.getItem(this.USER_ID);
-    return id !== null ? Number(id) : null;
+  isAdmin(): boolean {
+    return this.adminStatus;
   }
 }
