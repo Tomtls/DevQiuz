@@ -1,7 +1,3 @@
-.platzhalter{
-  height: 100px;
-}
-
 .quiz-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -13,4 +9,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.quiz-info {
+  display: flex;
+  gap: 8px;         // Abstand zwischen den Elementen
+  align-items: center;
+  flex-wrap: wrap;  // optional: erlaubt Umbruch auf kleineren Bildschirmen
 }

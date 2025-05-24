@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 
-import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { HttpService } from '../services/http.service';
 
@@ -22,7 +21,7 @@ export class AuthPage implements OnInit {
   public password: string = '';
   public password2: string = '';
 
-  constructor(private auth: AuthService, private api: HttpService, private modalCtrl: ModalController) {}
+  constructor(private auth: AuthService, private http: HttpService, private modalCtrl: ModalController) {}
   
   ngOnInit() {}
 
@@ -36,12 +35,13 @@ export class AuthPage implements OnInit {
   private handleLogin() {
     if(!this.eingabeCheck()) { return; }
 
-    this.api.login(this.username, this.password).subscribe(response => {
+    this.http.login(this.username, this.password).subscribe(response => {
       console.log(response.message);
       if (response.success) {
         const dummyToken = 'demo-token-123';
         const userId = response.user_id.toString();
-        this.auth.login(dummyToken, userId);
+        const isAdmin = response.is_admin.valueOf();
+        this.auth.login(dummyToken, userId, isAdmin);
         this.modalCtrl.dismiss({ success: true });    
       }
     });
@@ -50,7 +50,7 @@ export class AuthPage implements OnInit {
   private handleRegister() {
     if(!this.eingabeCheck()) { return; }
 
-    this.api.register(this.username, this.email, this.password).subscribe(response => {
+    this.http.register(this.username, this.email, this.password).subscribe(response => {
       console.log(response.message);
       if(response.success){
         const dummyToken = 'demo-token-123';

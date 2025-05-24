@@ -6,24 +6,25 @@ import { IonicModule, ModalController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { AppComponent } from '../app.component';
 import { AuthPage } from '../auth/auth.page';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-quiz-js',
   templateUrl: './quiz-js.page.html',
   styleUrls: ['./quiz-js.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, RouterModule]
 })
 export class QuizJsPage implements OnInit {
-  public questions: any[] = [];
   public current = 0;
+  public showResults: boolean = false;
+  public highscoreNotSaved: boolean = true;
+  public questions: any[] = [];
   public selectedAnswers: number[] = [];
-  public showResults = false;
   public explanationVisible: boolean[] = [];
 
-  highscoreNotSaved = true;
 
-  constructor(private http: HttpService, private auth: AuthService, private app: AppComponent, private modalCtrl: ModalController) { }
+  constructor(private http: HttpService, private auth: AuthService, private modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.http.getJsQuiz().subscribe(data => this.questions = data);
@@ -35,11 +36,7 @@ export class QuizJsPage implements OnInit {
   }
 
   public get score(): number { return this.questions.filter((q, i) => q.correctAnswer === this.selectedAnswers[i]).length; }
-  public get isLoggedIn(): boolean { return this.auth.isLoggedIn() }
-  private get currentUserId(): number | null {
-    const id = this.auth.getUserId();
-    return id ? +id : null;
-  }
+  public get isLoggedIn(): boolean { return this.auth.isLoggedIn }
 
 
   public isCorrect(index: number): boolean { return this.questions[index].correctAnswer === this.selectedAnswers[index]; }
@@ -59,7 +56,7 @@ export class QuizJsPage implements OnInit {
 
     modal.onDidDismiss().then(result => {
       const success = result.data?.success;
-      if (success && this.auth.isLoggedIn()) {
+      if (success && this.auth.isLoggedIn) {
         this.saveResults();
         this.highscoreNotSaved = false;
       }
@@ -77,7 +74,8 @@ export class QuizJsPage implements OnInit {
   }
 
   private saveResults() {
-    if(!this.isLoggedIn){ return; }
+    if(!this.auth.isLoggedIn){ return; }
+    if(!this.auth.UserId){ return; }
     this.highscoreNotSaved = false;
     const answers = this.questions.map((q, i) => ({
       question_index: q.question_index,
@@ -86,7 +84,7 @@ export class QuizJsPage implements OnInit {
     }));
     
     const payload = {
-      user_id: this.currentUserId,
+      user_id: this.auth.UserId,
       score: answers.filter(a => a.selected === a.correctAnswer).length,
       timestamp: new Date().toISOString(),
       answers
@@ -97,10 +95,11 @@ export class QuizJsPage implements OnInit {
     });  
   }
 
-  private reset() {
+  public reset() {
     this.showResults = false;
     this.current = 0;
     this.selectedAnswers = [];
+    this.explanationVisible = [];
   }
 
 }

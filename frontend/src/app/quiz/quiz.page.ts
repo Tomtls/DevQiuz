@@ -14,25 +14,29 @@ import { AuthService } from '../services/auth.service';
   standalone: true,
   imports: [FormsModule, IonicModule, CommonModule]
 })
-export class QuizPage implements OnInit {
+export class QuizPage {
   quizzes: any[] = [];
-  isAdmin = false;
-  adminModeActive = false;
+  
+  constructor(private http: HttpService, private router: Router, private auth: AuthService,) { }
 
-  constructor(private api: HttpService, private router: Router, private auth: AuthService,) { }
+  public get adminMode(): boolean { return this.auth.adminMode; }
+  public get isLoggedIn(): boolean { return this.auth.isLoggedIn; }
 
-  ngOnInit() {
-    this.isAdmin = this.auth.isAdmin();
-    this.api.getQuizzes().subscribe(data => { this.quizzes = data; });
+
+  ionViewWillEnter() {
+    this.loadData();
   }
 
-  openQuiz(id: number) {
-    this.router.navigate(['/quiz-view', id]);
-  }
-  deleteQuiz(id: number) {
-    this.api.deleteQuiz(id).subscribe(() => {
-      this.quizzes = this.quizzes.filter(q => q.id !== id);
-    });
+  public loadData(){ this.http.getQuizzes().subscribe(data => { this.quizzes = data; }); }
+
+  public openQuiz(id: number) { this.router.navigate(['/quiz-view', id]); }
+
+  public deleteQuiz(id: number) {
+    if(this.auth.isAdmin) {
+      this.http.deleteQuiz(id).subscribe(() => {
+        this.quizzes = this.quizzes.filter(q => q.id !== id);
+      });
+    }
   }
 
 }

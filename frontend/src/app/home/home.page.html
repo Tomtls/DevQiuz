@@ -1,5 +1,10 @@
-<ion-content>
-  <ion-item class="platzhalter"></ion-item>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="margin-top:50px">
   <ion-card>
     <ion-card-header>
       <ion-card-title>Willkommen bei DevQuiz</ion-card-title>
@@ -10,12 +15,10 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-button expand="block" color="primary" (click)="startDemoQuiz()">Demo-Quiz starten</ion-button>
-  <ion-button expand="block" color="medium" (click)="openAuthModal('login')">Einloggen</ion-button>
-  <ion-button expand="block" color="success" (click)="openAuthModal('register')">Registrieren</ion-button>
-
+  <ion-card>
   <ion-list>
     <ion-list-header>
+      <ion-icon slot="start" name="home-outline"></ion-icon>
       <ion-label>Was dich erwartet:</ion-label>
     </ion-list-header>
     <ion-item>
@@ -35,6 +38,7 @@
       <ion-label>YouTube-Tutorials in Fragen</ion-label>
     </ion-item>
   </ion-list>
+  </ion-card>
 
   <ion-card>
     <ion-card-header>
@@ -44,4 +48,14 @@
       Diese App befindet sich in aktiver Entwicklung. Weitere Funktionen wie API-Anbindung, Fortschrittsanzeige und Export folgen bald!
     </ion-card-content>
   </ion-card>
+  <ion-card>
+    <ion-buttons>
+      <!--
+        <ion-button expand="block" color="primary" (click)="startDemoQuiz()">Demo-Quiz starten</ion-button>
+      -->
+      <ion-button color="medium" (click)="openAuthModal('login')">Einloggen</ion-button>
+      <ion-button color="success" (click)="openAuthModal('register')">Registrieren</ion-button>
+    </ion-buttons>
+  </ion-card>
+
 </ion-content>

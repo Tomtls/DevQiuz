@@ -4,33 +4,49 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AuthService {
-  private token: string | null = null;
-  private userId: String | null = null; // User ID als number
-  private adminStatus: boolean = false;
 
-  login(token: string, userId: String, isAdmin: boolean = false) {
-    this.token = token;
-    this.userId = userId;
-    this.adminStatus = isAdmin;
+  private TOKEN_KEY = 'auth_token';
+  private USER_ID = 'user_id';
+
+  private _isAdmin: boolean = false; // ist der User admin Berechtigungen?
+  private _adminMode: boolean = false;   // ist Admin Modus aktiv?
+
+  public login(token: string, userId: string, isAdmin: boolean = false) {
+    localStorage.setItem(this.TOKEN_KEY, token);
+    localStorage.setItem(this.USER_ID, userId)
+
+    this._isAdmin = isAdmin;
     // Optional: localStorage/sessionStorage speichern
   }
 
-  logout() {
-    this.token = null;
-    this.userId = null;
-    this.adminStatus = false;
+  public logout() {
+    localStorage.clear();
+    this._isAdmin = this._adminMode = false;
     // Optional: localStorage/sessionStorage löschen
   }
 
-  isLoggedIn(): boolean {
-    return !!this.token;
+  get isLoggedIn(): boolean {
+    return !!localStorage.getItem(this.TOKEN_KEY);
   }
 
-  getUserId(): String | null {
-    return this.userId;
+  get Token(): string | null {
+    return localStorage.getItem(this.TOKEN_KEY);
+  }
+  
+  get UserId(): number | null {
+    const id = localStorage.getItem(this.USER_ID);
+    return id !== null ? Number(id) : null;
   }
 
-  isAdmin(): boolean {
-    return this.adminStatus;
+  get isAdmin(): boolean {
+    return this._isAdmin;
+  }
+  
+  get adminMode(): boolean {
+    return this._adminMode;
+  }
+
+  set adminMode(adminMode: boolean) {
+    this._adminMode = adminMode;
   }
 }

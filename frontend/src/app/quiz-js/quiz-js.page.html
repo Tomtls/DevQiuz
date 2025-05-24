@@ -69,6 +69,7 @@
     </ion-item>
     <ion-buttons>
       <ion-button routerLink="/home">Zurück</ion-button>
+      <ion-button (click)="reset()">Neu starten</ion-button>
       <ion-button *ngIf="!isLoggedIn" (click)="anmelden()">Anmelden</ion-button>
     </ion-buttons>
 

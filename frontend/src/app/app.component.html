@@ -10,43 +10,42 @@
     <ion-content>
       <ion-list>
         <ion-item routerLink="/home">
-          <ion-icon slot="start" name=""></ion-icon>
+          <ion-icon slot="start" name="home-outline"></ion-icon>
           <ion-label>Home</ion-label>
         </ion-item>
+        
+        <ion-item routerLink="/quiz-js">
+          <ion-icon slot="start" src="/assets/icon/javascript.svg" style="width: 24px; height: 24px;"></ion-icon>
+          <ion-label>JS is weird</ion-label>
+        </ion-item>
 
-        <ion-item *ngIf="!isLoggedIn" button (click)="openAuthModal()">
+        <ion-item routerLink="/quiz-hello-world">
           <ion-icon slot="start" name=""></ion-icon>
-          <ion-label>Login/Registrieren</ion-label>
+          <ion-label>Hello World! - Quiz</ion-label>
         </ion-item>
 
         <ion-item routerLink="/quiz">
           <ion-icon slot="start" name=""></ion-icon>
           <ion-label>Quiz</ion-label>
         </ion-item>
-        
-        <ion-item routerLink="/quiz-hello-world">
-          <ion-icon slot="start" name=""></ion-icon>
-          <ion-label>Hello World! - Quiz</ion-label>
-        </ion-item>
-        
-        <ion-item routerLink="/quiz-js">
-          <ion-icon slot="start" name=""></ion-icon>
-          <ion-label>JS is weird</ion-label>
-        </ion-item>
 
         <ion-item routerLink="/create-quiz">
-          <ion-icon slot="start" name=""></ion-icon>
+          <ion-icon slot="start" name="add-circle-outline"></ion-icon>
           <ion-label>Quiz erstellen</ion-label>
         </ion-item>
 
         <ion-item routerLink="/highscore">
-          <ion-icon slot="start" name=""></ion-icon>
+          <ion-icon slot="start" name="bar-chart-outline"></ion-icon>
           <ion-label>Highscore</ion-label>    
         </ion-item>
 
         <ion-item *ngIf="isLoggedIn" button (click)="logout()">
-          <ion-icon slot="start" name=""></ion-icon>
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
           <ion-label>Logout</ion-label>
+        </ion-item>
+        <ion-item *ngIf="!isLoggedIn" button (click)="openAuthModal()">
+          <ion-icon slot="start" name="log-in-outline"></ion-icon>
+          <ion-label>Login/Registrieren</ion-label>
         </ion-item>
       </ion-list>
     </ion-content>
@@ -58,6 +57,7 @@
         <a routerLink="/home"><img src="assets/icon/image3.png" alt="Logo" style="margin-left: 10px; height: 64px; display: flex; align-items: center;" /></a>
       </ion-buttons>
       <ion-title class="ion-text-center">DevQuiz</ion-title>
+      <ion-toggle *ngIf="isAdmin" slot="end" [checked]="adminMode" (ionChange)="toggleAdminMode()">Admin Mode</ion-toggle>
       <ion-buttons slot="end">
         <ion-menu-button autoHide="false"></ion-menu-button>
       </ion-buttons>

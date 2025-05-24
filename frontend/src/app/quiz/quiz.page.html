@@ -1,26 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>quiz</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
-  <ion-item class="platzhalter"></ion-item>
-
-<ion-item *ngIf="isAdmin" lines="none">
-  <ion-label>Admin Modus</ion-label>
-  <ion-toggle [(ngModel)]="adminModeActive"></ion-toggle>
-</ion-item>
-
-
   <div class="quiz-grid">
     <ion-card *ngFor="let quiz of quizzes">
-        <ion-card-header>
-          <ion-card-title>{{ quiz.title }}</ion-card-title>
-          <ion-button *ngIf="adminModeActive" color="danger" size="small" (click)="deleteQuiz(quiz.id)">
-            Löschen
-          </ion-button>
-        </ion-card-header>
+      <ion-card-header>
+        <ion-card-title>{{ quiz.title }}</ion-card-title>
+        <ion-button *ngIf="adminMode" color="danger" size="small" (click)="deleteQuiz(quiz.id)">Löschen</ion-button>
+      </ion-card-header>
       <ion-card-content>
-        <p>{{ quiz.questions.length }} Fragen</p>
-        <p *ngIf="quiz.demo">🔓 Demo</p>
-        <ion-button expand="block" (click)="openQuiz(quiz.id)">
-          Starten
-        </ion-button>
+        <div class="quiz-info">  
+          <p>{{ quiz.questions.length }} Fragen</p>
+          <p *ngIf="quiz.demo" style="display: inline; margin-left: 8px">🔓 Demo</p>
+        </div>
+        <ion-button *ngIf="quiz.demo && !isLoggedIn" expand="block" (click)="openQuiz(quiz.id)">Demo starten</ion-button>
+        <ion-button *ngIf="isLoggedIn" expand="block" (click)="openQuiz(quiz.id)">Starten</ion-button>
+        <ion-button *ngIf="adminMode" color="danger" size="small" (click)="deleteQuiz(quiz.id)">Löschen</ion-button>
       </ion-card-content>
     </ion-card>
   </div>
