@@ -19,23 +19,23 @@
   <ion-list>
     <ion-list-header>
       <ion-icon slot="start" name="home-outline"></ion-icon>
-      <ion-label>Was dich erwartet:</ion-label>
+      <ion-label>Schnell Zugriff:</ion-label>
     </ion-list-header>
     <ion-item>
-      <ion-icon name="" slot="start"></ion-icon>
-      <ion-label>Fragen zu IT, Web & Programmierung</ion-label>
+      <ion-icon name="clipboard-outline" slot="start"></ion-icon>
+      <ion-button fill="clear" style="color: black" [routerLink]="['/quiz']">Fragen zu IT, Web & Programmierung</ion-button>
     </ion-item>
     <ion-item>
-      <ion-icon name="" slot="start"></ion-icon>
-      <ion-label>Eigene Quizfragen erstellen</ion-label>
+      <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+      <ion-button fill="clear" style="color: black" [routerLink]="['/create-quiz']">Eigene Quizfragen erstellen</ion-button>
     </ion-item>
     <ion-item>
-      <ion-icon name="" slot="start"></ion-icon>
-      <ion-label>Highscore & Punkte sammeln</ion-label>
+      <ion-icon name="bar-chart-outline" slot="start"></ion-icon>
+      <ion-button fill="clear" style="color: black" [routerLink]="['/highscore']">Highscore & Punkte sammeln</ion-button>
     </ion-item>
     <ion-item>
-      <ion-icon name="" slot="start"></ion-icon>
-      <ion-label>YouTube-Tutorials in Fragen</ion-label>
+      <ion-icon name="videocam-outline" slot="start"></ion-icon>
+      <ion-button fill="clear" style="color: black" [routerLink]="['/highscore']">YouTube-Tutorials in Fragen</ion-button>
     </ion-item>
   </ion-list>
   </ion-card>
@@ -45,17 +45,11 @@
       <ion-card-title>Hinweis 💡</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      Diese App befindet sich in aktiver Entwicklung. Weitere Funktionen wie API-Anbindung, Fortschrittsanzeige und Export folgen bald!
+      Wenn du deinen Fortschritt speichern willst und deinen Highscore mit anderen vergleichen willst dann Erstelle einen Account und melde dich vor dem Quiz an!
     </ion-card-content>
+    <div style="display: flex; width: 100%;">
+      <ion-button style="flex: 3;" color="medium" (click)="openAuthModal('login')">Einloggen</ion-button>
+      <ion-button style="flex: 3;" color="success" (click)="openAuthModal('register')">Registrieren</ion-button>
+    </div>
   </ion-card>
-  <ion-card>
-    <ion-buttons>
-      <!--
-        <ion-button expand="block" color="primary" (click)="startDemoQuiz()">Demo-Quiz starten</ion-button>
-      -->
-      <ion-button color="medium" (click)="openAuthModal('login')">Einloggen</ion-button>
-      <ion-button color="success" (click)="openAuthModal('register')">Registrieren</ion-button>
-    </ion-buttons>
-  </ion-card>
-
 </ion-content>
