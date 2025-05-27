@@ -14,6 +14,7 @@ function readQuizzes() {
 
 function writeQuizzes(quizzes) {
   fs.writeFileSync(path, JSON.stringify(quizzes, null, 2));
+  console.log('Quizzes gespeichert:', quizzes.length);
 }
 
 function addQuiz(quiz) {
@@ -27,7 +28,17 @@ function addQuiz(quiz) {
   return newQuiz;
 }
 
+function deleteQuiz(id){
+  console.log('ID als number:', id);
+  let quizzes = readQuizzes();
+  console.log('Vorherige Anzahl Quizzes:', quizzes.length);
+  quizzes = quizzes.filter(quiz => quiz.id !== id);
+  writeQuizzes(quizzes);
+  console.log('Nachher Anzahl Quizzes:', quizzes.length);
+}
+
 module.exports = {
   readQuizzes,
-  addQuiz
+  addQuiz,
+  deleteQuiz
 };

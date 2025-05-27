@@ -8,7 +8,7 @@ export class AuthService {
   private TOKEN_KEY = 'auth_token';
   private USER_ID = 'user_id';
 
-  private _isAdmin: boolean = false; // ist der User admin Berechtigungen?
+  private _isAdmin: boolean = false; // ist der User admin/ hat er Berechtigungen?
   private _adminMode: boolean = false;   // ist Admin Modus aktiv?
 
   public login(token: string, userId: string, isAdmin: boolean = false) {
