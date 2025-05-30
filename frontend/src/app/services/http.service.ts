@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 interface AuthResponse {
   success: boolean;
   message: string;
+  token: string;
   user_id: number;
   is_admin: boolean;
 }

@@ -13,18 +13,11 @@ exports.createQuiz = (req, res) => {
 
 exports.deleteQuiz = (req, res) => {
   try {
-    console.log('Params:', req.params); // Debug
     const id = parseInt(req.params.id);
-
-    if (isNaN(id)) {
-      return res.status(400).json({ error: 'Ungültige ID' });
-    }
-
-  const quiz = req.body;
-  const saved = quizService.deleteQuiz(id);
-  res.status(201).json(saved);
-    } catch (err) {
-    console.error('Fehler beim Löschen:', err);
+    if (isNaN(id)) { return res.status(400).json({ error: 'Ungültige ID' }); }
+    const saved = quizService.deleteQuiz(id);
+    res.status(201).json(saved);
+  } catch (err) {
     res.status(500).json({ error: 'Interner Serverfehler' });
   }
 };

@@ -6,39 +6,30 @@ function readQuizzes() {
   try {
     const raw = fs.readFileSync(path, 'utf-8');
     return JSON.parse(raw || '[]');
-  } catch (err) {
-    console.error('Quiz-Datei konnte nicht gelesen werden:', err.message);
-    return [];
-  }
+  } catch (err) { return []; }
 }
 
 function writeQuizzes(quizzes) {
   fs.writeFileSync(path, JSON.stringify(quizzes, null, 2));
-  console.log('Quizzes gespeichert:', quizzes.length);
 }
 
 function addQuiz(quiz) {
   const quizzes = readQuizzes();
-  const newQuiz = {
-    id: Date.now(),
-    ...quiz
-  };
+  const maxId = quizzes.reduce((max, quiz) => Math.max(max, quiz.id || 0), 0);
+  const newQuiz = { id: maxId + 1, ...quiz };
   quizzes.push(newQuiz);
   writeQuizzes(quizzes);
   return newQuiz;
 }
 
 function deleteQuiz(id){
-  console.log('ID als number:', id);
   let quizzes = readQuizzes();
-  console.log('Vorherige Anzahl Quizzes:', quizzes.length);
   quizzes = quizzes.filter(quiz => quiz.id !== id);
   writeQuizzes(quizzes);
-  console.log('Nachher Anzahl Quizzes:', quizzes.length);
 }
 
 module.exports = {
   readQuizzes,
   addQuiz,
-  deleteQuiz
+  deleteQuiz,
 };

@@ -1,4 +1,5 @@
 const fs = require('fs');
+const jwt = require('jsonwebtoken'); 
 const bcrypt = require('bcryptjs');
 const dataFile = './data/users.json';
 
@@ -38,5 +39,12 @@ exports.loginUser = async (username, password) => {
   const match = await bcrypt.compare(password, user.password);
   if (!match) return { success: false, message: 'Falsches Passwort' };
 
-  return { success: true, message: 'Login erfolgreich', user_id: user.user_id, is_admin: user.is_admin || false };
+  // JWT erzeugen
+  const token = jwt.sign(
+    { user_id: user.user_id, username: user.username, is_admin: user.is_admin },
+    process.env.JWT_SECRET,
+    { expiresIn: '1h' }
+  );
+
+  return { success: true, message: 'Login erfolgreich', token, user_id: user.user_id, is_admin: user.is_admin || false };
 };

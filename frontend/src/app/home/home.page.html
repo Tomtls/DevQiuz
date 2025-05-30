@@ -48,8 +48,9 @@
       Wenn du deinen Fortschritt speichern willst und deinen Highscore mit anderen vergleichen willst dann Erstelle einen Account und melde dich vor dem Quiz an!
     </ion-card-content>
     <div style="display: flex; width: 100%;">
-      <ion-button style="flex: 3;" color="medium" (click)="openAuthModal('login')">Einloggen</ion-button>
-      <ion-button style="flex: 3;" color="success" (click)="openAuthModal('register')">Registrieren</ion-button>
+      <ion-button *ngIf="!isLoggedIn" style="flex: 3;" color="medium" (click)="openAuthModal('login')">Einloggen</ion-button>
+      <ion-button *ngIf="!isLoggedIn" style="flex: 3;" color="success" (click)="openAuthModal('register')">Registrieren</ion-button>
+      <ion-button *ngIf="isLoggedIn" style="flex: 3" color="medium" (click)="logout()">Ausloggen</ion-button>
     </div>
   </ion-card>
 </ion-content>

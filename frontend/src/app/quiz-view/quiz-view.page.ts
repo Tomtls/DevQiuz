@@ -18,12 +18,12 @@ export class QuizViewPage implements OnInit {
   correctAnswers = 0;
   finished = false;
 
-  constructor( private route: ActivatedRoute, public router: Router, private api: HttpService) { }
+  constructor( private route: ActivatedRoute, public router: Router, private http: HttpService) { }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     console.log('Quiz-ID: ', id);
-    this.api.getQuizzes().subscribe(quizzes => {
+    this.http.getQuizzes().subscribe(quizzes => {
       this.quiz = quizzes.find(q => q.id == id);
     });
   }
@@ -70,7 +70,7 @@ submitQuiz() {
     return acc + (q.answer === this.selectedAnswers[i] ? 1 : 0);
   }, 0);
   this.finished = true;
-  this.api.saveHighscore(this.quiz.id, 'UserXY', this.correctAnswers).subscribe();
+  this.http.saveHighscore(this.quiz.id, 'UserXY', this.correctAnswers).subscribe();
 }
 
 }

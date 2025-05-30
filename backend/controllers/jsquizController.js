@@ -18,17 +18,13 @@ exports.getHighscores = (req, res) => {
 exports.storeResults = async (req, res) => {
   try {
     const resultData = req.body;
-
-    // Validierung (z. B. Pflichtfelder prüfen)
     if (!resultData || !Array.isArray(resultData.answers)) {
       return res.status(400).json({ message: 'Invalid data format.' });
     }
 
     await jsquizService.saveResults(resultData);
-
     res.status(201).json({ message: 'Result saved successfully.' });
   } catch (err) {
-    console.error('Error saving quiz result:', err);
     res.status(500).json({ message: 'Internal server error.' });
   }
 };

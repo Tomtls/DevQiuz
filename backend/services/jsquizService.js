@@ -8,19 +8,13 @@ function readQuizzes() {
   try {
     const data = JSON.parse(fs.readFileSync(PATH, 'utf8'));
     return data.map(({ correctAnswer, explanation, ...rest }) => rest);
-  } catch (err) {
-    console.error('Quiz-Datei konnte nicht gelesen werden:', err.message);
-    return [];
-  }
+  } catch (err) { return []; }
 }
 
 function readAnswers(){
   if (!fs.existsSync(PATH)) return [];
   try { return JSON.parse(fs.readFileSync(PATH, 'utf8')); }
-  catch (err){
-    console.error('Quiz-Datei konnte nicht gelesen werden:', err.message);
-    return [];
-  }
+  catch (err){ return []; }
 }
 
 function getHighscores(){
@@ -35,7 +29,6 @@ function getHighscores(){
     };
   });
 
-  // Optional: sortiert nach Score (absteigend), dann Zeit (aufsteigend)
   highscores.sort((a, b) => {
     if (b.score !== a.score) return b.score - a.score;
     return new Date(a.timestamp) - new Date(b.timestamp);
@@ -46,12 +39,8 @@ function getHighscores(){
 
 function readJson(filePath) {
   if (!fs.existsSync(filePath)) return [];
-  try {
-    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
-  } catch (err) {
-    console.error(`Fehler beim Lesen von ${filePath}:`, err.message);
-    return [];
-  }
+  try { return JSON.parse(fs.readFileSync(filePath, 'utf8')); } 
+  catch (err) { return []; }
 }
 
 async function saveResults(resultData){
@@ -60,7 +49,7 @@ async function saveResults(resultData){
     try {
       const file = await fs.promises.readFile(PATH_RESULT, 'utf-8');
       existing = JSON.parse(file);
-    } catch (e) { console.log('Erstelle neue Ergebnisdatei.');}
+    } catch (e) { }
 
     existing.push(resultData);
     await fs.promises.writeFile(PATH_RESULT, JSON.stringify(existing, null, 2), 'utf-8');

@@ -5,24 +5,28 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-  private TOKEN_KEY = 'auth_token';
+  private TOKEN_KEY = 'jwt-token';
   private USER_ID = 'user_id';
 
-  private _isAdmin: boolean = false; // ist der User admin/ hat er Berechtigungen?
-  private _adminMode: boolean = false;   // ist Admin Modus aktiv?
+  private _isAdmin: boolean = false;    // ist der User Admin / hat er Berechtigungen?
+  private _adminMode: boolean = false;  // ist Admin Modus aktiv?
+
+  constructor() {
+    if (this.Token) {
+      const payload = this.parseJwt(this.Token);
+      this._isAdmin = payload?.is_admin || false;
+    }
+  }
 
   public login(token: string, userId: string, isAdmin: boolean = false) {
     localStorage.setItem(this.TOKEN_KEY, token);
     localStorage.setItem(this.USER_ID, userId)
-
     this._isAdmin = isAdmin;
-    // Optional: localStorage/sessionStorage speichern
   }
 
   public logout() {
     localStorage.clear();
     this._isAdmin = this._adminMode = false;
-    // Optional: localStorage/sessionStorage löschen
   }
 
   get isLoggedIn(): boolean {
@@ -49,4 +53,13 @@ export class AuthService {
   set adminMode(adminMode: boolean) {
     this._adminMode = adminMode;
   }
+
+  private parseJwt(token: string): any {
+    try {
+      const base64Payload = token.split('.')[1];
+      const payload = atob(base64Payload);
+      return JSON.parse(payload);
+    } catch (e) { return null; }
+  }
+
 }

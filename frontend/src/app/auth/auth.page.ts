@@ -36,13 +36,12 @@ export class AuthPage implements OnInit {
     if(!this.eingabeCheck()) { return; }
 
     this.http.login(this.username, this.password).subscribe(response => {
-      console.log(response.message);
       if (response.success) {
-        const dummyToken = 'demo-token-123';
+        const token = response.token;
         const userId = response.user_id.toString();
         const isAdmin = response.is_admin.valueOf();
-        this.auth.login(dummyToken, userId, isAdmin);
-        this.modalCtrl.dismiss({ success: true });    
+        this.auth.login(token, userId, isAdmin);
+        this.modalCtrl.dismiss({ success: true });
       }
     });
   }
@@ -51,11 +50,10 @@ export class AuthPage implements OnInit {
     if(!this.eingabeCheck()) { return; }
 
     this.http.register(this.username, this.email, this.password).subscribe(response => {
-      console.log(response.message);
       if(response.success){
-        const dummyToken = 'demo-token-123';
+        const token = response.token;
         const userId = response.user_id.toString();
-        this.auth.login(dummyToken, userId);
+        this.auth.login(token, userId);
         this.modalCtrl.dismiss({ success: true });
       }
     });
