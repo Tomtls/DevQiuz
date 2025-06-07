@@ -136,5 +136,23 @@
     "username": "UserXY",
     "score": 12,
     "date": "2025-05-22T15:19:12.041Z"
+  },
+  {
+    "quizId": 1,
+    "username": "tom",
+    "score": 7,
+    "date": "2025-06-07T22:51:18.345Z"
+  },
+  {
+    "quizId": 1,
+    "username": "tom",
+    "score": 7,
+    "date": "2025-06-07T22:51:21.127Z"
+  },
+  {
+    "quizId": 1,
+    "username": "tom",
+    "score": 7,
+    "date": "2025-06-07T22:52:54.003Z"
   }
 ]

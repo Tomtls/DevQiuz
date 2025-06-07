@@ -1,48 +1,77 @@
-const fs = require('fs');
+const fs = require('fs/promises');
 const path = './data/quizzes.json';
 
-function readQuizzes() {
-  if (!fs.existsSync(path)) return [];
-  try {
-    const raw = fs.readFileSync(path, 'utf-8');
-    return JSON.parse(raw || '[]');
-  } catch (err) { return []; }
+async function getPublicQuizInfos() {
+  const quizzes = await readQuizzes();
+  return quizzes.map(q => ({
+    id: q.id,
+    title: q.title,
+    demo: q.demo ?? false
+  }));
 }
 
-function getQuiz(id) {
-  const quizzes = readQuizzes();
-  const quiz = quizzes.find(quiz => quiz.id == id)
-  return quiz || null;
+async function getQuizById(id, quizzes = null) {
+  quizzes = quizzes || await readQuizzes();
+  return quizzes.find(quiz => Number(quiz.id) === Number(id)) || null;
 }
 
-function getDemoQuiz(){
-  const quizzes = readQuizzes();
-  const quiz = quizzes.find(quiz => quiz.demo = true);
-  return quiz || null;
-}
-function writeQuizzes(quizzes) {
-  fs.writeFileSync(path, JSON.stringify(quizzes, null, 2));
-}
+async function createQuiz(quiz) {
+  if (!isValidQuiz(quiz)) throw new Error('[QuizService] Ungültiges Quiz-Format');
 
-function addQuiz(quiz) {
-  const quizzes = readQuizzes();
+  const quizzes = await readQuizzes();
   const maxId = quizzes.reduce((max, quiz) => Math.max(max, quiz.id || 0), 0);
   const newQuiz = { id: maxId + 1, ...quiz };
   quizzes.push(newQuiz);
-  writeQuizzes(quizzes);
+  await writeQuizzes(quizzes);
   return newQuiz;
 }
 
-function deleteQuiz(id){
-  let quizzes = readQuizzes();
-  quizzes = quizzes.filter(quiz => quiz.id !== id);
-  writeQuizzes(quizzes);
+async function deleteQuiz(id) {
+  let quizzes =await readQuizzes();
+  const initialLength = quizzes.length;
+  quizzes = quizzes.filter(quiz => Number(quiz.id) !== Number(id));
+
+  if(quizzes.length < initialLength) await writeQuizzes(quizzes);
+  else console.warn(`[QuizService] Kein Quiz mit ID ${id} gefunden`)
 }
 
+//#region Hilfsfunktionen
+async function readQuizzes() {
+  try {
+    const raw = await fs.readFile(path, 'utf-8');
+    return JSON.parse(raw || '[]');
+  } catch (err) { 
+    console.error('[QuizService] Fehler beim Lesen der Datei:', err);
+    return []; 
+  }
+}
+
+async function writeQuizzes(quizzes) {
+  try { 
+    await fs.writeFileSync(path, JSON.stringify(quizzes, null, 2));
+  } catch (err){
+    console.error('[QuizService] Fehler beim Schreiben der Datei:', err)
+  }
+}
+
+function isValidQuiz(quiz) {
+  return (
+    quiz && 
+    typeof quiz.title === 'string' &&
+    Array.isArray(quiz.questions) &&
+    quiz.questions.every(q =>
+      typeof q.text === 'string' &&
+      Array.isArray(q.options) &&
+      typeof q.answer === 'string'
+    )
+  )
+}
+//#endregion
+
+//#region Exports
 module.exports = {
-  readQuizzes,
-  getDemoQuiz,
-  getQuiz,
-  addQuiz,
+  getPublicQuizInfos,
+  getQuizById,
+  createQuiz,
   deleteQuiz,
 };

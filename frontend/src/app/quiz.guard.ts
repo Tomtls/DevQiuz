@@ -17,7 +17,7 @@ export class QuizAccessGuard implements CanActivate {
 
     if (isDemo) return of(true);
 
-    return this.http.getQuizById(quizId).pipe(
+    return this.http.getQuizById(quizId, isDemo).pipe(
       map(quiz => {
         const hasAccess = quiz.demo || this.authService.isLoggedIn;
         if (!hasAccess) {

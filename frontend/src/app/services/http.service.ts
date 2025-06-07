@@ -31,11 +31,10 @@ export class HttpService {
   public getQuizzes(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/quizzes`);
   }
-  public getQuizById(quizId: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/quizzes/${quizId}`);
-  }
-  public getDemoQuiz(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/quizzes/demo`);
+  public getQuizById(quizId: number, isDemo: boolean): Observable<any> {
+    return isDemo 
+    ? this.http.get<any>(`${this.baseUrl}/quizzes/demo/${quizId}`)
+    : this.http.get<any>(`${this.baseUrl}/quizzes/${quizId}`)
   }
   public createQuiz(quiz: any) {
    return this.http.post(`${this.baseUrl}/quizzes`, quiz);
@@ -43,7 +42,6 @@ export class HttpService {
   public deleteQuiz(quizId: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/quizzes/${quizId}`);
   }
-
   //#endregion
 
   //#region js quiz

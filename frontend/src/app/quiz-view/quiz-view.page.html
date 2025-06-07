@@ -28,7 +28,7 @@
       </ion-card>
     </div>
 
-    <ion-button expand="block" class="ion-margin-top" (click)="submitQuiz()">
+    <ion-button *ngIf="!finished" expand="block" class="ion-margin-top" (click)="submitQuiz()" [disabled]="selectedAnswers.length < quiz.questions.length">
       Abschließen
     </ion-button>
   </form>

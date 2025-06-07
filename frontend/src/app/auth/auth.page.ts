@@ -99,7 +99,7 @@ export class AuthPage implements OnInit {
   }
 
   private validateRequired(value: string, message: string): boolean {
-    return this.validate(!value.trim(), message);
+    return this.validate(value.trim().length > 0, message);
   }
 
   private isValidEmail(email: string): boolean {

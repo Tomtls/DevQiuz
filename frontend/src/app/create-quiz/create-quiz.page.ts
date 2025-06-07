@@ -14,7 +14,7 @@ import { HttpService } from '../services/http.service';
 })
 export class CreateQuizPage {
   quiz = {
-    id: Date.now(), // temporär; könnte Backend auch setzen
+    id: 0,
     title: '',
     questions: [
       {
@@ -88,7 +88,7 @@ export class CreateQuizPage {
       return;
     }
     
-    // ✅ Alles valid — Speichern
+    // Alles valid — Speichern
     this.http.createQuiz(this.quiz).subscribe({
       next: async () => {
         const toast = await this.toastCtrl.create({

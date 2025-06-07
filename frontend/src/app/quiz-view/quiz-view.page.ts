@@ -18,7 +18,7 @@ export class QuizViewPage {
   public correctAnswers = 0;
   
   private isDemo: boolean = false;
-  private selectedAnswers: string[] = [];
+  public selectedAnswers: (string | null)[] = [];
 
   constructor( private route: ActivatedRoute, public router: Router, private http: HttpService, private auth: AuthService ) {
     const nav = this.router.getCurrentNavigation();
@@ -42,47 +42,22 @@ export class QuizViewPage {
       return acc + (q.answer === this.selectedAnswers[i] ? 1 : 0);
     }, 0);
     this.finished = true;
-    this.http.saveHighscore(this.quiz.id, this.auth.Username ?? "", this.correctAnswers).subscribe();
+    if(!this.isDemo) {
+      this.http.saveHighscore(this.quiz.id, this.auth.username ?? "", this.correctAnswers).subscribe({
+        error: err => console.error('Highscore speichern fehlgeschlagen:', err)
+      });
+    }
   }
 
   private loadData(){
-    if (this.isDemo) { this.http.getDemoQuiz().subscribe(quiz => { this.quiz = quiz; }); } 
-    else {
-      const ParamId = this.route.snapshot.paramMap.get('id');
-      const id = Number(ParamId);
-      this.http.getQuizById(id).subscribe(quiz => { this.quiz = quiz; });
-    }
+    const ParamId = this.route.snapshot.paramMap.get('id');
+    const id = Number(ParamId);
+    this.http.getQuizById(id, this.isDemo).subscribe({ 
+      next: quiz => this.quiz = quiz,
+      error: err => {
+        console.error(err);
+        this.router.navigate(['/quiz']);
+      }})
   }
 
-  /* 
-  currentIndex = 0;
-  selectedAnswer: string | null = null;
-
-  get currentQuestion() { return this.quiz.questions[this.currentIndex]; }
-
-  get isLastQuestion() { return this.currentIndex === this.quiz.questions.length - 1; }
-
-  nextQuestion() {
-    if (this.selectedAnswer === this.currentQuestion.answer) {
-      this.correctAnswers++;
-    }
-
-    this.selectedAnswer = null;
-
-    if (this.isLastQuestion) {
-      this.finished = true;
-      this.router.navigate(['/quiz/result'], {
-        queryParams: {
-          correct: this.correctAnswers,
-          total: this.quiz.questions.length
-        }
-      });
-    } else { this.currentIndex++; }
-  }
-  restart() {
-    this.currentIndex = 0;
-    this.correctAnswers = 0;
-    this.selectedAnswer = null;
-    this.finished = false;
-  } */
 }
