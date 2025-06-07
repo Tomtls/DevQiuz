@@ -29,7 +29,11 @@ export class QuizPage {
 
   public loadData(){ this.http.getQuizzes().subscribe(data => { this.quizzes = data; }); }
 
-  public openQuiz(id: number) { this.router.navigate(['/quiz-view', id]); }
+  public openQuiz(id: number, isDemo = false) { 
+    this.router.navigate(['/quiz-view', id ], {
+      state: { isDemo }
+    }); 
+  }
 
   public deleteQuiz(id: number) {
     if(this.auth.isAdmin) {

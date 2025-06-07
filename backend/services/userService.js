@@ -27,7 +27,14 @@ exports.registerUser = async (username, email, password) => {
   users.push(newUser);
   writeUsers(users);
 
-  return { success: true, message: 'Registrierung erfolgreich', user_id: newUser.user_id };
+  // JWT erzeugen
+  const token = jwt.sign(
+    { user_id: newUser.user_id, username: newUser.username, is_admin: false },
+    process.env.JWT_SECRET,
+    { expiresIn: '1h' }
+  );
+
+  return { success: true, message: 'Registrierung erfolgreich', token };
 };
 
 exports.loginUser = async (username, password) => {
@@ -46,5 +53,5 @@ exports.loginUser = async (username, password) => {
     { expiresIn: '1h' }
   );
 
-  return { success: true, message: 'Login erfolgreich', token, user_id: user.user_id, is_admin: user.is_admin || false };
+  return { success: true, message: 'Login erfolgreich', token };
 };

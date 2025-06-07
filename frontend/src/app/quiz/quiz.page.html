@@ -15,7 +15,7 @@
           <p>{{ quiz.questions.length }} Fragen</p>
           <p *ngIf="quiz.demo" style="display: inline; margin-left: 8px">🔓 Demo</p>
         </div>
-        <ion-button *ngIf="quiz.demo && !isLoggedIn" expand="block" (click)="openQuiz(quiz.id)">Demo starten</ion-button>
+        <ion-button *ngIf="quiz.demo && !isLoggedIn" expand="block" (click)="openQuiz(quiz.id, true)">Demo starten</ion-button>
         <ion-button *ngIf="isLoggedIn && !adminMode" expand="block" (click)="openQuiz(quiz.id)">Starten</ion-button>
         <div *ngIf="adminMode" style="display: flex; width: 100%;">
           <ion-button *ngIf="isLoggedIn" style="flex: 9;" expand="block" (click)="openQuiz(quiz.id)">Starten</ion-button>

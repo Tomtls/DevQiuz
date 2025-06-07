@@ -31,6 +31,12 @@ export class HttpService {
   public getQuizzes(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/quizzes`);
   }
+  public getQuizById(quizId: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/quizzes/${quizId}`);
+  }
+  public getDemoQuiz(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/quizzes/demo`);
+  }
   public createQuiz(quiz: any) {
    return this.http.post(`${this.baseUrl}/quizzes`, quiz);
   }

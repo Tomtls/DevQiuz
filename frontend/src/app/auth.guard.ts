@@ -1,15 +1,15 @@
 import { CanActivateFn } from '@angular/router';
 import { inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
+import { AuthModalService } from './services/auth-modal.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const auth = inject(AuthService);
-  const router = inject(Router);
+  const authModalService = inject(AuthModalService)
 
-  if (auth.isLoggedIn) { return true; } 
-  else {
-    router.navigate(['/login']);
+  if (!auth.isLoggedIn) {
+    authModalService.triggerLoginRedirect(state.url);
     return false;
   }
+  return true; 
 };

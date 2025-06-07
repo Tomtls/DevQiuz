@@ -4,42 +4,43 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AuthService {
-
-  private TOKEN_KEY = 'jwt-token';
-  private USER_ID = 'user_id';
+  private readonly TOKEN_KEY = 'jwt-token';
 
   private _isAdmin: boolean = false;    // ist der User Admin / hat er Berechtigungen?
   private _adminMode: boolean = false;  // ist Admin Modus aktiv?
 
   constructor() {
-    if (this.Token) {
-      const payload = this.parseJwt(this.Token);
-      this._isAdmin = payload?.is_admin || false;
-    }
+    const payload = this.parseJwt(this.token);
+    this._isAdmin = payload?.is_admin || false;
   }
 
-  public login(token: string, userId: string, isAdmin: boolean = false) {
+  public login(token: string) {
     localStorage.setItem(this.TOKEN_KEY, token);
-    localStorage.setItem(this.USER_ID, userId)
-    this._isAdmin = isAdmin;
+    const payload = this.parseJwt(token);
+    this._isAdmin = payload?.is_admin || false;
   }
 
   public logout() {
-    localStorage.clear();
+    localStorage.removeItem(this.TOKEN_KEY);
     this._isAdmin = this._adminMode = false;
   }
 
   get isLoggedIn(): boolean {
-    return !!localStorage.getItem(this.TOKEN_KEY);
+    return !!this.token;
   }
 
-  get Token(): string | null {
+  get token(): string | null {
     return localStorage.getItem(this.TOKEN_KEY);
   }
   
-  get UserId(): number | null {
-    const id = localStorage.getItem(this.USER_ID);
-    return id !== null ? Number(id) : null;
+  get userId(): number | null {
+    const payload = this.parseJwt(this.token);
+    return payload?.user_id ?? null;
+  }
+
+  get username(): string | null {
+    const payload = this.parseJwt(this.token);
+    return payload?.username || null;
   }
 
   get isAdmin(): boolean {
@@ -50,16 +51,22 @@ export class AuthService {
     return this._adminMode;
   }
 
-  set adminMode(adminMode: boolean) {
-    this._adminMode = adminMode;
+  set adminMode(value: boolean) {
+    this._adminMode = value;
   }
 
-  private parseJwt(token: string): any {
+  private parseJwt(token: string | null): any {
+    if (!token) return null;
     try {
-      const base64Payload = token.split('.')[1];
-      const payload = atob(base64Payload);
-      return JSON.parse(payload);
-    } catch (e) { return null; }
+      const parts = token.split('.');
+      if(parts.length != 3) return null;
+      const base64Payload = parts[1];
+      const jsonPayload = atob(base64Payload);
+      return JSON.parse(jsonPayload);
+    } catch (e) {
+      console.error('JWT konnte nicht gelesen werden:', e);
+      return null;
+    }
   }
 
 }

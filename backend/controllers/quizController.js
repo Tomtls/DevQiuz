@@ -5,6 +5,18 @@ exports.getQuizzes = (req, res) => {
   res.json(quizzes);
 };
 
+exports.getDemoQuiz = (req, res) => {
+  const quiz = quizService.getDemoQuiz();
+  res.json(quiz);
+}
+
+exports.getQuiz = (req, res) => {
+  const id = parseInt(req.params.id);
+  if (isNaN(id)) { return res.status(400).json({ error: 'Ungültige ID' }); }
+  const quiz = quizService.getQuiz(id);
+  res.json(quiz);
+}
+
 exports.createQuiz = (req, res) => {
   const quiz = req.body;
   const saved = quizService.addQuiz(quiz);

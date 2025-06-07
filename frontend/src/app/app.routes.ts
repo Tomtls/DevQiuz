@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './auth.guard';
+import { QuizAccessGuard } from './quiz.guard';
 
 export const routes: Routes = [
   {
@@ -18,12 +19,11 @@ export const routes: Routes = [
   {
     path: 'quiz',
     loadComponent: () => import('./quiz/quiz.page').then( m => m.QuizPage),
-    canActivate: [authGuard]
   },
   {
     path: 'create-quiz',
-    loadComponent: () => import('./create-quiz/create-quiz.page').then( m => m.CreateQuizPage),
-    canActivate: [authGuard]
+    canActivate: [authGuard],
+    loadComponent: () => import('./create-quiz/create-quiz.page').then( m => m.CreateQuizPage)
   },
   {
     path: 'highscore',
@@ -31,14 +31,17 @@ export const routes: Routes = [
   },
   {
     path: 'quiz-view/:id',
+    canActivate: [QuizAccessGuard],
     loadComponent: () => import('./quiz-view/quiz-view.page').then( m => m.QuizViewPage)
   },
   {
     path: 'quiz-hello-world',
+    canActivate: [authGuard],
     loadComponent: () => import('./quiz-hello-world/quiz-hello-world.page').then( m => m.QuizHelloWorldPage)
   },
   {
     path: 'quiz-js',
+    canActivate: [authGuard],
     loadComponent: () => import('./quiz-js/quiz-js.page').then( m => m.QuizJsPage)
   },
 ];

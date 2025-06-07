@@ -15,30 +15,23 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
-  <ion-list>
-    <ion-list-header>
-      <ion-icon slot="start" name="home-outline"></ion-icon>
-      <ion-label>Schnell Zugriff:</ion-label>
-    </ion-list-header>
-    <ion-item>
-      <ion-icon name="clipboard-outline" slot="start"></ion-icon>
-      <ion-button fill="clear" style="color: black" [routerLink]="['/quiz']">Fragen zu IT, Web & Programmierung</ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="add-circle-outline" slot="start"></ion-icon>
-      <ion-button fill="clear" style="color: black" [routerLink]="['/create-quiz']">Eigene Quizfragen erstellen</ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="bar-chart-outline" slot="start"></ion-icon>
-      <ion-button fill="clear" style="color: black" [routerLink]="['/highscore']">Highscore & Punkte sammeln</ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="videocam-outline" slot="start"></ion-icon>
-      <ion-button fill="clear" style="color: black" [routerLink]="['/highscore']">YouTube-Tutorials in Fragen</ion-button>
-    </ion-item>
-  </ion-list>
-  </ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        size="12"
+        size-sm="6"
+        size-md="4"
+        size-lg="4"
+        *ngFor="let link of navLinks">
+        <ion-card [routerLink]="[link.route]" class="clickable-card" button>
+          <ion-card-content class="card-content">
+            <ion-icon [name]="link.icon" class="nav-icon"></ion-icon>
+            <div class="nav-label">{{ link.label }}</div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <ion-card>
     <ion-card-header>

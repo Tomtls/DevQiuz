@@ -75,7 +75,7 @@ export class QuizJsPage implements OnInit {
 
   private saveResults() {
     if(!this.auth.isLoggedIn){ return; }
-    if(!this.auth.UserId){ return; }
+    if(!this.auth.userId){ return; }
     this.highscoreNotSaved = false;
     const answers = this.questions.map((q, i) => ({
       question_index: q.question_index,
@@ -84,7 +84,7 @@ export class QuizJsPage implements OnInit {
     }));
     
     const payload = {
-      user_id: this.auth.UserId,
+      user_id: this.auth.userId,
       score: answers.filter(a => a.selected === a.correctAnswer).length,
       timestamp: new Date().toISOString(),
       answers

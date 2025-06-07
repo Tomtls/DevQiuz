@@ -16,7 +16,26 @@ export class HomePage {
 
   constructor() {}
 
+  navLinks = [
+    {
+      icon: 'clipboard-outline',
+      label: 'Fragen zu IT, Web & Programmierung',
+      route: '/quiz'
+    },
+    {
+      icon: 'add-circle-outline',
+      label: 'Eigene Quizfragen erstellen',
+      route: '/create-quiz'
+    },
+    {
+      icon: 'bar-chart-outline',
+      label: 'Highscore & Punkte sammeln',
+      route: '/highscore'
+    },
+  ];
+  
   public get isLoggedIn(): boolean { return this.auth.isLoggedIn; }
+
   public logout() { this.auth.logout(); }
 
   //#region AuthPage

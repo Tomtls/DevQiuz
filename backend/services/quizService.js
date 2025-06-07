@@ -9,6 +9,17 @@ function readQuizzes() {
   } catch (err) { return []; }
 }
 
+function getQuiz(id) {
+  const quizzes = readQuizzes();
+  const quiz = quizzes.find(quiz => quiz.id == id)
+  return quiz || null;
+}
+
+function getDemoQuiz(){
+  const quizzes = readQuizzes();
+  const quiz = quizzes.find(quiz => quiz.demo = true);
+  return quiz || null;
+}
 function writeQuizzes(quizzes) {
   fs.writeFileSync(path, JSON.stringify(quizzes, null, 2));
 }
@@ -30,6 +41,8 @@ function deleteQuiz(id){
 
 module.exports = {
   readQuizzes,
+  getDemoQuiz,
+  getQuiz,
   addQuiz,
   deleteQuiz,
 };

@@ -1,10 +1,10 @@
 const express = require('express');
 const { saveHighscore, save, getGlobal, getQuizScores } = require('../controllers/highscoreController');
-
+const authToken = require('../middleware/authMiddleware');
 const router = express.Router();
 
-router.post('/', saveHighscore);
-router.post('/', save);
+router.post('/', authToken, saveHighscore);
+router.post('/', authToken, save);
 router.get('/global', getGlobal);
 router.get('/quiz/:quizId', getQuizScores);
 
