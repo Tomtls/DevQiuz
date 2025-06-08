@@ -24,7 +24,10 @@ export class HighscorePage implements OnInit {
   }
 
   private loadJsQuizHighscores(){
-    this.http.getJsQuizHighscores().subscribe((data: any[]) => { this.jsHighscore = data; });
+    this.http.getJsQuizHighscores().subscribe({
+      next: (data: any[]) => this.jsHighscore = data,
+      error: (err) => console.error(err)
+    });
   }
 
 }

@@ -27,7 +27,12 @@ export class QuizPage {
     this.loadData();
   }
 
-  public loadData(){ this.http.getQuizzes().subscribe(data => { this.quizzes = data; }); }
+  public loadData(){ 
+    this.http.getQuizzes().subscribe({
+      next: data => this.quizzes = data,
+      error: (err) => console.error(err)
+    });
+  }
 
   public openQuiz(id: number, isDemo = false) { 
     this.router.navigate(['/quiz-view', id ], {
@@ -37,8 +42,9 @@ export class QuizPage {
 
   public deleteQuiz(id: number) {
     if(this.auth.isAdmin) {
-      this.http.deleteQuiz(id).subscribe(() => {
-        this.quizzes = this.quizzes.filter(q => q.id !== id);
+      this.http.deleteQuiz(id).subscribe({
+        next: () => this.quizzes = this.quizzes.filter(q => q.id !== id),
+        error: (err) => console.error(err)
       });
     }
   }

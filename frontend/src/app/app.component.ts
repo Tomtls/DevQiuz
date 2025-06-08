@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { AuthModalService } from './services/auth-modal.service';
 
@@ -15,6 +15,7 @@ import { AuthModalService } from './services/auth-modal.service';
 export class AppComponent implements OnInit {
   private auth = inject(AuthService);
   private authModalService = inject(AuthModalService);
+  private router = inject(Router)
 
   ngOnInit(){
     this.authModalService.loginRequested$.subscribe(redirectUrl => {
@@ -26,7 +27,7 @@ export class AppComponent implements OnInit {
   get adminMode(): boolean { return this.auth.adminMode; }
   get isLoggedIn(): boolean { return this.auth.isLoggedIn; }
 
-  public openAuthModal() { this.authModalService.open('login', '/'); }
+  public openAuthModal() { this.authModalService.open('login', this.router.url); }
   public toggleAdminMode(): void { this.auth.adminMode = !this.auth.adminMode; }
   public logout() { this.auth.logout(); }
 }

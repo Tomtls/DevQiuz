@@ -27,12 +27,19 @@ export class QuizJsPage implements OnInit {
   constructor(private http: HttpService, private auth: AuthService, private modalCtrl: ModalController) { }
 
   ngOnInit() {
-    this.http.getJsQuiz().subscribe(data => this.questions = data);
+    this.loadData();
   }
 
   ionViewWillEnter() {
-    this.http.getJsQuiz().subscribe(data => this.questions = data);
+    this.loadData();
     this.reset();
+  }
+
+  private loadData(){
+    this.http.getJsQuiz().subscribe({
+      next: (data) => this.questions = data,
+      error: (err) => console.error(err)
+    });
   }
 
   public get score(): number { return this.questions.filter((q, i) => q.correctAnswer === this.selectedAnswers[i]).length; }
@@ -65,11 +72,14 @@ export class QuizJsPage implements OnInit {
   }
 
   private loadResults() {
-    this.http.getJsQuizAnswers().subscribe((data: any[]) => {
-      this.questions = data;
-      this.showResults = true;
-      this.explanationVisible = Array(data.length).fill(false);
-      this.saveResults();
+    this.http.getJsQuizAnswers().subscribe({
+      next: (data: any[]) => {
+        this.questions = data;
+        this.showResults = true;
+        this.explanationVisible = Array(data.length).fill(false);
+        this.saveResults();
+      }, 
+      error: (err) => console.error(err)
     });
   }
 
@@ -92,7 +102,7 @@ export class QuizJsPage implements OnInit {
     this.http.postJsQuizResults(payload).subscribe({
       next: () => console.log('Ergebnisse gespeichert'),
       error: (err) => console.error('Fehler beim Speichern:', err)
-    });  
+    });
   }
 
   public reset() {

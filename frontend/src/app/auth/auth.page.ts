@@ -41,10 +41,7 @@ export class AuthPage implements OnInit {
           this.modalCtrl.dismiss({ success: true });
         } else this.showToast('Login fehlgeschlagen')  
       },
-      error: (err) => {
-        console.error(err);
-        this.showToast('Serverfehler beim Login')
-      }
+      error: (err) => { console.error(err); }
     });
   }
 
@@ -56,10 +53,7 @@ export class AuthPage implements OnInit {
           this.modalCtrl.dismiss({ success: true });
         } else this.showToast('Registrieren fehlgeschlagen')
       },
-      error: (err) => {
-        console.error(err);
-        this.showToast('Serverfehler beim Registrieren')
-      }
+      error: (err) => { console.error(err); }
     });
   }
   //#endregion

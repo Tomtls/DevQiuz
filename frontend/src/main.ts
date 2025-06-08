@@ -3,13 +3,14 @@ import { RouteReuseStrategy, provideRouter, withPreloading, PreloadAllModules } 
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-import { routes } from './app/app.routes';
-import { AppComponent } from './app/app.component';
-import { registerLocaleData } from '@angular/common';
-import { AuthInterceptor } from './app/auth.interceptor';
 import localeDe from '@angular/common/locales/de';
-import { importProvidersFrom, LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import { AppComponent } from './app/app.component';
 import { IonicModule } from '@ionic/angular';
+import { routes } from './app/app.routes';
+import { importProvidersFrom, LOCALE_ID } from '@angular/core';
+import { AuthInterceptor } from './app/interceptors/auth.interceptor';
+import { HttpErrorInterceptor } from './app/interceptors/http-error.interceptor';
 
 registerLocaleData(localeDe);
 
@@ -22,5 +23,6 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(withInterceptorsFromDi()),
     { provide: LOCALE_ID, useValue: 'de' }, 
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
   ],
 });

@@ -97,15 +97,9 @@ export class CreateQuizPage {
           color: 'success'
         });
         toast.present();
-        this.router.navigate(['/']);
+        this.router.navigate(['/quiz']);
       },
-      error: async () => {
-        const toast = await this.toastCtrl.create({
-          message: 'Fehler beim Speichern!',
-          duration: 2000,
-          color: 'danger'
-        });
-        toast.present();
+      error: (err) => {console.error(err)
       }
     });
   }
