@@ -16,13 +16,20 @@ function writeUsers(users) {
 
 exports.registerUser = async (username, email, password) => {
   const users = readUsers();
+  const cleanedUsername = username.trim().toLowerCase();
 
-  const exists = users.find(u => u.username === username);
+  const exists = users.find(u => u.username.trim().toLowerCase() === cleanedUsername);
   if (exists) return { success: false, message: 'Benutzername existiert bereits' };
 
   const hash = await bcrypt.hash(password, 10);
   const maxId = users.reduce((max, user) => Math.max(max, user.user_id || 0), 0);
-  const newUser = { user_id: maxId + 1, username, email, password: hash, is_admin: false };
+  const newUser = { 
+    user_id: maxId + 1,
+    username: username.trim(), 
+    email: email.trim(),
+    password: hash,
+    is_admin: false 
+  };
 
   users.push(newUser);
   writeUsers(users);
@@ -39,8 +46,9 @@ exports.registerUser = async (username, email, password) => {
 
 exports.loginUser = async (username, password) => {
   const users = readUsers();
+  const cleanedUsername = username.trim().toLowerCase();
 
-  const user = users.find(u => u.username === username);
+  const user = users.find(u => u.username.trim().toLowerCase() === cleanedUsername);
   if (!user) return { success: false, message: 'Benutzer nicht gefunden' };
 
   const match = await bcrypt.compare(password, user.password);
