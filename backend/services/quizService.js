@@ -6,13 +6,24 @@ async function getPublicQuizInfos() {
   return quizzes.map(q => ({
     id: q.id,
     title: q.title,
-    demo: q.demo ?? false
+    demo: q.demo ?? false,
+    questionsCount: Array.isArray(q.questions) ? q.questions.length : 0
   }));
 }
 
 async function getQuizById(id, quizzes = null) {
   quizzes = quizzes || await readQuizzes();
-  return quizzes.find(quiz => Number(quiz.id) === Number(id)) || null;
+  quiz = quizzes.find(quiz => Number(quiz.id) === Number(id)) || null;
+  if(!quiz) return null;
+  return {
+    id: quiz.id,
+    title: quiz.title,
+    demo: quiz.demo ?? false,
+    questions: quiz.questions.map(q => ({
+      text: q.text,
+      options: q.options
+    }))
+  }
 }
 
 async function createQuiz(quiz) {
@@ -74,4 +85,5 @@ module.exports = {
   getQuizById,
   createQuiz,
   deleteQuiz,
+  readQuizzes,
 };

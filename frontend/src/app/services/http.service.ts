@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 
 interface AuthResponse {
   success: boolean;
@@ -35,6 +35,17 @@ export class HttpService {
     return isDemo 
     ? this.http.get<any>(`${this.baseUrl}/quizzes/demo/${quizId}`)
     : this.http.get<any>(`${this.baseUrl}/quizzes/${quizId}`)
+  }
+  public isDemoQuiz(quizId: number): Observable<boolean> {
+    return this.http.get<{ demo: boolean }>(`${this.baseUrl}/quizzes/is-demo/${quizId}`).pipe(
+      map(response => response.demo),
+      catchError(() => of(false))
+    )
+  }
+  public submitQuiz(quizId: number, isDemo: boolean, selectAnswer: any): Observable<any> {
+    return isDemo
+    ? this.http.post(`${this.baseUrl}/quizzes/demo/${quizId}/submit`, { answer: selectAnswer })
+    : this.http.post(`${this.baseUrl}/quizzes/${quizId}/submit`, { answer: selectAnswer })
   }
   public createQuiz(quiz: any) {
    return this.http.post(`${this.baseUrl}/quizzes`, quiz);

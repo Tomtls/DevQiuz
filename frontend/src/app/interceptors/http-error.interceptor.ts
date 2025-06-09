@@ -39,6 +39,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   }
 
   private getErrorMessage(error: HttpErrorResponse): string {
+    if (error.error?.error) return error.error.error;
     if (error.error?.message) return error.error.message;
     if (error.status === 0) return 'Server nicht erreichbar';
     if (error.status === 401) return 'Nicht autorisiert';

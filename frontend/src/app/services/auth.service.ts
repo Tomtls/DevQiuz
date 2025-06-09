@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, Router } from '@angular/router';
+import { HttpService } from './http.service';
+import { take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +12,7 @@ export class AuthService {
   private _isAdmin: boolean = false;    // ist der User Admin / hat er Berechtigungen?
   private _adminMode: boolean = false;  // ist Admin Modus aktiv?
 
-  constructor() {
+  constructor(private router: Router, private http: HttpService) {
     const payload = this.parseJwt(this.token);
     this._isAdmin = payload?.is_admin || false;
   }
@@ -23,6 +26,19 @@ export class AuthService {
   public logout() {
     localStorage.removeItem(this.TOKEN_KEY);
     this._isAdmin = this._adminMode = false;
+    
+    const currentSnapshot = this.router.routerState.snapshot.root;
+    const activeChild = this.getDeepestChild(currentSnapshot);
+    const isProtected = activeChild.data?.['protected'];
+    const url = this.router.url;
+
+    if (url.startsWith('/quiz-view/')){
+      const quizId = activeChild.params?.['id'];
+      if (quizId) this.http.isDemoQuiz(quizId).pipe(take(1)).subscribe(
+        isDemo => { if(!isDemo) this.router.navigate(['/quiz'])},
+      )
+    }
+    else if (isProtected) { this.router.navigate(['/home']); }
   }
 
   get isLoggedIn(): boolean {
@@ -67,6 +83,11 @@ export class AuthService {
       console.error('JWT konnte nicht gelesen werden:', e);
       return null;
     }
+  }
+
+  private getDeepestChild(snapshot: ActivatedRouteSnapshot): ActivatedRouteSnapshot {
+    while (snapshot.firstChild) { snapshot = snapshot.firstChild; }
+    return snapshot;
   }
 
 }

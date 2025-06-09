@@ -38,15 +38,11 @@ export class QuizViewPage {
   }
 
   public submitQuiz() {
-    this.correctAnswers = this.quiz.questions.reduce((acc: number, q: any, i: number) => {
-      return acc + (q.answer === this.selectedAnswers[i] ? 1 : 0);
-    }, 0);
+    const treatAsDemo = this.quiz.demo && !this.auth.isLoggedIn;
+    this.http.submitQuiz(this.quiz.id, treatAsDemo, this.selectedAnswers).subscribe({
+      error: err => console.error(err)
+    });
     this.finished = true;
-    if(!this.isDemo) {
-      this.http.saveHighscore(this.quiz.id, this.auth.username ?? "", this.correctAnswers).subscribe({
-        error: err => console.error('Highscore speichern fehlgeschlagen:', err)
-      });
-    }
   }
 
   private loadData(){

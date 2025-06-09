@@ -23,6 +23,7 @@ export const routes: Routes = [
   {
     path: 'create-quiz',
     canActivate: [authGuard],
+    data: { protected: true},
     loadComponent: () => import('./create-quiz/create-quiz.page').then( m => m.CreateQuizPage)
   },
   {
@@ -37,11 +38,13 @@ export const routes: Routes = [
   {
     path: 'quiz-hello-world',
     canActivate: [authGuard],
+    data: { protected: true},
     loadComponent: () => import('./quiz-hello-world/quiz-hello-world.page').then( m => m.QuizHelloWorldPage)
   },
   {
     path: 'quiz-js',
     canActivate: [authGuard],
+    data: { protected: true},
     loadComponent: () => import('./quiz-js/quiz-js.page').then( m => m.QuizJsPage)
   },
 ];

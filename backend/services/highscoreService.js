@@ -1,16 +1,30 @@
 const fs = require('fs');
 const path = './data/highscores.json';
 
-function readScores() {
+async function readScores() {
   if (!fs.existsSync(path)) return [];
   const raw = fs.readFileSync(path, 'utf-8');
   return JSON.parse(raw || '[]');
 }
 
-function saveScore(entry) {
-  const scores = readScores();
-  scores.push(entry);
-  fs.writeFileSync(path, JSON.stringify(scores, null, 2));
+async function writeScore(scores) {
+  try { 
+    await fs.writeFileSync(path, JSON.stringify(scores, null, 2), 'utf-8');
+  } catch (err){
+    console.error('[highscoreService] Fehler beim Schreiben der Datei:', err)
+  }
+}
+
+async function saveScore({quizId, username, userId, score}) {
+  const scores = await readScores();
+  scores.push({
+    quizId,
+    username,
+    userId,
+    score,
+    date: new Date()
+  });
+  await writeScore(scores);
 }
 
 function getHighscoresGlobal() {
