@@ -1,0 +1,104 @@
+[
+    {
+        "question_index":1,
+        "question":"module Main where\n\nmain :: IO ()\nmain = putStrLn \"Hello, World!\"",
+        "options":["Haskell", "Idris", "Erlang"],
+        "correctAnswer":1
+    },
+    {
+        "question_index":2,
+        "question":"Class MainForm\n    Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load\n        MessageBox.Show(\"Hello, world!\")\n    End Sub\nEnd Class\n",
+        "options":["Visual-basic","Fantom","Delphi"],
+        "correctAnswer":2
+    },{
+        "question_index":3,
+        "question":"REPORT TEST.\nWRITE 'Hello World'.",
+        "options":["Abap" , "Cobol"],
+        "correctAnswer":1
+    },{
+        "question_index":4,
+        "question":"procedure Hello is\nbegin\nPut_Line (\"Hello, world!\");\nend Hello;",
+        "options":["Pascal" , "Delphi" , "Ada"],
+        "correctAnswer":3
+    },{
+        "question_index":5,
+        "question":"defmodule Hello do\ndef world do\nIO.puts \"Hello World\"\nend\nend\n\nHello.world",
+        "options":["Common Lisp" , "Elixir"],
+        "correctAnswer":2
+    },{
+        "question_index":6,
+        "question":"#lang web-server/insta\n(define (start request) (response/xexpr '(html (body \"Hello, world\"))))",
+        "options":["Scala" , "Racket", "Scheme"],
+        "correctAnswer":2
+    },{
+        "question_index":7,
+        "question":"?- write('Hello world'), nl.\nHello world\ntrue.",
+        "options":["Logtalk" , "Smalltalk", "Scala"],
+        "correctAnswer":1
+    },{
+        "question_index":8,
+        "question":"io:format(\"~s~n\", [\"Hello, world!\"])",
+        "options":["Smalltalk" , "Erlang", "Prolog"],
+        "correctAnswer":2
+    },{
+        "question_index":9,
+        "question":"BEGIN { if ( NF == 0 ) print \"Hello, world!\" }",
+        "options":["Perl" , "Awk"],
+        "correctAnswer":2
+    },{
+        "question_index":10,
+        "question":"printfn \"Hello World!\"",
+        "options":["D" , "F#", "C#"],
+        "correctAnswer":2
+    },{
+        "question_index":11,
+        "question":"trace(for $i in (\"hello\", \"world\", \"!\")[\"&\"] return for $j in ($i, \" \") return $j, \"\")",
+        "options":["XPath 2.0+" , "XQuery"],
+        "correctAnswer":1
+    },{
+        "question_index":12,
+        "question":"display dialog \"Hello, world!\"",
+        "options":["AppleScript" , "JavaScript"],
+        "correctAnswer":1
+    },{
+        "question_index":13,
+        "question":"\"Hello world!\".postln;",
+        "options":["SuperCollider" , "Processing" , "Matlab"],
+        "correctAnswer":1
+    },{
+        "question_index":14,
+        "question":"%!\n/Times-Roman 12 selectfont\n20 20 moveto\n(Hello, world!) show\nshowpage",
+        "options":["Forth" , "Common Lisp" , "PostScript"],
+        "correctAnswer":3
+    },{
+        "question_index":15,
+        "question":"IDENTIFICATION DIVISION.\nPROGRAM-ID. HELLO-WORLD.\nPROCEDURE DIVISION.\nDISPLAY 'Hello, world'.\nSTOP RUN.",
+        "options":["Abap" , "Cobol"],
+        "correctAnswer":2
+    },{
+        "question_index":16,
+        "question":"void setup() {\n  size(200, 200);\n  smooth();\n  fill(0);\n  textFont(createFont(\"SansSerif\",18));\n  textAlign(CENTER);\n  noLoop();\n}\n\nvoid draw() {\n  text(\"Hello World!\", width/2, height/2);\n}",
+        "options":["JavaScript" , "Processing" , "C"],
+        "correctAnswer":2
+    },{
+        "question_index":17,
+        "question":"\"dlroW olleH\">:v\n         ^,_@",
+        "options":["Befunge" , "Brainfuck" , "LOLCODE"],
+        "correctAnswer":1
+    },{
+        "question_index":18,
+        "question":"use strict;\nuse warnings;\n\nprint \"Hello World!\n\";",
+        "options":["Python" , "PHP" , "Perl"],
+        "correctAnswer":3
+    },{
+        "question_index":19,
+        "question":"class\n    HELLO_WORLD\ncreate\n    make\nfeature\n    make\n        do\n            print (\"Hello, world!%N\")\n        end\nend",
+        "options":["Ada" , "Eiffel" , "D"],
+        "correctAnswer":2
+    },{
+        "question_index":20,
+        "question":"concat(\n  string-join(\n    for $i in\n      <_>\n        <Hello/>\n        <World/>\n      </_>/*/name()\n    order by $i ascending\n    return $i,\n    \" \"\n  ),\"!\"\n)",
+        "options":["XPath 2.0+" , "XQuery"],
+        "correctAnswer":2
+    }
+]
