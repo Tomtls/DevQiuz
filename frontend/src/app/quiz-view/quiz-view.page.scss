@@ -3,8 +3,8 @@
   gap: 16px;
 }
 
-  .answer-grid {
-    display: grid;
-    gap: 12px;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  }
+.answer-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+}

@@ -4,7 +4,7 @@
     "username": "tom",
     "email": "tom@1",
     "password": "$2b$10$GYRy4oYcPJw0peTxx9xp0ekQOthH0.CFtA7RNk/LNgGkqKr6To6ja",
-    "is_admin":true
+    "is_admin": true
   },
   {
     "user_id": 2,
@@ -18,6 +18,6 @@
     "username": "malte",
     "email": "ml@1",
     "password": "$2b$10$GYRy4oYcPJw0peTxx9xp0ekQOthH0.CFtA7RNk/LNgGkqKr6To6ja",
-    "is_admin":false
+    "is_admin": false
   }
 ]

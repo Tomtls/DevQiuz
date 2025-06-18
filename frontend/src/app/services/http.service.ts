@@ -73,6 +73,18 @@ export class HttpService {
   }
   //#endregion
 
+  //#region HelloWorld!
+  public testHelloworld(): Observable<any> { // nur test
+    return this.http.get<any>(`${this.baseUrl}/helloworld/test`);
+  }
+  public startHelloWorld(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/helloworld/start`);
+  }
+  public submitHelloWorld(selectAnswer: string): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/helloworld`, { option: selectAnswer } );
+  }
+  //#endregion
+
   //#region highscore
   /*public getHighscore(quizId: number, username: string): Observable<any>{
     return this.http.get(`${this.baseUrl}/highscore`, { });

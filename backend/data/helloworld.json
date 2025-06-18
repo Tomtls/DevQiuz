@@ -1,205 +1,532 @@
 [
     {
-        "question_index":1,
-        "question":"module Main where\n\nmain :: IO ()\nmain = putStrLn \"Hello, World!\"",
-        "options":["Haskell", "Idris", "Erlang"],
+        "object_id":1,
+        "snippet": "module Main where\n\nmain :: IO ()\nmain = putStrLn \"Hello, World!\"",
+        "options":[
+            {"key": "haskell", "name": "Haskell"},
+            {"key": "idris", "name": "Idris"},
+            {"key": "erlang", "name": "Erlang"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":2,
+        "snippet": "Class MainForm\n    Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load\n        MessageBox.Show(\"Hello, world!\")\n    End Sub\nEnd Class\n",
+        "options":[
+            {"key": "basic", "name": "Visual-basic"},
+            {"key": "fantom", "name": "Fantom"},
+            {"key": "delphi", "name": "Delphi"}
+        ],
         "correctAnswer":1
     },
     {
-        "question_index":2,
-        "question":"Class MainForm\n    Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load\n        MessageBox.Show(\"Hello, world!\")\n    End Sub\nEnd Class\n",
-        "options":["Visual-basic","Fantom","Delphi"],
+        "object_id":3,
+        "snippet": "REPORT TEST.\nWRITE 'Hello World'.",
+        "options":[
+            {"key": "abap", "name": "Abap"},
+            {"key": "cobol", "name": "Cobol"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":4,
+        "snippet": "procedure Hello is\nbegin\nPut_Line (\"Hello, world!\");\nend Hello;",
+        "options":[
+            {"key": "pascal", "name": "Pascal"},
+            {"key": "delphi", "name": "Delphi"},
+            {"key": "ada", "name": "Ada"}
+        ],
         "correctAnswer":2
-    },{
-        "question_index":3,
-        "question":"REPORT TEST.\nWRITE 'Hello World'.",
-        "options":["Abap" , "Cobol"],
+    },
+    {
+        "object_id":5,
+        "snippet": "defmodule Hello do\n  def world do\n    IO.puts \"Hello World\"\n  end\nend\n\nHello.world",
+        "options":[
+            {"key": "commonlisp", "name": "Common Lisp"},
+            {"key": "elixir", "name": "Elixir"},
+            {"key": "erlang", "name": "Erlang"}
+        ],
         "correctAnswer":1
-    },{
-        "question_index":4,
-        "question":"procedure Hello is\nbegin\nPut_Line (\"Hello, world!\");\nend Hello;",
-        "options":["Pascal" , "Delphi" , "Ada"],
-        "correctAnswer":3
-    },{
-        "question_index":5,
-        "question":"defmodule Hello do\ndef world do\nIO.puts \"Hello World\"\nend\nend\n\nHello.world",
-        "options":["Common Lisp" , "Elixir"],
-        "correctAnswer":2
-    },{
-        "question_index":6,
-        "question":"#lang web-server/insta\n(define (start request) (response/xexpr '(html (body \"Hello, world\"))))",
-        "options":["Scala" , "Racket", "Scheme"],
-        "correctAnswer":2
-    },{
-        "question_index":7,
-        "question":"?- write('Hello world'), nl.\nHello world\ntrue.",
-        "options":["Logtalk" , "Smalltalk", "Scala"],
+    },
+    {
+        "object_id":6,
+        "snippet": "#lang web-server/insta\n(define (start request) (response/xexpr '(html (body \"Hello, world\"))))",
+        "options":[
+            {"key": "scala", "name": "Scala"},
+            {"key": "racket", "name": "Racket"},
+            {"key": "scheme", "name": "Scheme"}
+        ],
         "correctAnswer":1
-    },{
-        "question_index":8,
-        "question":"io:format(\"~s~n\", [\"Hello, world!\"])",
-        "options":["Smalltalk" , "Erlang", "Prolog"],
-        "correctAnswer":2
-    },{
-        "question_index":9,
-        "question":"BEGIN { if ( NF == 0 ) print \"Hello, world!\" }",
-        "options":["Perl" , "Awk"],
-        "correctAnswer":2
-    },{
-        "question_index":10,
-        "question":"printfn \"Hello World!\"",
-        "options":["D" , "F#", "C#"],
-        "correctAnswer":2
-    },{
-        "question_index":11,
-        "question":"trace(for $i in (\"hello\", \"world\", \"!\")[\"&\"] return for $j in ($i, \" \") return $j, \"\")",
-        "options":["XPath 2.0+" , "XQuery"],
+    },
+    {
+        "object_id":7,
+        "snippet": "?- write('Hello world'), nl.\nHello world\ntrue.",
+        "options":[
+            {"key": "logtalk", "name": "Logtalk"},
+            {"key": "smalltalk", "name": "Smalltalk"},
+            {"key": "scala", "name": "Scala"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":8,
+        "snippet": "io:format(\"~s~n\", [\"Hello, world!\"])",
+        "options":[
+            {"key": "smalltalk", "name": "Smalltalk"},
+            {"key": "erlang", "name": "Erlang"},
+            {"key": "prolog", "name": "Prolog"}
+        ],
         "correctAnswer":1
-    },{
-        "question_index":12,
-        "question":"display dialog \"Hello, world!\"",
-        "options":["AppleScript" , "JavaScript"],
+    },
+    {
+        "object_id":9,
+        "snippet": "BEGIN { if ( NF == 0 ) print \"Hello, world!\" }",
+        "options":[
+            {"key": "perl", "name": "Perl"},
+            {"key": "awk", "name": "awk"}
+        ],
         "correctAnswer":1
-    },{
-        "question_index":13,
-        "question":"\"Hello world!\".postln;",
-        "options":["SuperCollider" , "Processing" , "Matlab"],
+    },
+    {
+        "object_id":10,
+        "snippet": "printfn \"Hello World!\"",
+        "options":[
+            {"key": "d", "name": "D"},
+            {"key": "fsharp", "name": "F#"},
+            {"key": "csharp", "name": "C#"}
+        ],
         "correctAnswer":1
-    },{
-        "question_index":14,
-        "question":"%!\n/Times-Roman 12 selectfont\n20 20 moveto\n(Hello, world!) show\nshowpage",
-        "options":["Forth" , "Common Lisp" , "PostScript"],
-        "correctAnswer":3
-    },{
-        "question_index":15,
-        "question":"IDENTIFICATION DIVISION.\nPROGRAM-ID. HELLO-WORLD.\nPROCEDURE DIVISION.\nDISPLAY 'Hello, world'.\nSTOP RUN.",
-        "options":["Abap" , "Cobol"],
+    },
+    {
+        "object_id":11,
+        "snippet": "trace(for $i in (\"hello\", \"world\", \"!\")[\"&\"] return for $j in ($i, \" \") return $j, \"\")",
+        "options":[
+            {"key": "xpath", "name": "XPath 2.0+"},
+            {"key": "xquery", "name": "XQuery"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":12,
+        "snippet": "display dialog \"Hello, world!\"",
+        "options":[
+            {"key": "applescript", "name": "AppleScript"},
+            {"key": "javascript", "name": "JavaScript"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":13,
+        "snippet": "\"Hello world!\".postln;",
+        "options":[
+            {"key": "supercollider", "name": "SuperCollider"},
+            {"key": "processing", "name": "Processing"},
+            {"key": "matlab", "name": "Matlab"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":14,
+        "snippet": "%!\n/Times-Roman 12 selectfont\n20 20 moveto\n(Hello, world!) show\nshowpage",
+        "options":[
+            {"key": "forth", "name": "Forth"},
+            {"key": "commonlisp", "name": "Common Lisp"},
+            {"key": "postscript", "name": "PostScript"}
+        ],
         "correctAnswer":2
-    },{
-        "question_index":16,
-        "question":"void setup() {\n  size(200, 200);\n  smooth();\n  fill(0);\n  textFont(createFont(\"SansSerif\",18));\n  textAlign(CENTER);\n  noLoop();\n}\n\nvoid draw() {\n  text(\"Hello World!\", width/2, height/2);\n}",
-        "options":["JavaScript" , "Processing" , "C"],
-        "correctAnswer":2
-    },{
-        "question_index":17,
-        "question":"\"dlroW olleH\">:v\n         ^,_@",
-        "options":["Befunge" , "Brainfuck" , "LOLCODE"],
+    },
+    {
+        "object_id":15,
+        "snippet": "IDENTIFICATION DIVISION.\nPROGRAM-ID. HELLO-WORLD.\nPROCEDURE DIVISION.\nDISPLAY 'Hello, world'.\nSTOP RUN.",
+        "options":[
+            {"key": "abap", "name": "Abap"},
+            {"key": "cobol", "name": "Cobol"}
+        ],
         "correctAnswer":1
-    },{
-        "question_index":18,
-        "question":"use strict;\nuse warnings;\n\nprint \"Hello World!\n\";",
-        "options":["Python" , "PHP" , "Perl"],
-        "correctAnswer":3
-    },{
-        "question_index":19,
-        "question":"class\n    HELLO_WORLD\ncreate\n    make\nfeature\n    make\n        do\n            print (\"Hello, world!%N\")\n        end\nend",
-        "options":["Ada" , "Eiffel" , "D"],
-        "correctAnswer":2
-    },{
-        "question_index":20,
-        "question":"concat(\n  string-join(\n    for $i in\n      <_>\n        <Hello/>\n        <World/>\n      </_>/*/name()\n    order by $i ascending\n    return $i,\n    \" \"\n  ),\"!\"\n)",
-        "options":["XPath 2.0+" , "XQuery"],
-        "correctAnswer":2
-    },{
-        "question_index":21,
-        "question":"using System;\n\nclass Program\n{\n    static void Main()\n    {\n        Console.Write(\"Hello world!\");\n    }\n}",
-        "options":["C" , "C#" , "C++"],
-        "correctAnswer":2
-    },{
-        "question_index":22,
-        "question":"puts \"Hello, world!\"",
-        "options":["Common Lisp" , "Tcl" , "Erlang"],
-        "correctAnswer":2
-    },{
-        "question_index":23,
-        "question":"program ObjectPascalExample;\n\ntype\n  THelloWorld = class\n    procedure Put;\n  end;\n\nprocedure THelloWorld.Put;\nbegin\n  Writeln('Hello, World!');\nend;\n\nvar\n  HelloWorld: THelloWorld;\n\nbegin\n  HelloWorld := THelloWorld.Create;\n  HelloWorld.Put;\n  HelloWorld.Free;\nend.",
-        "options":["Ada" , "Pascal" , "Delphi"],
-        "correctAnswer":3
-    },{
-        "question_index":24,
-        "question":": HELLO  ( -- )  CR .\" Hello, world!\" ;\n\n HELLO <cr>\nHello, world!",
-        "options":["Erlang" , "Forth"],
-        "correctAnswer":2
-    },{
-        "question_index":25,
-        "question":"/starttext\nHello, world!\n/stoptext",
-        "options":["TeX" , "ConTeXt" , "LaTeX"],
-        "correctAnswer":2
-    },{
-        "question_index":26,
-        "question":"print_endline \"Hello World!\"",
-        "options":["OCaml" , "F#" , "Standard ML"],
+    },
+    {
+        "object_id":16,
+        "snippet": "void setup() {\n  size(200, 200);\n  smooth();\n  fill(0);\n  textFont(createFont(\"SansSerif\",18));\n  textAlign(CENTER);\n  noLoop();\n}\n\nvoid draw() {\n  text(\"Hello World!\", width/2, height/2);\n}",
+        "options":[
+            {"key": "javascript", "name": "JavaScript"},
+            {"key": "processing", "name": "Processing"},
+            {"key": "c", "name": "C"}
+        ],
         "correctAnswer":1
-    },{
-        "question_index":27,
-        "question":"val _ = print \"Hello, world!/n\"",
-        "options":["OCaml" , "F#" , "Standard ML"],
-        "correctAnswer":3
-    },{
-        "question_index":28,
-        "question":"use strict;\nuse warnings;\n\nprint \"Hello World!/n\";",
-        "options":["Python" , "Perl" , "PHP"],
+    },
+    {
+        "object_id":17,
+        "snippet": "\"dlroW olleH\">:v\n         ^,_@",
+        "options":[
+            {"key": "befunge", "name": "Befunge"},
+            {"key": "brainfuck", "name": "Brainfuck"},
+            {"key": "lolcode", "name": "LOLCODE"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":18,
+        "snippet": "use strict;\nuse warnings;\n\nprint \"Hello World!\";",
+        "options":[
+            {"key": "python", "name": "Python"},
+            {"key": "php", "name": "PHP"},
+            {"key": "perl", "name": "Perl"}
+        ],
         "correctAnswer":2
-    },{
-        "question_index":29,
-        "question":"HAI\nCAN HAS STDIO?\nVISIBLE \"HAI WORLD!\"\nKTHXBYE",
-        "options":["Befunge" , "Brainfuck" , "LOLCODE"],
-        "correctAnswer":3
-    },{
-        "question_index":30,
-        "question":"# include <iostream>\n\nint main()\n{\n   std::cout << \"Hello, world!/n\";\b}",
-        "options":["C" , "C++" , "C#"],
-        "correctAnswer":2
-    }
-    ,{
-        "question_index":31,
-        "question":"view layout [text \"Hello world!\" button \"Quit\" [quit]]",
-        "options":["Delphi" , "Rebol" , "Processing"],
-        "correctAnswer":2
-    },{
-        "question_index":32,
-        "question":"package main\n\nimport \"fmt\"\n\nfunc main() {\n    fmt.Println(\"Hello, World\")\n}",
-        "options":["C" , "GO" , "Smalltalk"],
-        "correctAnswer":2
-    },{
-        "question_index":33,
-        "question":"class Sample : Object {\n    void greeting () {\n        stdout.printf (\"Hello World/n\");\n    }\n\n    static void main (string[] args) {\n        var sample = new Sample ();\n        sample.greeting ();\n    }\n}",
-        "options":["Vala" , "Java" , "C++"],
+    },
+    {
+        "object_id":19,
+        "snippet": "class\n    HELLO_WORLD\ncreate\n    make\nfeature\n    make\n        do\n            print (\"Hello, world!%N\")\n        end\nend",
+        "options":[
+            {"key": "ada", "name": "Ada"},
+            {"key": "eiffel", "name": "Eiffel"},
+            {"key": "d", "name": "D"}
+        ],
         "correctAnswer":1
-    },{
-        "question_index":34,
-        "question":"object HelloWorld extends App {\n  println(\"Hello, world!\")\n}",
-        "options":["Scala" , "Prolog" , "Ocaml"],
+    },
+    {
+        "object_id":20,
+        "snippet": "concat(\n  string-join(\n    for $i in\n      <_>\n        <Hello/>\n        <World/>\n      </_>/*/name()\n    order by $i ascending\n    return $i,\n    \" \"\n  ),\"!\"\n)",
+        "options":[
+            {"key": "xpath", "name": "XPath 2.0+"},
+            {"key": "xquery", "name": "XQuery"}
+        ],
         "correctAnswer":1
-    },{
-        "question_index":35,
-        "question":"var hello = function () {\n  alert(\"Hello World!\");\n};\n\nhello();",
-        "options":["CoffeScript" , "Java" , "JavaScript"],
-        "correctAnswer":3
-    },{
-        "question_index":36,
-        "question":"class HelloWorldApp {\n    public static void main(String[] args) {\n        System.out.println(\"Hello World!\");\n    }\n}",
-        "options":["ActionScript" , "Java" , "Javascript"],
+    },
+    {
+        "object_id":21,
+        "snippet": "using System;\n\nclass Program\n{\n    static void Main()\n    {\n        Console.Write(\"Hello world!\");\n    }\n}",
+        "options":[
+            {"key": "c", "name": "C"},
+            {"key": "csharp", "name": "C#"},
+            {"key": "cpp", "name": "C++"}
+        ],
+        "correctAnswer":1
+    },
+    {
+        "object_id":22,
+        "snippet": "puts \"Hello, world!\"",
+        "options":[
+            {"key": "commonlisp", "name": "Common Lisp"},
+            {"key": "tcl", "name": "Tcl"},
+            {"key": "erlang", "name": "Erlang"}
+        ],
+        "correctAnswer":1
+    },
+    {
+        "object_id":23,
+        "snippet": "program ObjectPascalExample;\n\ntype\n  THelloWorld = class\n    procedure Put;\n  end;\n\nprocedure THelloWorld.Put;\nbegin\n  Writeln('Hello, World!');\nend;\n\nvar\n  HelloWorld: THelloWorld;\n\nbegin\n  HelloWorld := THelloWorld.Create;\n  HelloWorld.Put;\n  HelloWorld.Free;\nend.",
+        "options":[
+            {"key": "ada", "name": "Ada"},
+            {"key": "pascal", "name": "Pascal"},
+            {"key": "delphi", "name": "Delphi"}
+        ],
         "correctAnswer":2
-    },{
-        "question_index":37,
-        "question":"#import <Foundation/Foundation.h>\n\nint main (int argc, const char * argv[])\n{\n        NSLog (@\"Hello, World!\");\n        return 0;\n}",
-        "options":["C" , "Smalltalk" , "Objective C"],
-        "correctAnswer":3
-    },{
-        "question_index":38,
-        "question":"program HelloWorld(output);\nbegin\n  WriteLn('Hello world!')\nend.",
-        "options":["Delphi" , "Ada" , "Pascal"],
-        "correctAnswer":3
-    },{
-        "question_index":39,
-        "question":"def sayHello():\n    print('Hello World!')\n\nsayHello()",
-        "options":["Python" , "Ruby" , "PHP"],
+    },
+    {
+        "object_id":24,
+        "snippet": ": HELLO  ( -- )  CR .\" Hello, world!\" ;\n\n HELLO <cr>\nHello, world!",
+        "options":[
+            {"key": "erlang", "name": "Erlang"},
+            {"key": "forth", "name": "Forth"}
+        ],
         "correctAnswer":1
-    },{
-        "question_index":40,
-        "question":"(ns hello-world.core\n  (:gen-class))\n\n(defn -main [& args]\n  (println \"Hello World\"))",
-        "options":["Clojure" , "Java" , "Common Lisp"],
+    },
+    {
+        "object_id":25,
+        "snippet": "\\starttext\nHello, world!\n\\stoptext",
+        "options":[
+            {"key": "tex", "name": "TeX"},
+            {"key": "context", "name": "ConTeXt"},
+            {"key": "latex", "name": "LaTeX"}
+        ],
         "correctAnswer":1
+    },
+    {
+        "object_id":26,
+        "snippet": "print_endline \"Hello World!\"",
+        "options":[
+            {"key": "ocaml", "name": "OCaml"},
+            {"key": "fsharp", "name": "F#"},
+            {"key": "standardml", "name": "Standard ML"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":27,
+        "snippet": "val _ = print \"Hello, world!/n\"",
+        "options":[
+            {"key": "ocaml", "name": "OCaml"},
+            {"key": "fsharp", "name": "F#"},
+            {"key": "standardml", "name": "Standard ML"}
+        ],
+        "correctAnswer":2
+    },
+    {
+        "object_id":28,
+        "snippet": "use strict;\nuse warnings;\n\nprint \"Hello World!\";",
+        "options":[
+            {"key": "python", "name": "Python"},
+            {"key": "perl", "name": "Perl"},
+            {"key": "php", "name": "PHP"}
+        ],
+        "correctAnswer":1
+    },
+    {
+        "object_id":29,
+        "snippet": "HAI\nCAN HAS STDIO?\nVISIBLE \"HAI WORLD!\"\nKTHXBYE",
+        "options":[
+            {"key": "befunge", "name": "Befunge"},
+            {"key": "brainfuck", "name": "Brainfuck"},
+            {"key": "lolcode","name": "LOLCODE"}
+        ],
+        "correctAnswer":2
+    },
+    {
+        "object_id":30,
+        "snippet": "# include <iostream>\n\nint main()\n{\n   std::cout << \"Hello, world!\";\n}",
+        "options":[
+            {"key": "c", "name": "C"},
+            {"Key": "cpp", "name": "C++"},
+            {"key": "csharp", "name": "C#"}
+        ],
+        "correctAnswer":1
+    },
+    {
+        "object_id":31,
+        "snippet": "view layout [text \"Hello world!\" button \"Quit\" [quit]]",
+        "options":[
+            {"key": "delphi", "name": "Delphi"},
+            {"key": "rebol", "name": "Rebol"},
+            {"key": "processing", "name": "Processing"}
+        ],
+        "correctAnswer":1
+    },
+    {
+        "object_id":32,
+        "snippet": "package main\n\nimport \"fmt\"\n\nfunc main() {\n    fmt.Println(\"Hello, World\")\n}",
+        "options":[
+            {"key": "c", "name": "C"},
+            {"key": "go", "name": "GO"},
+            {"key": "smalltalk", "name": "Smalltalk"}
+        ],
+        "correctAnswer":1
+    },
+    {
+        "object_id":33,
+        "snippet": "class Sample : Object {\n    void greeting () {\n        stdout.printf (\"Hello World/n\");\n    }\n\n    static void main (string[] args) {\n        var sample = new Sample ();\n        sample.greeting ();\n    }\n}",
+        "options":[
+            {"key": "vala", "name": "Vala"},
+            {"key": "java", "name": "Java"},
+            {"key": "cpp", "name": "C++"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":34,
+        "snippet": "object HelloWorld extends App {\n  println(\"Hello, world!\")\n}",
+        "options":[
+            {"key": "scala", "name": "Scala"},
+            {"key": "prolog", "name": "Prolog"},
+            {"key": "ocaml", "name": "OCaml"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":35,
+        "snippet": "var hello = function () {\n  alert(\"Hello World!\");\n};\n\nhello();",
+        "options":[
+            {"key": "coffescript", "name": "CoffeScript"},
+            {"key": "java", "name": "Java"},
+            {"key": "javascript", "name": "JavaScript"}
+        ],
+        "correctAnswer":2
+    },
+    {
+        "object_id":36,
+        "snippet": "class HelloWorldApp {\n    public static void main(String[] args) {\n        System.out.println(\"Hello World!\");\n    }\n}",
+        "options":[
+            {"key": "actionscript", "name": "ActionScript"},
+            {"key": "java", "name": "Java"},
+            {"key": "javascript", "name": "JavaScript"}],
+        "correctAnswer":1
+    },
+    {
+        "object_id":37,
+        "snippet": "#import <Foundation/Foundation.h>\n\nint main (int argc, const char * argv[])\n{\n        NSLog (@\"Hello, World!\");\n        return 0;\n}",
+        "options":[
+            {"key": "c", "name": "C"},
+            {"key": "smalltalk", "name": "Smalltalk"},
+            {"key": "objectivec", "name": "Objective-C"}
+        ],
+        "correctAnswer":2
+    },
+    {
+        "object_id":38,
+        "snippet": "program HelloWorld(output);\nbegin\n  WriteLn('Hello world!')\nend.",
+        "options":[
+            {"key": "delphi", "name": "Delphi"},
+            {"key": "ada", "name": "Ada"},
+            {"key": "pascal", "name": "Pascal"}
+        ],
+        "correctAnswer":2
+    },
+    {
+        "object_id":39,
+        "snippet": "def sayHello():\n    print('Hello World!')\n\nsayHello()",
+        "options":[
+            {"key": "python", "name": "Python"},
+            {"key": "ruby", "name": "Ruby"},
+            {"key": "php", "name": "PHP"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":40,
+        "snippet": "(ns hello-world.core\n  (:gen-class))\n\n(defn -main [& args]\n  (println \"Hello World\"))",
+        "options":[
+            {"key": "clojure", "name": "Clojure"},
+            {"key": "java", "name": "Java"},
+            {"key": "commonlisp", "name": "Common Lisp"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":41,
+        "snippet": "\\documentclass{plain}\n\\begin{document}\nHello, world!\n\\end{document}",
+        "options":[
+            {"key": "latex", "name": "LaTeX"},
+            {"key": "context", "name": "ConTeXt"},
+            {"key": "tex", "name": "TeX"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":42,
+        "snippet": "<?= 'Hello world';",
+        "options":[
+            {"key": "php", "name": "PHP"},
+            {"key": "perl", "name": "Perl"},
+            {"key": "python", "name": "Python"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":43,
+        "snippet": "puts \"Hello, world!\"",
+        "options":[
+            {"key": "smalltalk", "name": "Smalltalk"},
+            {"key": "ruby", "name": "Ruby"},
+            {"key": "python", "name": "Python"}
+        ],
+        "correctAnswer":1
+    },
+    {
+        "object_id":44,
+        "snippet": "import std.stdio;\n\nvoid main()\n{\n    writeln(\"Hello, World!\");\n}",
+        "options":[
+            {"key": "d", "name": "D"},
+            {"key": "cpp", "name": "C++"},
+            {"key": "csharp", "name": "C#"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":45,
+        "snippet": "D := DATASET([{'Hello'},{'World'}],{STRING Value;});\nSD := SORT(D,Value);\noutput(SD)",
+        "options":[
+            {"key": "ecl", "name": "Ecl"},
+            {"key": "pascal", "name": "Pascal"},
+            {"key": "c", "name": "C"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":46,
+        "snippet": "(prn \"Hello, World\")",
+        "options":[
+            { "key": "commonlisp", "name": "Common Lisp"},
+            { "key": "arc", "name": "Arc"}
+        ],
+        "correctAnswer":1
+    },
+    {
+        "object_id":47,
+        "snippet": "class HelloWorld\n{\n  static Void main()\n  {\n    echo(\"Hello, World!\")\n  }\n}",
+        "options":[
+            { "key": "csharp", "name": "C#"},
+            { "key": "fantom", "name": "Fantom"},
+            { "key": "java", "name": "Java"}
+        ],
+        "correctAnswer":1
+    },
+    {
+        "object_id":48,
+        "snippet": "main: IO ()\nmain = putStrLn \"Hello, world!\"",
+        "options":[
+            {"key": "idris", "name": "Idris"},
+            {"key": "haskell", "name": "Haskell"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":49,
+        "snippet": "?- write('Hello world!'), nl.\nHello world!\ntrue.\n\n?-",
+        "options":[
+            {"key": "prolog", "name": "Prolog" },
+            {"key": "scala", "name": "Scala" },
+            {"key": "erlang", "name": "Erlang" }
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":50,
+        "snippet": "#include <stdio.h>\n\nint main() {\n void* message = \"Hello World\";\n puts(message);\n return 0;\n}",
+        "options":[
+            {"key": "c", "name": "C"},
+            {"key": "csharp", "name": "C#"},
+            {"key": "cpp", "name": "C++"}
+        ],
+        "correctAnswer": 0
+    },
+    {
+        "object_id":51,
+        "snippet": "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++\n..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.",
+        "options":[
+            {"key": "befunge", "name": "Befunge"},
+            {"key": "lolcode", "name": "LOLCODE"},
+            {"key": "brainfuck", "name": "Brainfuck"}
+        ],
+        "correctAnswer":2
+    },
+    {
+        "object_id":52,
+        "snippet": "let hello = \"hello world\"\nprintln(hello)",
+        "options":[
+            {"key": "swift", "name": "Swift"},
+            {"key": "haskell", "name": "Haskell"},
+            {"key": "objectivec", "name": "Objective-C"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":53,
+        "snippet": "main()\n{\n  print('Hello, world!');\n}",
+        "options":[
+            {"key": "go", "name": "GO"},
+            {"key": "c", "name": "C"},
+            {"key": "dart", "name": "Dart"}
+        ],
+        "correctAnswer":2
+    },
+    {
+        "object_id":0,
+        "snippet": "",
+        "options":[
+            {"key": "", "name": ""},
+            {"key": "", "name": ""},
+            {"key": "", "name": ""}
+        ],
+        "correctAnswer":-1
     }
 ]

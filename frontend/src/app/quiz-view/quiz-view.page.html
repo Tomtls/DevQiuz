@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form *ngIf="quiz">
+  <form *ngIf="quiz && !finished">
     <div class="quiz-container">
       <ion-card *ngFor="let q of quiz.questions; let i = index">
         <ion-card-header>
@@ -28,7 +28,7 @@
       </ion-card>
     </div>
 
-    <ion-button *ngIf="!finished" expand="block" class="ion-margin-top" (click)="submitQuiz()" [disabled]="selectedAnswers.length < quiz.questions.length">
+    <ion-button expand="block" class="ion-margin-top" (click)="submitQuiz()" [disabled]="selectedAnswers.length < quiz.questions.length">
       Abschließen
     </ion-button>
   </form>
@@ -39,7 +39,7 @@
         <ion-card-title>Ergebnis</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <p>Du hast {{ correctAnswers }} von {{ quiz.questions.length }} Fragen richtig.</p>
+        <p>Du hast {{ correctCount }} von {{ quiz.questions.length }} Fragen richtig.</p>
       </ion-card-content>
     </ion-card>
   </ng-container>

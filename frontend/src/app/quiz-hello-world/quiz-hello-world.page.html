@@ -1,29 +1,58 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>quiz-helloWorld</ion-title>
+    <ion-title>Hello World!</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>Hello World Quiz</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <div class="status-bar">
-      <span>Lives: {{ lives }}</span>
-      <span>Score: {{ score }}</span>
-    </div>
+<ion-content class="ion-padding">
 
-    <pre><code [innerText]="currentQuestion.code"></code></pre>
+  <ion-card *ngIf="question">
+    <ion-card-header>
+      <ion-card-title>Frage</ion-card-title>
+      <ion-card-subtitle>Score: {{score}} | Leben: {{lives}}</ion-card-subtitle>
+    </ion-card-header>
 
-    <ion-button
-      *ngFor="let option of currentQuestion.options"
-      expand="block"
-      (click)="checkAnswer(option)"
-    >
-      {{ option }}
-    </ion-button>
-  </ion-card-content>
-</ion-card>
+    <ion-card-content>
+      <pre>{{question.snippet}}</pre>
+
+      <ion-buttons>
+        <ion-button
+          *ngFor="let opt of question.options"
+          [color]="correctAnswer && opt.key === correctAnswer.key ? 'danger' :
+                   selectedOption === opt.key ? 'primary' : 'medium'"
+          (click)="submitAnswer(opt)"
+          >
+          {{opt.name}}
+        </ion-button>
+      </ion-buttons>
+
+      <div *ngIf="correctAnswer">
+        <p><strong>Richtige Antwort:</strong> {{correctAnswer.name}}</p>
+        <pre>{{correctAnswer.snippet}}</pre>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  
+  <!--nur test--> 
+  <ion-card> 
+    <ion-card-header>
+      <ion-card-title> TEST </ion-card-title>
+    </ion-card-header>
+    <ion-card-content *ngFor="let q of quizzes">
+      <pre>{{q.snippet}}</pre>
+      <ion-buttons>
+        <ion-button
+          *ngFor="let opt of q.options"
+          [color]="correctAnswer && opt.key === correctAnswer.key ? 'danger' :
+                   selectedOption === opt.key ? 'primary' : 'medium'"
+          (click)="submitAnswer(opt)"
+          >
+          {{opt.name}}
+        </ion-button>
+      </ion-buttons>
+
+    </ion-card-content>
+
+  </ion-card>
+
 </ion-content>

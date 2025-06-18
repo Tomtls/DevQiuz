@@ -79,7 +79,7 @@ export class AuthPage implements OnInit {
     if(!this.validate(this.isValidEmail(this.email), 'Ungültige E-Mail-Adresse!')) return false;
 
     // Passwort-Wiederholung
-    if (!this.validate(this.password !== this.password2,'Passwörter stimmen nicht überein!')) return false;
+    if (!this.validate(this.password === this.password2,'Passwörter stimmen nicht überein!')) return false;
 
     return true;
   }

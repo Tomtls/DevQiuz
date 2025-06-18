@@ -15,7 +15,7 @@ import { AuthService } from '../services/auth.service';
 export class QuizViewPage {
   public quiz: any;
   public finished = false;
-  public correctAnswers = 0;
+  public correctCount = 0;
   
   private isDemo: boolean = false;
   public selectedAnswers: (string | null)[] = [];
@@ -23,7 +23,7 @@ export class QuizViewPage {
   constructor( private route: ActivatedRoute, public router: Router, private http: HttpService, private auth: AuthService ) {
     const nav = this.router.getCurrentNavigation();
     this.isDemo = nav?.extras.state?.['isDemo'] ?? false;
-   }
+  }
 
   ionViewWillEnter() {
     this.loadData();
@@ -40,6 +40,7 @@ export class QuizViewPage {
   public submitQuiz() {
     const treatAsDemo = this.quiz.demo && !this.auth.isLoggedIn;
     this.http.submitQuiz(this.quiz.id, treatAsDemo, this.selectedAnswers).subscribe({
+      next: response => this.correctCount = response.correctCount,
       error: err => console.error(err)
     });
     this.finished = true;
@@ -53,7 +54,8 @@ export class QuizViewPage {
       error: err => {
         console.error(err);
         this.router.navigate(['/quiz']);
-      }})
+      }
+    });
   }
 
 }

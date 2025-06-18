@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { HttpService } from '../services/http.service';
 
 @Component({
   selector: 'app-quiz-hello-world',
@@ -10,46 +11,55 @@ import { IonicModule } from '@ionic/angular';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
-export class QuizHelloWorldPage implements OnInit {
+export class QuizHelloWorldPage {
 
-  constructor() { }
+  question: any = null;
+  selectedOption: string = "";
+  correctAnswer: any = null;
+  score: number = 0;
+  lives: number = 3;
+  quizzes: any = null
 
-  ngOnInit() {
-  }
-  lives = 5;
-score = 0;
-currentQuestionIndex = 0;
+  constructor(private http: HttpService) { }
 
-//questions: any = []; // aus Service laden
-questions = {
-  "id": 1,
-  "type": "code",
-  "code": "module Main where\n\nmain :: IO ()\nmain = putStrLn \"Hello, World!\"",
-  "options": ["Erlang", "Haskell", "Idris"],
-  "answer": "Haskell"
-}
-
-get currentQuestion() {
-  return this.questions;
-  //return this.questions[this.currentQuestionIndex];
-}
-
-checkAnswer(option: string) {
-  if (option === this.questions.answer) {
-    this.score++;
-  } else {
-    this.lives--;
+  ionViewWillEnter() {
+    this.loadQuestion();
   }
 
-  /*if (this.lives === 0 || this.currentQuestionIndex + 1 === this.questions.length) {
-    this.endGame();
-  } else {
-    this.currentQuestionIndex++;
-  }*/
-}
+  loadQuestion(){
+    this.http.testHelloworld().subscribe({ // nur test
+      next: (response) => this.quizzes = response,
+      error: (err) => console.error(err)
+    })
+    console.log(this.quizzes)
+    this.http.startHelloWorld().subscribe({
+      next: (data) => this.setQuestion(data),
+      error: (err) => console.error(err)
+    })
+  }
 
-endGame(){
+  submitAnswer(option: any) {
+    this.selectedOption = option.key;
+    
+    this.http.submitHelloWorld(this.selectedOption).subscribe({
+      next: (response) => {
+        this.score = response.game.score;
+        this.lives = response.game.lives;
+        this.correctAnswer = response.correct;
 
-}
+        this.setQuestion(response);
+        this.selectedOption = "";
+      },
+      error: (err) => console.error(err)
+    });
+  }
+  
+  
+  private setQuestion(response: any) {
+    this.question = {
+      snippet: response.variant.snippet,
+      options: response.variant.options
+    };
+  }
 
 }
