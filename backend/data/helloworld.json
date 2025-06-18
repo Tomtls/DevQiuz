@@ -100,5 +100,106 @@
         "question":"concat(\n  string-join(\n    for $i in\n      <_>\n        <Hello/>\n        <World/>\n      </_>/*/name()\n    order by $i ascending\n    return $i,\n    \" \"\n  ),\"!\"\n)",
         "options":["XPath 2.0+" , "XQuery"],
         "correctAnswer":2
+    },{
+        "question_index":21,
+        "question":"using System;\n\nclass Program\n{\n    static void Main()\n    {\n        Console.Write(\"Hello world!\");\n    }\n}",
+        "options":["C" , "C#" , "C++"],
+        "correctAnswer":2
+    },{
+        "question_index":22,
+        "question":"puts \"Hello, world!\"",
+        "options":["Common Lisp" , "Tcl" , "Erlang"],
+        "correctAnswer":2
+    },{
+        "question_index":23,
+        "question":"program ObjectPascalExample;\n\ntype\n  THelloWorld = class\n    procedure Put;\n  end;\n\nprocedure THelloWorld.Put;\nbegin\n  Writeln('Hello, World!');\nend;\n\nvar\n  HelloWorld: THelloWorld;\n\nbegin\n  HelloWorld := THelloWorld.Create;\n  HelloWorld.Put;\n  HelloWorld.Free;\nend.",
+        "options":["Ada" , "Pascal" , "Delphi"],
+        "correctAnswer":3
+    },{
+        "question_index":24,
+        "question":": HELLO  ( -- )  CR .\" Hello, world!\" ;\n\n HELLO <cr>\nHello, world!",
+        "options":["Erlang" , "Forth"],
+        "correctAnswer":2
+    },{
+        "question_index":25,
+        "question":"/starttext\nHello, world!\n/stoptext",
+        "options":["TeX" , "ConTeXt" , "LaTeX"],
+        "correctAnswer":2
+    },{
+        "question_index":26,
+        "question":"print_endline \"Hello World!\"",
+        "options":["OCaml" , "F#" , "Standard ML"],
+        "correctAnswer":1
+    },{
+        "question_index":27,
+        "question":"val _ = print \"Hello, world!/n\"",
+        "options":["OCaml" , "F#" , "Standard ML"],
+        "correctAnswer":3
+    },{
+        "question_index":28,
+        "question":"use strict;\nuse warnings;\n\nprint \"Hello World!/n\";",
+        "options":["Python" , "Perl" , "PHP"],
+        "correctAnswer":2
+    },{
+        "question_index":29,
+        "question":"HAI\nCAN HAS STDIO?\nVISIBLE \"HAI WORLD!\"\nKTHXBYE",
+        "options":["Befunge" , "Brainfuck" , "LOLCODE"],
+        "correctAnswer":3
+    },{
+        "question_index":30,
+        "question":"# include <iostream>\n\nint main()\n{\n   std::cout << \"Hello, world!/n\";\b}",
+        "options":["C" , "C++" , "C#"],
+        "correctAnswer":2
+    }
+    ,{
+        "question_index":31,
+        "question":"view layout [text \"Hello world!\" button \"Quit\" [quit]]",
+        "options":["Delphi" , "Rebol" , "Processing"],
+        "correctAnswer":2
+    },{
+        "question_index":32,
+        "question":"package main\n\nimport \"fmt\"\n\nfunc main() {\n    fmt.Println(\"Hello, World\")\n}",
+        "options":["C" , "GO" , "Smalltalk"],
+        "correctAnswer":2
+    },{
+        "question_index":33,
+        "question":"class Sample : Object {\n    void greeting () {\n        stdout.printf (\"Hello World/n\");\n    }\n\n    static void main (string[] args) {\n        var sample = new Sample ();\n        sample.greeting ();\n    }\n}",
+        "options":["Vala" , "Java" , "C++"],
+        "correctAnswer":1
+    },{
+        "question_index":34,
+        "question":"object HelloWorld extends App {\n  println(\"Hello, world!\")\n}",
+        "options":["Scala" , "Prolog" , "Ocaml"],
+        "correctAnswer":1
+    },{
+        "question_index":35,
+        "question":"var hello = function () {\n  alert(\"Hello World!\");\n};\n\nhello();",
+        "options":["CoffeScript" , "Java" , "JavaScript"],
+        "correctAnswer":3
+    },{
+        "question_index":36,
+        "question":"class HelloWorldApp {\n    public static void main(String[] args) {\n        System.out.println(\"Hello World!\");\n    }\n}",
+        "options":["ActionScript" , "Java" , "Javascript"],
+        "correctAnswer":2
+    },{
+        "question_index":37,
+        "question":"#import <Foundation/Foundation.h>\n\nint main (int argc, const char * argv[])\n{\n        NSLog (@\"Hello, World!\");\n        return 0;\n}",
+        "options":["C" , "Smalltalk" , "Objective C"],
+        "correctAnswer":3
+    },{
+        "question_index":38,
+        "question":"program HelloWorld(output);\nbegin\n  WriteLn('Hello world!')\nend.",
+        "options":["Delphi" , "Ada" , "Pascal"],
+        "correctAnswer":3
+    },{
+        "question_index":39,
+        "question":"def sayHello():\n    print('Hello World!')\n\nsayHello()",
+        "options":["Python" , "Ruby" , "PHP"],
+        "correctAnswer":1
+    },{
+        "question_index":40,
+        "question":"(ns hello-world.core\n  (:gen-class))\n\n(defn -main [& args]\n  (println \"Hello World\"))",
+        "options":["Clojure" , "Java" , "Common Lisp"],
+        "correctAnswer":1
     }
 ]
