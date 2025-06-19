@@ -19,5 +19,12 @@
     "email": "ml@1",
     "password": "$2b$10$GYRy4oYcPJw0peTxx9xp0ekQOthH0.CFtA7RNk/LNgGkqKr6To6ja",
     "is_admin": false
+  },
+  {
+    "user_id": 4,
+    "username": "Foxyy",
+    "email": "hherdel05@gmail.com",
+    "password": "$2b$10$LKDV9MbYY99Miv5DOLadO.g/Xn/Xkg9BJXF8Ut/h2iSRD0dReOqF6",
+    "is_admin": true
   }
 ]
