@@ -81,7 +81,7 @@ Frontend läuft unter `http://localhost:8100/`.
 ```bash
 cd backend
 npm install
-npm start
+node index.js
 ```
 
 Backend läuft unter `http://localhost:3000/`.
