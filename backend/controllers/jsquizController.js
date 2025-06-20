@@ -1,28 +1,29 @@
-const jsquizService = require('../services/jsquizService');
+import { getScoresJSQuiz, saveScoreJSQuiz } from "../services/highscoreService.js";
+import { readQuizzes, readAnswers } from '../services/jsquizService.js';
 
-exports.getQuizzes = (req, res) => {
-  const quizzes = jsquizService.readQuizzes();
+export const getQuizzes = async (req, res) => {
+  const quizzes = await readQuizzes();
   res.json(quizzes);
 };
 
-exports.getAnswers = (req, res) => {
-  const quizzes = jsquizService.readAnswers();
+export const getAnswers = async (req, res) => {
+  const quizzes = await readAnswers();
   res.json(quizzes);
 };
 
-exports.getHighscores = (req, res) => {
-  const highscores = jsquizService.getHighscores();
+export const getHighscores = async (req, res) => {
+  const highscores = await getScoresJSQuiz();
   res.json(highscores);
 };
 
-exports.storeResults = async (req, res) => {
+export const storeResults = async (req, res) => {
   try {
     const resultData = req.body;
     if (!resultData || !Array.isArray(resultData.answers)) {
       return res.status(400).json({ message: 'Invalid data format.' });
     }
 
-    await jsquizService.saveResults(resultData);
+    await saveScoreJSQuiz(resultData);
     res.status(201).json({ message: 'Result saved successfully.' });
   } catch (err) {
     res.status(500).json({ message: 'Internal server error.' });

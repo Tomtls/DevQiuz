@@ -1,20 +1,18 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
+import express, { json } from 'express';
+import cors from 'cors';
+import 'dotenv/config';
 
-const authRoutes = require('./routes/authRoutes');
-const quizRoutes = require('./routes/quizRoutes');
-const highscoreRoutes = require('./routes/highscoreRoutes');
-const jsquiz = require('./routes/jsquizRoutes')
-const helloWorldRoutes = require('./routes/helloWorldRoutes')
+import authRoutes from './routes/authRoutes.js';
+import quizRoutes from './routes/quizRoutes.js';
+import jsquiz from './routes/jsquizRoutes.js';
+import helloWorldRoutes from './routes/helloWorldRoutes.js';
 
 const app = express();
 app.use(cors());
-app.use(express.json());
+app.use(json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/quizzes', quizRoutes);
-app.use('/api/highscore', highscoreRoutes);
 app.use('/api/jsquiz', jsquiz);
 app.use('/api/helloworld', helloWorldRoutes);
 

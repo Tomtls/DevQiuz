@@ -1,0 +1,26 @@
+[
+  {
+    "user_id": 1,
+    "username": "tom",
+    "score": 50,
+    "date": "2025-06-19T09:20:42.894Z"
+  },
+  {
+    "user_id": 1,
+    "username": "tom",
+    "score": 10,
+    "date": "2025-06-19T11:52:57.400Z"
+  },
+  {
+    "user_id": 1,
+    "username": "tom",
+    "score": 30,
+    "date": "2025-06-19T11:53:21.381Z"
+  },
+  {
+    "user_id": 1,
+    "username": "tom",
+    "score": 5,
+    "date": "2025-06-20T00:19:05.805Z"
+  }
+]

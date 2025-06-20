@@ -85,14 +85,4 @@ export class HttpService {
   }
   //#endregion
 
-  //#region highscore
-  /*public getHighscore(quizId: number, username: string): Observable<any>{
-    return this.http.get(`${this.baseUrl}/highscore`, { });
-  }*/
-  public saveHighscore(quizId: number, username: string, score: number): Observable<any> {
-    return this.http.post(`${this.baseUrl}/highscore`, { quizId, username, score });
-  }
-  
-  //#endregion
-
 }

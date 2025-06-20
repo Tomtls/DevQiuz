@@ -1,9 +1,10 @@
-const express = require('express');
-const { getPublicQuizInfos, getDemoQuizById, checkIfDemoQuiz, checkQuizAnswers, getQuizById, createQuiz, deleteQuiz } = require('../controllers/quizController');
-const authToken = require('../middleware/authMiddleware');  // Prüft ob der User eingeloggt ist (JWT-Token)
-const isAdmin = require('../middleware/isAdmin');           // Prüft ob der User Admin ist (JWT-Token)
-const rateLimit = require('express-rate-limit');            // Setzt ein Limit für Anfragen pro IP
-const router = express.Router();
+import { Router } from 'express';
+import { getPublicQuizInfos, getDemoQuizById, checkIfDemoQuiz, checkQuizAnswers, getQuizById, createQuiz, deleteQuiz } from '../controllers/quizController.js';
+import authToken from '../middleware/authMiddleware.js';  // Prüft ob der User eingeloggt ist (JWT-Token)
+import isAdmin from '../middleware/isAdmin.js';           // Prüft ob der User Admin ist (JWT-Token)
+import rateLimit from 'express-rate-limit';            // Setzt ein Limit für Anfragen pro IP
+
+const router = Router();
 
 const submitLimit = rateLimit({
   windowMs: 60 * 1000,  // 1 Minute
@@ -23,4 +24,4 @@ router.post('/:id/submit', authToken, submitLimit, checkQuizAnswers); // prüft 
 router.post('/', authToken, createQuiz);                    // neues Quiz (nur eingeloggte User)
 router.delete('/:id', authToken, isAdmin, deleteQuiz);      // nur Admin darf löschen
 
-module.exports = router;
+export default router;

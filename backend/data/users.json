@@ -26,5 +26,12 @@
     "email": "hherdel05@gmail.com",
     "password": "$2b$10$LKDV9MbYY99Miv5DOLadO.g/Xn/Xkg9BJXF8Ut/h2iSRD0dReOqF6",
     "is_admin": true
+  },
+  {
+    "user_id": 5,
+    "username": "admin1",
+    "email": "admin@devquiz.de",
+    "password": "$2b$10$8UFi13/RoxauAcwXNvyuTO4FjdIiWg.HqRfMWSKrxER0yyWVgR6pS",
+    "is_admin": false
   }
 ]

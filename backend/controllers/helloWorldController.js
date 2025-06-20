@@ -1,11 +1,8 @@
-const helloWolrdService = require('../services/helloWorldService');
+import { startGame, checkAnswer } from '../services/helloWorldService.js';
 
-exports.test = (req, res) =>{
-  const result = helloWolrdService.test();
-  res.json(result);
-}
-exports.start = (req, res) => {
-  const result = helloWolrdService.startGame();
+export const start = async (req, res) => {
+  const result = await startGame();
+
   res.json({
     status: "ready",
     game: {
@@ -20,9 +17,10 @@ exports.start = (req, res) => {
     correct: null
   })
 }
-exports.submitAnswer = (req, res) => {
+
+export const submitAnswer = async (req, res) => {
   const { option } = req.body;
-  const result = helloWolrdService.checkAnswer(option);
+  const result = await checkAnswer(option, req.user);
 
   res.json({
     status: result.lives > 0 ? "ready" : "died",
@@ -31,10 +29,10 @@ exports.submitAnswer = (req, res) => {
       score: result.score,
       lives: result.lives
     },
-    variant: {
+    variant: result.nextQuestion ? {
       snippet: result.nextQuestion.snippet,
       options: result.nextQuestion.options
-    },
+    } : [],
     correct: result.correct
   });
 }

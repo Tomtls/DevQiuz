@@ -13,11 +13,11 @@
         "object_id":2,
         "snippet": "Class MainForm\n    Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load\n        MessageBox.Show(\"Hello, world!\")\n    End Sub\nEnd Class\n",
         "options":[
-            {"key": "basic", "name": "Visual-basic"},
+            {"key": "basic", "name": "Visual Basic"},
             {"key": "fantom", "name": "Fantom"},
             {"key": "delphi", "name": "Delphi"}
         ],
-        "correctAnswer":1
+        "correctAnswer":0
     },
     {
         "object_id":3,
@@ -30,7 +30,7 @@
     },
     {
         "object_id":4,
-        "snippet": "procedure Hello is\nbegin\nPut_Line (\"Hello, world!\");\nend Hello;",
+        "snippet": "procedure Hello is\nbegin\n  Put_Line (\"Hello, world!\");\nend Hello;",
         "options":[
             {"key": "pascal", "name": "Pascal"},
             {"key": "delphi", "name": "Delphi"},
@@ -60,11 +60,11 @@
     },
     {
         "object_id":7,
-        "snippet": "?- write('Hello world'), nl.\nHello world\ntrue.",
+        "snippet": "Dear Princess Celestia: Letter About Equestria.\n\nToday I learned:\n\nI wrote \"Hello, World!\".\n\nYour faithful student, Twilight Sparkle.",
         "options":[
-            {"key": "logtalk", "name": "Logtalk"},
-            {"key": "smalltalk", "name": "Smalltalk"},
-            {"key": "scala", "name": "Scala"}
+            {"key": "chef", "name": "Chef"},
+            {"key": "fimpp", "name": "FiM++"},
+            {"key": "shakespeare", "name": "Shakespeare"}
         ],
         "correctAnswer":0
     },
@@ -520,13 +520,209 @@
         "correctAnswer":2
     },
     {
-        "object_id":0,
-        "snippet": "",
+        "object_id":54,
+        "snippet": "cat('Hello, world!\n')",
         "options":[
-            {"key": "", "name": ""},
-            {"key": "", "name": ""},
-            {"key": "", "name": ""}
+            {"key": "r", "name": "R"},
+            {"key": "scheme", "name": "Scheme"}
         ],
-        "correctAnswer":-1
+        "correctAnswer":0
+    },
+    {
+        "object_id":55,
+        "snippet": "fn main() {\n    println!(\"hello, world\");\n}",
+        "options":[
+            {"key": "cpp", "name": "C++"},
+            {"key": "rust", "name": "Rust"},
+            {"key": "haskell", "name": "Haskell"}
+        ],
+        "correctAnswer":1
+    },
+    {
+        "object_id":56,
+        "snippet": "--[[\n  Hello, world!\n]]\n\nprint 'Hello World!'",
+        "options":[
+            {"key": "lua", "name": "Lua"},
+            {"key": "javascript", "name": "JavaScript"},
+            {"key": "cpp", "name": "C++"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":57,
+        "snippet": "Universe bear hatchery powers world.\n    bear hatchery powers o.      bear hatchery powers hell     marshy marshy marshy a snowmelt",
+        "options":[
+            {"key": "homespring", "name": "Homespring"},
+            {"key": "smalltalk", "name": "Smalltalk"},
+            {"key": "shakespeare", "name": "Shakespeare"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":58,
+        "snippet": "H",
+        "options":[
+            {"key": "r", "name": "R"},
+            {"key": "omgrofl", "name": "Omgrofl"},
+            {"key": "hq9p", "name": "HQ9+"}
+        ],
+        "correctAnswer":2
+    },
+    {
+        "object_id":59,
+        "snippet": "package sample\n\nimport java.util.List\n\nclass Greeter {\n  def greetThem(List<String> names) {\n    for(name: names) {\n      println(name.sayHello)\n    }\n  }\n\n  def sayHello(String name) {\n    'Hello ' + name + '!'\n  }\n}",
+        "options":[
+            {"key": "xtend", "name": "Xtend"},
+            {"key": "java", "name": "Java"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":60,
+        "snippet": "w00t a Hello, World! program by poiuy_qwert\nlol iz 72\nrofl lol\nlol iz 101\nrofl lol\nlol iz 108\nrofl lol\nrofl lol\nlool iz 111\nrofl lool\nloool iz 44\nrofl loool\nloool iz 32\nrofl loool\nloool iz 87\nrofl loool\nrofl lool\nlool iz 114\nrofl lool\nrofl lol\nlol iz 100\nrofl lol\nlol iz 33\nrofl lol\nstfu",
+        "options":[
+            {"key": "lolcode", "name": "LOLCODE"},
+            {"key": "omgrofl", "name": "Omgrofl"},
+            {"key": "brainfuck", "name": "Brainfuck"}
+        ],
+        "correctAnswer":1
+    },
+    {
+        "object_id":61,
+        "snippet": " .section .rodata\nstring:\n .ascii \"Hello, world!\\n\"\nlength:\n .quad . -string\n\n .section .text\n .globl _start\n_start:\n movq $4, %rax\n movq $1, %rbx\n movq $string, %rcx\n movq length, %rdx\n int $0x80\n movq %rax, %rbx\n movq $1, %rax\n int $0x80",
+        "options":[
+            {"key": "assembly", "name": "Assembly"},
+            {"key": "tcl", "name": "Tcl"},
+            {"key": "c", "name": "C"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":62,
+        "snippet": "class Hello\n{\n static Main () : void\n {\n System.Console.WriteLine (\"Hello, world!\");\n }\n}",
+        "options":[
+            {"key": "csharp", "name": "C#"},
+            {"key": "nemerle", "name": "Nemerle"},
+            {"key": "commonlisp", "name": "Common Lisp"}
+        ],
+        "correctAnswer":1
+    },
+    {
+        "object_id":63,
+        "snippet": "classdef hello\n methods\n function doit(this)\n disp('Hello, world!')\n end\n end\nend",
+        "options":[
+            {"key": "matlab", "name": "Matlab"},
+            {"key": "elixir", "name": "Elixir"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":64,
+        "snippet": "program helloworld\n print *, \"Hello, world!\"\nend program helloworld",
+        "options":[
+            {"key": "pascal", "name": "Pascal"},
+            {"key": "c", "name": "C"},
+            {"key": "fortran", "name": "FORTRAN"}
+        ],
+        "correctAnswer":2
+    },
+    {
+        "object_id":65,
+        "snippet": "3 times: { \"hello world!\" println }",
+        "options":[
+            {"key": "smalltalk", "name": "Smalltalk"},
+            {"key": "ruby", "name": "Ruby"},
+            {"key": "fancy", "name": "Fancy"}
+        ],
+        "correctAnswer":2
+    },
+    {
+        "object_id":66,
+        "snippet": "print(\"Hello World!\")",
+        "options":[
+            {"key": "java", "name": "Java"},
+            {"key": "gosu", "name": "Gosu"},
+            {"key": "go", "name": "Go"}
+        ],
+        "correctAnswer":1
+    },
+    {
+        "object_id":67,
+        "snippet": "hello = ->\n alert \"Hello, world!\"\nhello()",
+        "options":[
+            {"key": "coffescript", "name": "CoffeScript"},
+            {"key": "javascript", "name": "JavaScript"},
+            {"key": "applescript", "name": "AppleScript"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":68,
+        "snippet": "(defun foo ()\n (format t \"Hello, world\"))\n\n(with-output-to-string (*standard-output*)\n (foo))",
+        "options":[
+            {"key": "clojure", "name": "Clojure"},
+            {"key": "elixir", "name": "Elixir"},
+            {"key": "commonlisp", "name": "Common Lisp"}
+        ],
+        "correctAnswer":2
+    },
+    {
+        "object_id":69,
+        "snippet": "package com.example\n{\n import flash.text.TextField;\n import flash.display.Sprite;\n \n public class Greeter extends Sprite\n {\n public function Greeter()\n {\n var txtHello:TextField = new TextField();\n txtHello.text = \"Hello World\";\n addChild(txtHello);\n }\n }\n}",
+        "options":[
+            {"key": "java", "name": "Java"},
+            {"key": "actionscript", "name": "ActionScript"}
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "object_id":70,
+        "snippet": "public class Main\n{\n public static void main(String[] arguments)\n {\n println \"Hello World\"\n }\n}",
+        "options":[
+            {"key": "groovy", "name": "Groovy"},
+            {"key": "java", "name": "Java"},
+            {"key": "smalltalk", "name": "Smalltalk"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":71,
+        "snippet": "(let ((hello0 (lambda() (display \"Hello world\") (newline))))\n (hello0))",
+        "options":[
+            {"key": "scheme", "name": "Scheme"},
+            {"key": "scala", "name": "Scala"},
+            {"key": "commonlisp", "name": "Common Lisp"}
+        ],
+        "correctAnswer":0
+    },
+    {
+        "object_id":72,
+        "snippet": "package main\n\nimport \"fmt\"\n\nfunc main() {\n fmt.Println(\"Hello, World\")\n}",
+        "options":[
+            {"key": "c", "name": "C"},
+            {"key": "smalltalk", "name": "Smalltalk"},
+            {"key": "go", "name": "Go"}
+        ],
+        "correctAnswer":2
+    },
+    {
+        "object_id":73,
+        "snippet": "Transcript show: 'Hello, world!'.",
+        "options":[
+            {"key": "prolog", "name": "Prolog"},
+            {"key": "go", "name": "Go"},
+            {"key": "smalltalk", "name": "Smalltalk"}
+        ],
+        "correctAnswer":2
+    },
+    {
+        "object_id":74,
+        "snippet": "Hello, world!\n\\bye",
+        "options":[
+            {"key": "tex", "name": "TeX"},
+            {"key": "latex", "name": "LaTeX"},
+            {"key": "context", "name": "ConTeXt"}
+        ],
+        "correctAnswer":0
     }
 ]
