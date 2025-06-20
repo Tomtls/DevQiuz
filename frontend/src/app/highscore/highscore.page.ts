@@ -11,21 +11,28 @@ import { HttpService } from '../services/http.service';
   standalone: true,
   imports: [FormsModule, IonicModule, CommonModule]
 })
-export class HighscorePage implements OnInit {
-  public jsHighscore: any[] = [];
+export class HighscorePage {
+  public jsHighscore: any[] = [];     // Daten vom JS-Quiz    
+  public helloHighscore: any[] = [];  // Daten vom Hello World-Quiz
+
+  public showFullJS = false;          // Steuerung für "Mehr anzeigen"
+  public showFullHello = false;       // Steuerung für "Mehr anzeigen"
 
   constructor(private http: HttpService) { }
 
-  ngOnInit() {
-    this.loadJsQuizHighscores();
-  }
+
   ionViewWillEnter(){
-    this.loadJsQuizHighscores();
+    this.loadHighscores();
   }
 
-  private loadJsQuizHighscores(){
+  private loadHighscores(){
     this.http.getJsQuizHighscores().subscribe({
       next: (data: any[]) => this.jsHighscore = data,
+      error: (err) => console.error(err)
+    });
+
+    this.http.getHelloWorldHighscores().subscribe({
+      next: (data: any[]) => this.helloHighscore = data,
       error: (err) => console.error(err)
     });
   }

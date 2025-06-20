@@ -74,8 +74,8 @@ export class HttpService {
   //#endregion
 
   //#region HelloWorld!
-  public testHelloworld(): Observable<any> { // nur test
-    return this.http.get<any>(`${this.baseUrl}/helloworld/test`);
+  public getHelloWorldHighscores(): Observable<any> { 
+    return this.http.get<any>(`${this.baseUrl}/helloworld/highscores`);
   }
   public startHelloWorld(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/helloworld/start`);

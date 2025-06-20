@@ -1,3 +1,4 @@
+import { getScoresHelloWorld } from "../services/highscoreService.js";
 import { startGame, checkAnswer } from '../services/helloWorldService.js';
 
 export const start = async (req, res) => {
@@ -36,3 +37,8 @@ export const submitAnswer = async (req, res) => {
     correct: result.correct
   });
 }
+
+export const getHighscores = async (req, res) => {
+  const highscores = await getScoresHelloWorld();
+  res.json(highscores);
+};

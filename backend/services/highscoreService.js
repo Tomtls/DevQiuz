@@ -116,28 +116,25 @@ export async function getScoresJSQuiz() {
   return scores;
 }
 
-//#endregion
-/*
+/**
+ * Returns a sorted list of Scores for the Hello World quiz,
+ *
+ * @returns {Promise<object[]>} Sorted Scores with username, score, and timestamp
+ */
+export async function getScoresHelloWorld() {
+  const scores = await readJson(HELLOWORLD_RESULTS_PATH);
 
-function getHighscoresGlobal() {
-  const scores = readScores();
-  const grouped = {};
+  const reducedScores = scores.map(({ username, score, date }) => ({
+    username,
+    score,
+    date
+  }));
 
-  scores.forEach(s => {
-    if (!grouped[s.username]) {
-      grouped[s.username] = 0;
-    }
-    grouped[s.username] += s.score;
-  });
+  // Sort by score descending, then by timestamp ascending
+  reducedScores.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return new Date(a.date) - new Date(b.date);
+  })
 
-  return Object.entries(grouped)
-    .map(([username, score]) => ({ username, score }))
-    .sort((a, b) => b.score - a.score);
+  return reducedScores;
 }
-
-function getHighscoresForQuiz(quizId) {
-  return readScores()
-    .filter(s => s.quizId == quizId)
-    .sort((a, b) => b.score - a.score);
-}
-*/
