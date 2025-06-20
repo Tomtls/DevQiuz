@@ -19,8 +19,7 @@ DevQuiz/
 - ✅ **Benutzerregistrierung und Login**
 - ✅ **Eigene Quizfragen erstellen**
 - ✅ **Highscore-Tracking und globale Ranglisten**
-- ✅ **Spezielle JavaScript-Quizzes**
-- ✅ **Hello-World-Test-API**
+- ✅ **Spezielle Quizzes**
 
 ---
 
