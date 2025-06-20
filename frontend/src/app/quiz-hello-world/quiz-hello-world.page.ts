@@ -57,7 +57,7 @@ export class QuizHelloWorldPage {
   public selectedOption: string = "";           // selected answer key
   public correctAnswer: Option | null= null;    // correct answer returned by the server
   public score: number = 0;                     // current score
-  public lives: number = 5;                     // current remaining lives
+  public lives: number = 0;                     // current remaining lives
   public gameOver: boolean = false;             // indicates whether the game has ended
 
   private nextQuestion: Question | null = null; // next question (buffered in case the answer was incorrect)
@@ -104,12 +104,8 @@ export class QuizHelloWorldPage {
    * Resets the game state and starts a new game
    */
   public restart() {
-    this.score = 0;
-    this.lives = 3;
-    this.correctAnswer = null;
-    this.selectedOption = "";
-    this.nextQuestion = null;
     this.gameOver = false;
+    this.nextQuestion = null;
     this.startGame();
   }
 
@@ -117,13 +113,12 @@ export class QuizHelloWorldPage {
    * Determines the button color based on selection and correctness
    */
   public getButtonColor(opt: Option): string {
-    if (!this.correctAnswer) {
-      return this.selectedOption === opt.key ? 'primary' : 'medium';
-    }
+    if (!this.correctAnswer) return 'medium';
 
-    if (opt.key === this.correctAnswer.key) return 'success';
-    if (this.selectedOption === opt.key) return 'danger';
-    return 'medium';
+    const isCorrect = opt.key === this.correctAnswer.key; 
+    const isSelected = opt.key === this.selectedOption; 
+
+    return isCorrect ? 'success' : isSelected ? 'danger' : 'medium';
   }
 
   //#endregion
@@ -136,7 +131,7 @@ export class QuizHelloWorldPage {
    */
   private startGame() {
     this.http.startHelloWorld().subscribe({
-      next: (response) => this.setQuestion(response.variant),
+      next: (response) => this.handleAnswerResponse(response),
       error: (err) => console.error(err)
     });
   }
@@ -157,7 +152,6 @@ export class QuizHelloWorldPage {
       return;
     }
 
-    console.log("bool:", !response.correct)
     // Load next question or wait for user to continue
     if (response.correct === null) {              // correct → next question immediately
       this.setQuestion(response.variant);

@@ -23,7 +23,7 @@ export const submitAnswer = async (req, res) => {
   const result = await checkAnswer(option, req.user);
 
   res.json({
-    status: result.lives > 0 ? "ready" : "died",
+    status: result.gameOver ? "died" : "ready",
     game: {
       object_id: result.object_id,
       score: result.score,

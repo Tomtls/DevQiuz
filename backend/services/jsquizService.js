@@ -1,6 +1,6 @@
 import { readJson } from "./fileService.js";
 
-const PATH = './data/jsquiz.json';
+const PATH = './data/jsquiz.quiz.json';
 
 /**
  * Reads the quiz file and returns quiz data without the correct answer and explanation.

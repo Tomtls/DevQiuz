@@ -40,3 +40,42 @@
 ion-button {
   text-transform: none !important;
 }
+/* Default style only for solid and default buttons (no fill set) */
+ion-button:not([fill]),
+ion-button[fill="solid"] {
+  --background: var(--ion-color-medium);
+  --color: var(--ion-color-medium-contrast);
+}
+
+/* CLEAR buttons: transparent background, inherited color */
+ion-button[fill="clear"] {
+  --background: transparent !important;
+  --color: var(--ion-color-medium);
+  box-shadow: none;
+}
+
+/* OUTLINE buttons: transparent background + visible border */
+ion-button[fill="outline"] {
+  --background: transparent !important;
+  --color: var(--ion-color-medium);
+  --border-color: var(--ion-color-medium);
+  --border-width: 1px;
+  --border-style: solid;
+}
+
+
+pre {
+  background: #f4f4f4;
+  padding: 1em;
+  border-radius: 8px;
+  font-family: monospace;
+  white-space: pre-wrap;
+}
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  pre {
+    background: #2a2a2a;
+    color: #f0f0f0;
+  }
+}
+

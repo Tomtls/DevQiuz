@@ -22,5 +22,53 @@
     "username": "tom",
     "score": 5,
     "date": "2025-06-20T00:19:05.805Z"
+  },
+  {
+    "user_id": 1,
+    "username": "tom",
+    "score": 1,
+    "date": "2025-06-20T16:28:42.020Z"
+  },
+  {
+    "user_id": 1,
+    "username": "tom",
+    "score": 1,
+    "date": "2025-06-20T18:56:29.570Z"
+  },
+  {
+    "user_id": 1,
+    "username": "tom",
+    "score": 2,
+    "date": "2025-06-20T19:01:55.981Z"
+  },
+  {
+    "user_id": 1,
+    "username": "tom",
+    "score": 5,
+    "date": "2025-06-20T19:33:40.303Z"
+  },
+  {
+    "user_id": 1,
+    "username": "tom",
+    "score": 5,
+    "date": "2025-06-20T19:34:29.169Z"
+  },
+  {
+    "user_id": 1,
+    "username": "tom",
+    "score": 3,
+    "date": "2025-06-20T19:34:52.805Z"
+  },
+  {
+    "user_id": 1,
+    "username": "tom",
+    "score": 4,
+    "date": "2025-06-20T19:35:17.501Z"
+  },
+  {
+    "user_id": 1,
+    "username": "tom",
+    "score": 0,
+    "date": "2025-06-20T20:07:07.199Z"
   }
 ]

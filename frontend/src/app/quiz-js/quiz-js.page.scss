@@ -1,4 +1,7 @@
 .quiz-container {
+  justify-content: center;
+  align-items: center;
+  height: 20%;
   padding: 1rem;
   max-width: 800px;
   margin: 0 auto; // zentriert auf großen Bildschirmen
@@ -7,12 +10,8 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  //padding: 0 1em;
-  //display: grid;
-  //grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  //gap: 0.75rem;
-  //margin-top: 1rem;
 }
+
 @media (min-width: 600px) {
   .options-grid {
     flex-direction: row;

@@ -86,13 +86,7 @@ export async function startGame() {
  * @returns {object} - Result of the answer and game state update
  */
 export async function checkAnswer(selectedKey, user) {
-
   const { currentIndex, shuffledIndexes, quiz } = state;
-
-  // End of questions
-  if (currentIndex >= shuffledIndexes.length) {
-    return { gameOver: true, score: state.score };
-  }
 
   const current = quiz[shuffledIndexes[currentIndex]];
 
@@ -114,7 +108,12 @@ export async function checkAnswer(selectedKey, user) {
     // If player loses all lives → game over + save score
     if(state.lives === 0){ 
       await saveScoreHelloWorld(state.score, user); 
-      return { gameOver: true, score: state.score };
+      return { 
+        gameOver: true,
+        correct: correctOption,
+        score: state.score,
+        lives: state.lives
+      };
     }
   }
 
@@ -122,12 +121,19 @@ export async function checkAnswer(selectedKey, user) {
 
   // If last question reached after answer
   if (state.currentIndex >= state.shuffledIndexes.length) {
-    return { gameOver: true, score: state.score };
+    await saveScoreHelloWorld(state.score, user); 
+    return { 
+      gameOver: true,
+      correct: isCorrect ? null : correctOption,
+      score: state.score,
+      lives: state.lives
+    };
   }
 
   const next = quiz[shuffledIndexes[state.currentIndex]];
 
   return {
+    gameOver: false,
     correct: isCorrect ? null : correctOption,
     nextQuestion: next,
     score: state.score,

@@ -4,73 +4,100 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <!-- Quizfragen -->
-  <div *ngIf="!showResults && questions.length" class="quiz-container">
-    <h2>Frage {{ current + 1 }} von {{ questions.length }}</h2>
-    <pre><code>{{ questions[current].question }}</code></pre>
+<ion-content class="ion-padding">
 
-    <div class="options-grid">
-      <ion-button
-      *ngFor="let option of questions[current].options; let i = index"
-      (click)="selectOption(i)"
-      style="text-transform: none;">
-      {{ option }}
-      </ion-button>
-    </div>
+  <!-- Question Progress -->
+  <h2 class="quiz-container">
+    Question {{ current + 1 }} of {{ questions.length }}
+  </h2>
+  
+  <!-- Quiz Section: Visible when results are not shown -->
+  <div *ngIf="!showResults && questions.length" class="quiz-container">
+
+    <!-- Quiz Card: Contains current question and answer buttons -->
+    <ion-card>
+      <ion-card-content>
+        
+        <!-- Current Question-->
+        <pre><code>{{ questions[current].question }}</code></pre>
+        
+        <!-- Answer Buttons Grid -->
+        <div class="options-grid">
+          <ion-button
+            *ngFor="let option of questions[current].options; let i = index"
+            (click)="selectOption(i)">
+            {{ option }}
+          </ion-button>
+        </div>
+        
+      </ion-card-content>
+    </ion-card>
   </div>
 
-  <!-- Ergebnisse -->
-  <div *ngIf="showResults" class="results-container">
-    <h2>Du hast {{ score }} von {{ questions.length }} richtig!</h2>
 
-    <div *ngFor="let q of questions; let i = index" class="result-card" [ngClass]="isCorrect(i) ? 'correct-card' : 'incorrect-card'">
+
+  <!-- Results Section: Shown after quiz is finished -->
+  <div *ngIf="showResults" class="results-container">
+
+    <!-- Score Summary -->
+    <h2>You got {{ score }} out of {{ questions.length }} correct!</h2>
+
+    <!-- Detailed Feedback for Each Question -->
+    <div *ngFor="let q of questions; let i = index" class="result-card" 
+      [ngClass]="isCorrect(i) ? 'correct-card' : 'incorrect-card'">
+
+      <!-- Question and Answer Summary -->
       <h3>{{ i + 1 }}. {{ q.question }}</h3>
       <p class="answer-label"><strong>Output:</strong> {{ q.options[q.correctAnswer] }}</p>
-      <p class="answer-label"><strong>Du hast geantwortet:</strong>  {{ q.options[selectedAnswers[i]] }}</p>
-      <p [ngClass]="isCorrect(i) ? 'correct' : 'incorrect'">
-        {{ isCorrect(i) ? 'Richtig!' : 'Falsch!' }}
-      </p>
+      <p class="answer-label"><strong>Your Answer:</strong>  {{ q.options[selectedAnswers[i]] }}</p>
+      <p [ngClass]="isCorrect(i) ? 'correct' : 'incorrect'"> {{ isCorrect(i) ? 'correct!' : 'incorrect!' }}</p>
 
-      <!-- Toggle Button -->
-      <ion-button fill="clear" size="small" (click)="toggleExplanation(i)" style="text-transform: none;">
-        {{ explanationVisible[i] ? 'Erklärung verbergen' : 'Warum?' }}
+      <!-- Toggle Button for Explanation -->
+      <ion-button fill="clear" size="small" (click)="toggleExplanation(i)">
+        {{ explanationVisible[i] ? 'Hide Explanation' : 'Why?' }}
       </ion-button>    
 
+      <!-- Explanation Block (If Visible) -->
       <div *ngIf="explanationVisible[i]" class="explanation">
-        <h4>Erklärung:</h4>
+        <h4>Explanation:</h4>
         <div *ngFor="let part of q.explanation">
-          <!-- Textabschnitt -->
+
+          <!-- Inline Content with Mixed Text and Links -->
           <p *ngIf="part.type === 'inline'">
             <ng-container *ngFor="let inline of part.content" [ngSwitch]="inline.type">
               <span *ngSwitchCase="'text'">{{ inline.content }}</span>
               <a *ngSwitchCase="'link'" [href]="inline.url" target="_blank">{{ inline.content }}</a>
             </ng-container>
           </p>
+
+          <!-- Plain Text Block -->
           <p *ngIf="part.type === 'text'">{{ part.content }}</p>
-          <!-- Linkabschnitt --> 
+
+          <!-- Link Block --> 
           <p *ngIf="part.type === 'link'">
             <a [href]="part.url" target="_blank" rel="noopener noreferrer">{{ part.content }}</a>
           </p>
           
-          <!-- Codeabschnitt -->
+          <!-- Code Block -->
           <pre *ngIf="part.type === 'code'"><code>{{ part.content }}</code></pre>
         </div>
       </div>
       <hr />
     </div>
 
-    
+    <!-- Warning for Unsaved Highscore -->
     <ion-item *ngIf="highscoreNotSaved" color="warning" lines="none">
       <ion-label>
-        <strong>Highscore wurde nicht gespeichert.</strong><br>
-        Bitte anmelden oder registrieren, um Ergebnisse zu speichern.
+        <strong>Highscore not saved.</strong><br>
+        Please log in or register to save your results.
       </ion-label>
     </ion-item>
+
+    <!-- Navigation Buttons -->
     <ion-buttons>
-      <ion-button routerLink="/home">Zurück</ion-button>
-      <ion-button (click)="reset()">Neu starten</ion-button>
-      <ion-button *ngIf="!isLoggedIn" (click)="anmelden()">Anmelden</ion-button>
+      <ion-button routerLink="/home">Back</ion-button>
+      <ion-button (click)="reset()">restart</ion-button>
+      <ion-button *ngIf="!isLoggedIn" (click)="anmelden()">Login</ion-button>
     </ion-buttons>
 
   </div>
