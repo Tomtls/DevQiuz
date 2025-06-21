@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpService } from '../services/http.service';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
-import { AppComponent } from '../app.component';
 import { AuthPage } from '../auth/auth.page';
 import { RouterModule } from '@angular/router';
 
@@ -15,46 +14,68 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, RouterModule]
 })
-export class QuizJsPage implements OnInit {
-  public current = 0;
-  public showResults: boolean = false;
-  public highscoreNotSaved: boolean = true;
-  public questions: any[] = [];
-  public selectedAnswers: number[] = [];
-  public explanationVisible: boolean[] = [];
+export class QuizJsPage {
 
+  //#region Properties
+
+  public current = 0;                              // Current question index
+  public showResults: boolean = false;             // Whether to show result screen
+  public highscoreNotSaved: boolean = true;        // Tracks whether results have been saved
+  public questions: any[] = [];                    // All quiz questions
+  public selectedAnswers: number[] = [];           // User-selected answers
+  public explanationVisible: boolean[] = [];       // Which answers' explanations are visible
+
+  //#endregion
+
+  //#region Constructor
 
   constructor(private http: HttpService, private auth: AuthService, private modalCtrl: ModalController) { }
 
-  ngOnInit() {
-    this.loadData();
-  }
+  //#endregion
+
+  //#region Lifecycle
 
   ionViewWillEnter() {
     this.loadData();
     this.reset();
   }
 
-  private loadData(){
-    this.http.getJsQuiz().subscribe({
-      next: (data) => this.questions = data,
-      error: (err) => console.error(err)
-    });
-  }
+  //#endregion
 
+  //#region Public Methods
+
+  /**
+   * Returns the current score by comparing selected answers to correct answers.
+   */
   public get score(): number { return this.questions.filter((q, i) => q.correctAnswer === this.selectedAnswers[i]).length; }
+
+  /**
+   * Returns true if the user is logged in.
+   */
   public get isLoggedIn(): boolean { return this.auth.isLoggedIn }
 
-
+  /**
+   * Checks if the selected answer at the given index is correct.
+   */
   public isCorrect(index: number): boolean { return this.questions[index].correctAnswer === this.selectedAnswers[index]; }
+  
+  /**
+   * Toggles the explanation visibility for a given question index.
+   */
   public toggleExplanation(index: number): void { this.explanationVisible[index] = !this.explanationVisible[index]; }
 
+  /**
+   * Selects an option and advances to the next question or shows results.
+   */
   public selectOption(index: number) {
     this.selectedAnswers[this.current] = index;
     if (this.current + 1 < this.questions.length) { this.current++; } 
     else { this.loadResults(); }
   }
 
+  /**
+   * Opens the auth modal and saves results if login was successful.
+   */
   public async anmelden() {
     const modal = await this.modalCtrl.create({
       component: AuthPage,
@@ -71,6 +92,33 @@ export class QuizJsPage implements OnInit {
     await modal.present();
   }
 
+  /**
+   * Resets the quiz state for a new attempt.
+   */
+  public reset() {
+    this.showResults = false;
+    this.current = 0;
+    this.selectedAnswers = [];
+    this.explanationVisible = [];
+  }
+
+  //#endregion
+  
+  //#region Private Methods
+
+  /**
+   * Loads the initial quiz questions.
+   */
+  private loadData(){
+    this.http.getJsQuiz().subscribe({
+      next: (data) => this.questions = data,
+      error: (err) => console.error(err)
+    });
+  }
+
+  /**
+   * Loads correct answers from server and switches to results view.
+   */
   private loadResults() {
     this.http.getJsQuizAnswers().subscribe({
       next: (data: any[]) => {
@@ -83,6 +131,9 @@ export class QuizJsPage implements OnInit {
     });
   }
 
+  /**
+   * Sends the user's quiz results to the backend if logged in.
+   */
   private saveResults() {
     if(!this.auth.isLoggedIn){ return; }
     if(!this.auth.userId){ return; }
@@ -105,11 +156,6 @@ export class QuizJsPage implements OnInit {
     });
   }
 
-  public reset() {
-    this.showResults = false;
-    this.current = 0;
-    this.selectedAnswers = [];
-    this.explanationVisible = [];
-  }
+//#endregion
 
 }

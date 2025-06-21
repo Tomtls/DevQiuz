@@ -11,12 +11,26 @@ import { CommonModule } from '@angular/common';
   imports: [IonicModule, RouterModule, CommonModule],
 })
 export class HomePage {
-  private modalCtrl = inject(ModalController);
-  private auth = inject(AuthService);
+
+  //#region Dependencies
+
+  private modalCtrl = inject(ModalController);  // Controls modals (login/register)
+  private auth = inject(AuthService);           // Injects auth state and methods
+
+  //#endregion
+
+  //#region Constructor
 
   constructor() {}
 
-  navLinks = [
+  //#endregion
+
+  //#region Properties
+
+  /**
+   * Navigation links for the home screen cards.
+   */
+  public navLinks = [
     {
       icon: 'clipboard-outline',
       label: 'Fragen zu IT, Web & Programmierung',
@@ -34,11 +48,28 @@ export class HomePage {
     },
   ];
   
+  //#endregion
+
+  //#region Public Methods
+
+  /**
+   * Returns whether a user is currently logged in.
+   */
   public get isLoggedIn(): boolean { return this.auth.isLoggedIn; }
 
+  /**
+   * Logs the user out and resets auth state.
+   */
   public logout() { this.auth.logout(); }
 
-  //#region AuthPage
+  //#endregion
+
+  //#region Modal Handling
+
+  /**
+   * Opens the authentication modal for login or registration.
+   * @param mode 'login' or 'register'
+   */
   public async openAuthModal(mode: 'login' | 'register' = 'login'){
     const modelAuth = await this.modalCtrl.create({
       component: AuthPage,
@@ -46,6 +77,6 @@ export class HomePage {
     });
     await modelAuth.present();
   }
-  //#endregion
 
+  //#endregion
 }

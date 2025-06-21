@@ -11,12 +11,18 @@ export class QuizAccessGuard implements CanActivate {
 
   constructor(private authService: AuthService, private http: HttpService, private router: Router) {}
 
+  /**
+   * Guard that checks access to a specific quiz.
+   * Demo quizzes are always allowed. Non-demo require authentication.
+   */
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     const quizId = route.params['id'];
     const isDemo = this.router.getCurrentNavigation()?.extras.state?.['isDemo'] ?? false;
 
+    // Demo quizzes are accessible without login
     if (isDemo) return of(true);
 
+    // Fetch quiz and check if access is allowed
     return this.http.getQuizById(quizId, isDemo).pipe(
       map(quiz => {
         const hasAccess = quiz.demo || this.authService.isLoggedIn;

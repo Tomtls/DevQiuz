@@ -5,15 +5,24 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  <!-- Display form only while quiz is active and not finished -->
   <form *ngIf="quiz && !finished">
     <div class="quiz-container">
+
+      <!-- Loop through each question -->
       <ion-card *ngFor="let q of quiz.questions; let i = index">
         <ion-card-header>
           <ion-card-subtitle>Frage {{ i + 1 }}</ion-card-subtitle>
+
+          <!-- Display the question text -->
           <ion-card-title>{{ q.text }}</ion-card-title>
         </ion-card-header>
+
         <ion-card-content>
           <div class="answer-grid">
+
+            <!-- Loop through each option for the question -->
+            <!-- Highlights selected option in primary color -->
             <ion-button
               *ngFor="let opt of q.options"
               [color]="isSelected(i, opt) ? 'primary' : 'medium'"
@@ -27,17 +36,20 @@
       </ion-card>
     </div>
 
+    <!-- Submit button is only enabled if all questions are answered -->
     <ion-button expand="block" class="ion-margin-top" (click)="submitQuiz()" [disabled]="selectedAnswers.length < quiz.questions.length">
       Abschließen
     </ion-button>
   </form>
 
+  <!-- Display the result after submission -->
   <ng-container *ngIf="finished">
     <ion-card>
       <ion-card-header>
         <ion-card-title>Ergebnis</ion-card-title>
       </ion-card-header>
       <ion-card-content>
+        <!-- Shows how many answers the user got correct -->
         <p>Du hast {{ correctCount }} von {{ quiz.questions.length }} Fragen richtig.</p>
       </ion-card-content>
     </ion-card>

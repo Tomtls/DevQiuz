@@ -5,24 +5,47 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+
+  <!-- Container for all available quizzes in a grid layout -->
   <div class="quiz-grid">
+
+    <!-- Loop through all quiz objects and render each as a card -->
     <ion-card *ngFor="let quiz of quizzes">
+
       <ion-card-header>
+        <!-- Displays the quiz title -->
         <ion-card-title>{{ quiz.title }}</ion-card-title>
       </ion-card-header>
+
       <ion-card-content>
         <div class="quiz-info">  
+          <!-- Shows how many questions are in the quiz -->
           <p>{{ quiz.questionsCount }} Fragen</p>
+
+          <!-- Displays a "Demo" badge if the quiz is marked as demo -->
           <p *ngIf="quiz.demo" style="display: inline; margin-left: 8px">🔓 Demo</p>
         </div>
+
+        <!-- Button for demo quiz when user is not logged in -->
         <ion-button *ngIf="quiz.demo && !isLoggedIn" expand="block" (click)="openQuiz(quiz.id, true)">Demo starten</ion-button>
+        
+        <!-- Button for normal quiz start (non-admin user, logged in) -->
         <ion-button *ngIf="isLoggedIn && !adminMode" expand="block" (click)="openQuiz(quiz.id)">Starten</ion-button>
+        
+        <!-- Admin-specific controls: Start + Delete -->
         <div *ngIf="adminMode" style="display: flex; width: 100%;">
+
+          <!-- start button for admins -->
           <ion-button *ngIf="isLoggedIn" style="flex: 9;" expand="block" (click)="openQuiz(quiz.id)">Starten</ion-button>
+          
+          <!-- Small delete button, only for custom quizzes (ID > 5) -->
           <ion-button *ngIf="adminMode && quiz.id > 5" style="flex: 1;" color="danger" size="small" (click)="deleteQuiz(quiz.id)"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-button>
+        
         </div>
+
       </ion-card-content>
     </ion-card>
+    
   </div>
 
 </ion-content>

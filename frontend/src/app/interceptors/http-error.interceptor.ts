@@ -10,8 +10,18 @@ import { AuthModalService } from '../services/auth-modal.service';
 })
 export class HttpErrorInterceptor implements HttpInterceptor {
 
+  //#region Constructor
+
   constructor(private toastCtrl: ToastController, private authModalService: AuthModalService,private router: Router) { }
 
+  //#endregion
+
+  //#region Interception Logic
+
+  /**
+   * Intercepts all HTTP responses to catch and handle errors globally.
+   * Shows toast message and optionally triggers login modal on 401/403.
+   */
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -29,6 +39,13 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     );
   }
 
+  //#endregion
+
+  //#region Helpers
+
+  /**
+   * Shows a toast with the provided message.
+   */
   private async showToast(message: string) {
     const toast = await this.toastCtrl.create({
       message,
@@ -38,6 +55,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     await toast.present();
   }
 
+  /**
+   * Maps known HTTP status codes to user-friendly messages.
+   * Falls back to raw status code if no match is found.
+   */
   private getErrorMessage(error: HttpErrorResponse): string {
     if (error.error?.error) return error.error.error;
     if (error.error?.message) return error.error.message;
@@ -47,4 +68,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     if (error.status === 404) return 'Ressource nicht gefunden';
     return `Fehler: ${error.status}`;
   }
+
+  //#endregion
 }

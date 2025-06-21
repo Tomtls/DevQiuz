@@ -5,6 +5,8 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+
+  <!-- Welcome card with introductory information -->
   <ion-card>
     <ion-card-header>
       <ion-card-title>Willkommen bei DevQuiz</ion-card-title>
@@ -15,14 +17,19 @@
     </ion-card-content>
   </ion-card>
 
+  <!-- Navigation section using a responsive grid -->
   <ion-grid>
     <ion-row>
+
+      <!-- Each navigation link is rendered as a card -->
       <ion-col
         size="12"
         size-sm="6"
         size-md="4"
         size-lg="4"
         *ngFor="let link of navLinks">
+
+        <!-- Card acts as a navigation button -->
         <ion-card [routerLink]="[link.route]" class="clickable-card" button>
           <ion-card-content class="card-content">
             <ion-icon [name]="link.icon" class="nav-icon"></ion-icon>
@@ -30,9 +37,11 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
+
     </ion-row>
   </ion-grid>
 
+  <!-- Card with a hint/reminder for user login -->
   <ion-card>
     <ion-card-header>
       <ion-card-title>Hinweis 💡</ion-card-title>
@@ -40,9 +49,14 @@
     <ion-card-content>
       Wenn du deinen Fortschritt speichern willst und deinen Highscore mit anderen vergleichen willst dann Erstelle einen Account und melde dich vor dem Quiz an!
     </ion-card-content>
+
+    <!-- Buttons for login/register or logout -->
     <div style="display: flex; width: 100%;">
+      <!-- Show login/register if not logged in -->
       <ion-button *ngIf="!isLoggedIn" style="flex: 3;" color="medium" (click)="openAuthModal('login')">Einloggen</ion-button>
       <ion-button *ngIf="!isLoggedIn" style="flex: 3;" color="success" (click)="openAuthModal('register')">Registrieren</ion-button>
+      
+      <!-- Show logout button if logged in -->
       <ion-button *ngIf="isLoggedIn" style="flex: 3" color="medium" (click)="logout()">Ausloggen</ion-button>
     </div>
   </ion-card>

@@ -1,69 +1,88 @@
 <ion-app>
 
+  <!-- Sidebar Menu (Overlay style, appears from right side) -->
   <ion-menu side="end" contentId="main-content" type="overlay">
     <ion-header>
       <ion-toolbar>
-        <ion-title class="ion-text-center">Menü</ion-title>
+        <ion-title class="ion-text-center">Menu</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content>
       <ion-list>
+        <!-- Link to Home page -->
         <ion-item routerLink="/home">
           <ion-icon slot="start" name="home-outline"></ion-icon>
           <ion-label>Home</ion-label>
         </ion-item>
         
+        <!-- Link to JavaScript quiz -->
         <ion-item routerLink="/quiz-js">
           <ion-icon slot="start" src="/assets/icon/javascript.svg" style="width: 24px; height: 24px;"></ion-icon>
           <ion-label>JS is weird</ion-label>
         </ion-item>
 
+        <!-- Link to Hello World quiz -->
         <ion-item routerLink="/quiz-hello-world">
           <ion-icon slot="start" name="help-circle-outline"></ion-icon>
           <ion-label>Hello World! - Quiz</ion-label>
         </ion-item>
 
+        <!-- Link to Quiz page -->
         <ion-item routerLink="/quiz">
           <ion-icon slot="start" name="clipboard-outline"></ion-icon>
           <ion-label>Quiz</ion-label>
         </ion-item>
 
+        <!-- Link to create a new quiz -->
         <ion-item routerLink="/create-quiz">
           <ion-icon slot="start" name="add-circle-outline"></ion-icon>
-          <ion-label>Quiz erstellen</ion-label>
+          <ion-label>create Quiz</ion-label>
         </ion-item>
 
+        <!-- Link to the highscore board -->
         <ion-item routerLink="/highscore">
           <ion-icon slot="start" name="bar-chart-outline"></ion-icon>
           <ion-label>Highscore</ion-label>    
         </ion-item>
 
+        <!-- Show logout button only when user is logged in -->
         <ion-item *ngIf="isLoggedIn" button (click)="logout()">
           <ion-icon slot="start" name="log-out-outline"></ion-icon>
           <ion-label>Logout</ion-label>
         </ion-item>
+
+        <!-- Show login/register modal button if user is not logged in -->
         <ion-item *ngIf="!isLoggedIn" button (click)="openAuthModal()">
           <ion-icon slot="start" name="log-in-outline"></ion-icon>
-          <ion-label>Login/Registrieren</ion-label>
+          <ion-label>Login/register</ion-label>
         </ion-item>
       </ion-list>
     </ion-content>
   </ion-menu>
   
+  <!-- App header with logo, title, and menu toggle -->
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
+        <!-- Clickable logo that links to home -->
         <a routerLink="/home"><img src="assets/icon/image3.png" alt="Logo" style="margin-left: 10px; height: 64px; display: flex; align-items: center;" /></a>
       </ion-buttons>
+
+      <!-- App title -->
       <ion-title class="ion-text-center">DevQuiz</ion-title>
+
+      <!-- Toggle admin mode only visible to admin users -->
       <ion-toggle *ngIf="isAdmin" slot="end" [checked]="adminMode" (ionChange)="toggleAdminMode()">Admin Mode</ion-toggle>
+
+      <!-- Menu toggle button on the right side -->
       <ion-buttons slot="end">
         <ion-menu-button autoHide="false"></ion-menu-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
   
+  <!-- Main router outlet where pages are rendered -->
   <ion-router-outlet id="main-content"></ion-router-outlet>
 
 </ion-app>

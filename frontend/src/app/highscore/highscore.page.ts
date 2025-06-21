@@ -12,19 +12,50 @@ import { HttpService } from '../services/http.service';
   imports: [FormsModule, IonicModule, CommonModule]
 })
 export class HighscorePage {
-  public jsHighscore: any[] = [];     // Daten vom JS-Quiz    
-  public helloHighscore: any[] = [];  // Daten vom Hello World-Quiz
 
-  public showFullJS = false;          // Steuerung für "Mehr anzeigen"
-  public showFullHello = false;       // Steuerung für "Mehr anzeigen"
+  //#region Properties
+
+  /**
+   * Highscore data from the "JS is Weird" quiz.
+   */
+  public jsHighscore: any[] = [];
+
+  /**
+   * Highscore data from the "Hello World" quiz.
+   */
+  public helloHighscore: any[] = [];
+
+  /**
+   * Controls whether the full JS highscore list is shown.
+   */
+  public showFullJS = false;
+
+  /**
+   * Controls whether the full Hello World highscore list is shown.
+   */
+  public showFullHello = false;
+
+  //#endregion
+
+  //#region Constructor
 
   constructor(private http: HttpService) { }
 
+  //#endregion
+
+  //#region Lifecycle
 
   ionViewWillEnter(){
     this.loadHighscores();
   }
 
+  //#endregion
+
+  //#region Private Methods
+
+  /**
+   * Loads highscore data for both quizzes from the backend.
+   */
   private loadHighscores(){
     this.http.getJsQuizHighscores().subscribe({
       next: (data: any[]) => this.jsHighscore = data,
@@ -37,4 +68,5 @@ export class HighscorePage {
     });
   }
 
+  //#endregion
 }

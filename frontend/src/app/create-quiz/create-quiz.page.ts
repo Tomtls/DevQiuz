@@ -13,7 +13,13 @@ import { HttpService } from '../services/http.service';
   imports: [IonicModule, CommonModule, FormsModule],
 })
 export class CreateQuizPage {
-  quiz = {
+
+  //#region Properties
+
+  /**
+   * Holds the data for the quiz being created, including its title and questions.
+   */
+  public quiz = {
     id: 0,
     title: '',
     questions: [
@@ -25,8 +31,19 @@ export class CreateQuizPage {
     ]
   };
 
+  //#endregion
+
+  //#region Constructor
+
   constructor(private http: HttpService, private toastCtrl: ToastController, private router: Router) {}
 
+  //#endregion
+
+  //#region Public Methods
+
+  /**
+   * Adds a new blank question to the quiz.
+   */
   addQuestion() {
     this.quiz.questions.push({
       text: '',
@@ -35,20 +52,41 @@ export class CreateQuizPage {
     });
   }
 
+  /**
+   * Removes a question from the quiz at the specified index.
+   * @param index Index of the question to remove
+   */
   removeQuestion(index: number) {
     this.quiz.questions.splice(index, 1);
   }
 
+  /**
+   * Updates a specific option within a question.
+   * @param questionIndex Index of the question
+   * @param optionIndex Index of the option within the question
+   * @param event DOM event carrying the new input value
+   */
   updateOption(questionIndex: number, optionIndex: number, event: any) {
     const value = (event.target as HTMLInputElement).value;
     this.quiz.questions[questionIndex].options[optionIndex] = value;
   }
+
+  /**
+   * TrackBy function to optimize rendering of *ngFor loops.
+   */
   trackByIndex(index: number, item: any): any {
     return index;
   }
 
 
+  /**
+   * Validates and submits the quiz to the backend.
+   * - Requires title and at least one question.
+   * - Each question must have at least two non-empty options.
+   * - Each question must define a correct answer.
+   */
   async submitQuiz() {
+    // Title and questions must be filled
     if (!this.quiz.title || this.quiz.questions.length === 0) {
       const toast = await this.toastCtrl.create({
         message: 'Bitte Titel und mindestens eine Frage angeben.',
@@ -59,7 +97,7 @@ export class CreateQuizPage {
       return;
     }
     
-    // Validierung: Jede Frage braucht mindestens zwei nicht-leere Optionen
+    // Each question must have at least two valid options
     const invalidQuestion = this.quiz.questions.find(q => {
       const validOptions = q.options.filter(opt => opt && opt.trim() !== '');
       return validOptions.length < 2;
@@ -75,7 +113,7 @@ export class CreateQuizPage {
       return;
     }
     
-    // Neue Validierung: Jede Frage muss eine richtige Antwort haben
+    // Each question must have a defined answer
     const missingAnswer = this.quiz.questions.find(q => !q.answer || q.answer.trim() === '');
     
     if (missingAnswer) {
@@ -88,7 +126,7 @@ export class CreateQuizPage {
       return;
     }
     
-    // Alles valid — Speichern
+    // Submit quiz to backend
     this.http.createQuiz(this.quiz).subscribe({
       next: async () => {
         const toast = await this.toastCtrl.create({
@@ -103,4 +141,6 @@ export class CreateQuizPage {
       }
     });
   }
+
+  //#endregion
 }

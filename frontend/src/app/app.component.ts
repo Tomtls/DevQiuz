@@ -13,9 +13,12 @@ import { AuthModalService } from './services/auth-modal.service';
   templateUrl: 'app.component.html',
 })
 export class AppComponent implements OnInit {
+  // Inject services using Angular's `inject` function
   private auth = inject(AuthService);
   private authModalService = inject(AuthModalService);
   private router = inject(Router)
+
+  //#region Lifecycle
 
   ngOnInit(){
     this.authModalService.loginRequested$.subscribe(redirectUrl => {
@@ -23,11 +26,27 @@ export class AppComponent implements OnInit {
     });
   }
 
+  //#endregion
+
+  //#region Getters
+
+  // Expose auth state to the template
   get isAdmin(): boolean { return this.auth.isAdmin; }
   get adminMode(): boolean { return this.auth.adminMode; }
   get isLoggedIn(): boolean { return this.auth.isLoggedIn; }
 
+  //#endregion
+
+  //#region Public Methods
+
+  // Opens the login modal and passes current route for redirect after login
   public openAuthModal() { this.authModalService.open('login', this.router.url); }
+
+  // Toggles admin mode flag
   public toggleAdminMode(): void { this.auth.adminMode = !this.auth.adminMode; }
+
+  // Logs the user out via AuthService
   public logout() { this.auth.logout(); }
+
+  //#endregion
 }

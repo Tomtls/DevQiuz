@@ -13,30 +13,55 @@ import { AuthService } from '../services/auth.service';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class QuizViewPage {
-  public quiz: any;
-  public finished = false;
-  public correctCount = 0;
-  
-  private isDemo: boolean = false;
-  public selectedAnswers: (string | null)[] = [];
+
+  //#region Properties
+
+  public quiz: any;                               // Loaded quiz object
+  public finished = false;                        // Indicates if the quiz has been submitted
+  public correctCount = 0;                        // Number of correct answers
+  public selectedAnswers: (string | null)[] = []; // Stores selected answers for each question
+
+  private isDemo: boolean = false;                // Indicates if the quiz should be treated as demo
+
+  //#endregion
+
+  //#region Constructor
 
   constructor( private route: ActivatedRoute, public router: Router, private http: HttpService, private auth: AuthService ) {
+    // Extracts "isDemo" flag passed via navigation extras
     const nav = this.router.getCurrentNavigation();
     this.isDemo = nav?.extras.state?.['isDemo'] ?? false;
   }
+
+  //#endregion
+
+  //#region Lifecycle
 
   ionViewWillEnter() {
     this.loadData();
   }
 
+  //#endregion
+
+  //#region Public Methods
+
+  /**
+   * Stores the user's selected answer for a specific question.
+   */
   public selectAnswer(questionIndex: number, option: string) {
     this.selectedAnswers[questionIndex] = option;
   }
 
+  /**
+   * Checks if a specific option is currently selected for a given question.
+   */
   public isSelected(questionIndex: number, option: string): boolean {
     return this.selectedAnswers[questionIndex] === option;
   }
 
+  /**
+   * Submits the user's answers to the backend and stores the result.
+   */
   public submitQuiz() {
     const treatAsDemo = this.quiz.demo && !this.auth.isLoggedIn;
     this.http.submitQuiz(this.quiz.id, treatAsDemo, this.selectedAnswers).subscribe({
@@ -46,6 +71,13 @@ export class QuizViewPage {
     this.finished = true;
   }
 
+  //#endregion
+
+  //#region Private Methods
+
+  /**
+   * Loads the quiz data from the backend based on route parameter.
+   */
   private loadData(){
     const ParamId = this.route.snapshot.paramMap.get('id');
     const id = Number(ParamId);
@@ -58,4 +90,5 @@ export class QuizViewPage {
     });
   }
 
+  //#endregion
 }
