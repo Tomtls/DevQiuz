@@ -1,6 +1,7 @@
 import { 
   getPublicQuizInfos as fetchPublicQuizInfos, 
   getQuizById as fetchQuizById, 
+  getQuizWithAnswerById as fetchQuizWithAnswerById,
   createQuiz as saveQuiz, 
   deleteQuiz as removeQuiz 
 } from '../services/quizService.js';
@@ -69,17 +70,17 @@ export const checkQuizAnswers = async (req, res) => {
   if (isNaN(id) || !Array.isArray(userAnswers)) return res.status(400).json({ error: 'Ungültige Daten' });
 
   try {
-    const quiz = await fetchQuizById(id);
+    const quiz = await fetchQuizWithAnswerById(id);
     if (!quiz) return res.status(404).json({ error: 'Quiz nicht gefunden' });
     if (!quiz.demo && !user) return res.status(404).json({ error: 'Nicht autorisiert – bitte einloggen' });
 
-    const correctCount = quiz.questions.reduce((acc, q, i) => {
+    const score = quiz.questions.reduce((acc, q, i) => {
       return acc + (q.answer === userAnswers[i] ? 1 : 0);
     }, 0);
 
-    if (user) await saveScoreQuizzes({quizId: id, username: user.username, userId: user.user_id, score: correctCount})
+    if (user) await saveScoreQuizzes(id, score, user);
 
-    res.json({ correctCount });
+    res.json({ score });
   } catch (err) {
     console.error('[checkQuizAnswers]', err);
     res.status(500).json({ error: 'Fehler beim Überprüfen der Antworten' });
@@ -88,8 +89,8 @@ export const checkQuizAnswers = async (req, res) => {
 
 export const createQuiz = async (req, res) => {
   try {
-    const saved = await saveQuiz(req.body);
-    res.status(201).json(saved);
+    await saveQuiz(req.body);
+    res.status(201).end();
   } catch (err) {
     console.error('[createQuiz]', err);
     res.status(400).json({ error: err.message || 'Ungültige Eingabe'})

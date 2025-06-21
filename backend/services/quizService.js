@@ -75,6 +75,19 @@ export async function getQuizById(id) {
   }
 }
 
+/**
+ * Returns a full quiz by ID.
+ *
+ * @param {number|string} id - The quiz ID to retrieve
+ * @returns {Promise<object|null>} The quiz object or null if not found
+ */
+export async function getQuizWithAnswerById(id) {
+  const quizzes = await readJson(QUIZ_PATH);
+
+  // Find quiz by ID, casting both to numbers for safe comparison
+  return quizzes.find(quiz => Number(quiz.id) === Number(id)) || null;
+}
+
 //#endregion
 
 //#region Post Functions
@@ -95,13 +108,14 @@ export async function createQuiz(quiz) {
   const maxId = quizzes.reduce((max, quiz) => Math.max(max, quiz.id || 0), 0);
 
   // Assign ID and add new quiz to the array
-  const newQuiz = { id: maxId + 1, ...quiz };
-  quizzes.push(newQuiz);
+  quizzes.push({
+    id: maxId + 1,
+    title: quiz.title,
+    questions: quiz.questions
+  });
 
   // Save updated quiz list
   await writeJson(QUIZ_PATH, quizzes);
-
-  return newQuiz;
 }
 
 //#endregion
